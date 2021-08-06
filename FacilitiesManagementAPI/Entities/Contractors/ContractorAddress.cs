@@ -9,6 +9,7 @@ namespace FacilitiesManagementAPI.Entities.Contractors
         public string County { get; set; }
         public string PostCode { get; set; }
         public string  PhoneNumber1 { get; set; }
-        public string PhoneNumber2 { get; set; }     
+        public string PhoneNumber2 { get; set; }    
+         public bool IsDeleted { get; set; } 
     }
 }

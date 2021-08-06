@@ -9,5 +9,6 @@ namespace FacilitiesManagementAPI.Entities
         
         public string PhoneNumber1 { get; set; }
         public string PhoneNumber2 { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

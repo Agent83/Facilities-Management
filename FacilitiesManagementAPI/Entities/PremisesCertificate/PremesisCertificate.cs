@@ -12,5 +12,6 @@ namespace FacilitiesManagementAPI.Entities.PremisesCertificate
         public DateTime? ReminderDate { get; set; }
         public bool Pass { get; set; }
         public int? PromesisId { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

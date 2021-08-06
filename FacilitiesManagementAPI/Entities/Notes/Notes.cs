@@ -7,5 +7,6 @@ namespace FacilitiesManagementAPI.Entities.Notes
         public int? ContractorId { get; set; }
         public int? PremisesId { get; set; }
         public int?  CertificatedId { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

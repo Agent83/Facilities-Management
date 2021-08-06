@@ -9,6 +9,7 @@ namespace FacilitiesManagementAPI.Entities
         public string PostCode { get; set; }
         public string Conty { get; set; }
         public string PremisesPhone { get; set; }
+        public bool IsDeleted { get; set; }
 
     }
 }

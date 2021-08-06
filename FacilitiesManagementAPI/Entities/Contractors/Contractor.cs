@@ -8,6 +8,7 @@ namespace FacilitiesManagementAPI.Entities.Contractors
         public int? Rating { get; set; }
         public int PremisesId { get; set; }
         public int? ContractorTypeId { get; set; }
+        public bool IsDeleted { get; set; }
 
     }
 }

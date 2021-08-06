@@ -3,14 +3,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using FacilitiesManagementAPI.Data;
 using FacilitiesManagementAPI.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FacilitiesManagementAPI.Controllers
 {
-    [ApiController]
-    [Route("api/[Controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseApiController
     {
         private readonly DataContext _context;
         public UsersController(DataContext context)
@@ -23,7 +22,7 @@ namespace FacilitiesManagementAPI.Controllers
         {
             return await _context.Users.ToListAsync();
         }
-
+        [Authorize]
         [HttpGet("{Id}")]
         public async Task<ActionResult<AppUser>> GetUser(int Id)
         {
