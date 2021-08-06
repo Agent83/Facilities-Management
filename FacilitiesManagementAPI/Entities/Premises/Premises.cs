@@ -4,6 +4,7 @@ namespace FacilitiesManagementAPI.Entities
     {
         public int Id { get; set; }
         public string PremiseName { get; set; }
+        public bool IsDeleted { get; set; }
     
     }
 }

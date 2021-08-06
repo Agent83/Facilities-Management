@@ -9,8 +9,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
+            
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/FacilitiesManagementAPI/bin/Debug/net5.0/FacilitiesManagementAPI.dll",
+            "program": "${workspaceFolder}/FacilitiesManagementAPI/bin/Debug/net5.0/win7-x64/FacilitiesManagementAPI.dll",
             "args": [],
             "cwd": "${workspaceFolder}/FacilitiesManagementAPI",
             "stopAtEntry": false,
