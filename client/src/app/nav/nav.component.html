@@ -1,21 +1,24 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
     <div class="container">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Facilities Management</a>
-              <ul class="navbar-nav me-auto " *ngIf="accountService.currentUser$ | async"> 
+            <a class="navbar-brand" routerLink='/' routerLinkActive='active'>Facilities Management</a>
+              <ul class="navbar-nav me-auto " > 
+                <ng-container *ngIf="accountService.currentUser$ | async" >
                 <li class="nav-item">
-                  <a class="nav-link " aria-current="page" href="#">Properties</a>
+                  <a class="nav-link " aria-current="page" routerLink='/members' routerLinkActive='active'>Properties</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
+                  <a class="nav-link" routerLink='/lists' routerLinkActive='active'>lists</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Disabled</a>
+                  <a class="nav-link" routerLink='/notes'routerLinkActive='active'>Notes</a>
                 </li>
+                </ng-container>
+
               </ul>
 
-              <div class="dropdown"  *ngIf="accountService.currentUser$ |async" dropdown>
-                <a class="dropdown-toggle text-ligh" dropdownToggle>Welcome user</a>
+              <div class="dropdown"  *ngIf="(accountService.currentUser$ |async) as user" dropdown>
+                <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{user.userName | titlecase}}</a>
                 <div class="dropdown-menu mt-3" *dropdownMenu>
                   <a class="dropdown-item">Edit profile</a>
                   <div class="dropdown-divider"></div>
@@ -37,7 +40,7 @@
                    class="form-control mr-sm-2" 
                    type="password" p
                    laceholder="Password">
-                <button class="btn btn-outline-success" type="submit">Login</button>
+                <button class="btn btn-dark" type="submit">Login</button>
               </form>
               <!-- <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
