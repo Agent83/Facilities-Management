@@ -15,6 +15,17 @@ import { MemberDetailsComponent } from './members/member-details/member-details.
 import { ListsComponent } from './lists/lists.component';
 import { NotesComponent } from './notes/notes.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ContractorListComponent } from './contractor/contractor-list/contractor-list.component';
+import { ContractorDeatialsComponent } from './contractor/contractor-deatials/contractor-deatials.component';
+import { PremiseJobsListComponent } from './premiseJobs/premise-jobs-list/premise-jobs-list.component';
+import { PremsiseJobDetailsComponent } from './premiseJobs/premsise-job-details/premsise-job-details.component';
+import { PremiseJobCreateComponent } from './premiseJobs/premise-job-create/premise-job-create.component';
+import { ContractorCreateComponent } from './contractor/contractor-create/contractor-create.component';
+import { PremiseCreateComponent } from './premises/premise-create/premise-create.component';
+import { PremiseDetailComponent } from './premises/premise-detail/premise-detail.component';
+import { PremiseListComponent } from './premises/premise-list/premise-list.component';
+import { CreateJobComponent } from './premisesJob/create-job/create-job.component';
+import { JobListComponent } from './premisesJob/job-list/job-list.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +36,18 @@ import { ToastrModule } from 'ngx-toastr';
     MemberListComponent,
     MemberDetailsComponent,
     ListsComponent,
-    NotesComponent
+    NotesComponent,
+    ContractorListComponent,
+    ContractorDeatialsComponent,
+    PremiseJobsListComponent,
+    PremsiseJobDetailsComponent,
+    PremiseJobCreateComponent,
+    ContractorCreateComponent,
+    PremiseCreateComponent,
+    PremiseDetailComponent,
+    PremiseListComponent,
+    CreateJobComponent,
+    JobListComponent
   ],
   imports: [
     BrowserModule,
