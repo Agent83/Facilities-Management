@@ -1,0 +1,55 @@
+<div class="my-6 p-4">
+    <form>
+       <fieldset>
+    <div class="shadow p-4 mb-4 bg-light">
+    
+      <h2 class="text-center">Create Job</h2>
+            <div class="form-group row">
+                <div class="col">
+                  <label for="premiseName" class="form-label mt-4">Property Name </label>
+                  <input type="text" class="form-control" id="premiseName"  placeholder="Enter Property name">
+               </div>
+               <div class="col">
+                  <label for="addressLine1" class="form-label mt-4">Description</label>
+                  <textarea class="form-control" aria-label="With textarea" rows="4" cols="50"></textarea>
+               </div>
+            </div> 
+          <br>
+            <hr>
+            <h5>Contractor</h5>
+            <div class="form-group row">
+              <div class="col">
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                  <button type="button" class="btn btn-primary">Select contractor</button>
+                  <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle show" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></button>
+                    <div class="dropdown-menu show" aria-labelledby="btnGroupDrop1" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(5px, 42px);">
+                      <a class="dropdown-item" href="#">Dropdown link</a>
+                      <a class="dropdown-item" href="#">Dropdown link</a>
+                    </div>
+                  </div>
+                </div>
+                
+             </div>
+             <div class="col"></div>
+          </div>
+          <hr>
+          <h5>Notes</h5>
+          <div class="form-group row">
+              <div class="col">
+                <textarea class="form-control" aria-label="With textarea" rows="4" cols="50"></textarea>
+             </div>
+             <div class="col">
+
+             </div>
+          </div>
+       </div>
+       <div class="text-right">
+          <div class="btn-group" role="group" aria-label="Basic example">
+             <button type="submit" class="btn btn-primary">Submit</button>
+             <button type="submit" class="btn btn-light" (click)="backNav()">Cancel</button>
+           </div>
+        </div>
+          </fieldset>
+        </form>
+    </div>
