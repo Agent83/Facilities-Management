@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'app-premise-job-create',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PremiseJobCreateComponent implements OnInit {
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit(): void {
   }
-
+ 
+  backNav() {
+    this.location.back();
+  }
 }

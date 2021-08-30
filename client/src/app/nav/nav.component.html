@@ -5,22 +5,16 @@
               <ul class="navbar-nav me-auto " > 
                 <ng-container *ngIf="accountService.currentUser$ | async" >
                 <li class="nav-item">
-                  <a class="nav-link " aria-current="page" routerLink='/members' routerLinkActive='active'>Properties</a>
+                  <a class="nav-link " aria-current="page" routerLink='/members' routerLinkActive='active'>members</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" routerLink='/lists' routerLinkActive='active'>lists</a>
+                  <a class="nav-link" routerLink='/lists-premises' routerLinkActive='active'>Properties</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" routerLink='/notes'routerLinkActive='active'>Notes</a>
+                  <a class="nav-link" routerLink='/lists-contractor'routerLinkActive='active'>Notes</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" routerLink='/create-premise'routerLinkActive='active'>Create property</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" routerLink='/create-contractor'routerLinkActive='active'>Create contractor</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" routerLink='/create-job'routerLinkActive='active'>Create Job</a>
+                  <a class="nav-link" routerLink='/lists-jobs'routerLinkActive='active'>Jobs</a>
                 </li>
                 </ng-container>
 

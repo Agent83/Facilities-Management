@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContractorCreateComponent } from './contractor/contractor-create/contractor-create.component';
+import { ContractorListComponent } from './contractor/contractor-list/contractor-list.component';
 import { HomeComponent } from './home/home.component';
 import { ListsComponent } from './lists/lists.component';
 import { MemberDetailsComponent } from './members/member-details/member-details.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { NotesComponent } from './notes/notes.component';
 import { PremiseJobCreateComponent } from './premiseJobs/premise-job-create/premise-job-create.component';
+import { PremiseJobsListComponent } from './premiseJobs/premise-jobs-list/premise-jobs-list.component';
 import { PremiseCreateComponent } from './premises/premise-create/premise-create.component';
+import { PremiseListComponent } from './premises/premise-list/premise-list.component';
 import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
@@ -23,7 +26,10 @@ const routes: Routes = [
       { path: 'notes', component: NotesComponent },
       { path: 'create-premise', component: PremiseCreateComponent },
       { path: 'create-contractor', component: ContractorCreateComponent },
-      { path: 'create-job', component: PremiseJobCreateComponent }
+      { path: 'create-job', component: PremiseJobCreateComponent },
+      { path: 'lists-jobs', component: PremiseJobsListComponent},
+      { path: 'lists-premises', component: PremiseListComponent},
+      { path: 'lists-contractor', component: ContractorListComponent}
     ]
   },
 

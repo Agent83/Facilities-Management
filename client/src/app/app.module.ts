@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,8 +23,7 @@ import { ContractorCreateComponent } from './contractor/contractor-create/contra
 import { PremiseCreateComponent } from './premises/premise-create/premise-create.component';
 import { PremiseDetailComponent } from './premises/premise-detail/premise-detail.component';
 import { PremiseListComponent } from './premises/premise-list/premise-list.component';
-import { CreateJobComponent } from './premisesJob/create-job/create-job.component';
-import { JobListComponent } from './premisesJob/job-list/job-list.component';
+import { SharedModule } from './_modules/shared.module';
 
 @NgModule({
   declarations: [
@@ -46,8 +44,6 @@ import { JobListComponent } from './premisesJob/job-list/job-list.component';
     PremiseCreateComponent,
     PremiseDetailComponent,
     PremiseListComponent,
-    CreateJobComponent,
-    JobListComponent
   ],
   imports: [
     BrowserModule,
@@ -55,10 +51,7 @@ import { JobListComponent } from './premisesJob/job-list/job-list.component';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    BsDropdownModule.forRoot(),
-    ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right'
-    })
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
