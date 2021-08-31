@@ -28,7 +28,7 @@ namespace FacilitiesManagementAPI.Controllers
             using var hmac = new HMACSHA512();
             var user = new AppUser
             {
-                UserName = registerDto.UserName.ToLower(),
+                Username = registerDto.UserName.ToLower(),
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
                 PasswordSalt = hmac.Key
             };
@@ -38,7 +38,7 @@ namespace FacilitiesManagementAPI.Controllers
 
             return new UserDto
             {
-                UserName = user.UserName,
+                UserName = user.Username,
                 Token = _tokenService.CreateToken(user)
             };
         }
@@ -47,7 +47,7 @@ namespace FacilitiesManagementAPI.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
+            var user = await _context.Users.SingleOrDefaultAsync(x => x.Username == loginDto.Username.ToLower());
             if (user == null) return Unauthorized("Invalid username");
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
@@ -60,13 +60,13 @@ namespace FacilitiesManagementAPI.Controllers
             }
    return new UserDto
             {
-                UserName = user.UserName,
+                UserName = user.Username,
                 Token = _tokenService.CreateToken(user)
             };
         }
         private async Task<bool> UserExists(string userName)
         {
-            return await _context.Users.AnyAsync(x => x.UserName == userName.ToLower());
+            return await _context.Users.AnyAsync(x => x.Username == userName.ToLower());
         }
     }
 }
