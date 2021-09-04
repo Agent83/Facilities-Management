@@ -1,21 +1,17 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using AutoMapper;
 using FacilitiesManagementAPI.Data;
 using FacilitiesManagementAPI.DTOs;
-using FacilitiesManagementAPI.Entities;
 using FacilitiesManagementAPI.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
+using System.Collections.Generic;
+using System.Threading.Tasks;
 namespace FacilitiesManagementAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class UsersController : BaseApiController
     {
-        private readonly DataContext _context;
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         public UsersController(IUserRepository userRepository, IMapper mapper)
@@ -34,7 +30,7 @@ namespace FacilitiesManagementAPI.Controllers
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
-            return await _userRepository.GetMemberAsync(username);  
+            return await _userRepository.GetMemberAsync(username);
         }
     }
 }

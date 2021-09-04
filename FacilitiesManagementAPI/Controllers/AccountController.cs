@@ -12,8 +12,8 @@ namespace FacilitiesManagementAPI.Controllers
 {
     public class AccountController : BaseApiController
     {
-        public DataContext _context { get; }
-        public ITokenService _tokenService { get; set; }
+        public DataContext _context;
+        public ITokenService _tokenService;
         public AccountController(DataContext context, ITokenService tokenService)
         {
             _tokenService = tokenService;
