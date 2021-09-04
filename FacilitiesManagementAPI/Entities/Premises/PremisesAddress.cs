@@ -10,6 +10,8 @@ namespace FacilitiesManagementAPI.Entities
         public string Conty { get; set; }
         public string PremisesPhone { get; set; }
         public bool IsDeleted { get; set; }
+        public Premises Premises { get; set; }
+        public int PremisesId { get; set; }
 
     }
 }
