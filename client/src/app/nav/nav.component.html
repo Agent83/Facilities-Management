@@ -31,26 +31,6 @@
                 </div>
               </div>
 
-
-              <form *ngIf="(accountService.currentUser$ | async) === null" #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()" autocomplete="off" >
-                <input 
-                   name="Username"
-                   [(ngModel)]="model.username"
-                   class="form-control mr-sm-2" 
-                   type="text" 
-                   placeholder="Username">
-                <input 
-                   name="password"
-                   [(ngModel)]="model.password"
-                   class="form-control mr-sm-2" 
-                   type="password" p
-                   laceholder="Password">
-                <button class="btn btn-dark" type="submit">Login</button>
-              </form>
-              <!-- <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form> -->
             </div>
     </div>
 

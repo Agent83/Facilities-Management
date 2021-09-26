@@ -1,17 +1,30 @@
-<div class="container-mt-5">
+<br>
+<br>
+<br>
+<div class="col-3-mt-10">
     <div *ngIf="!registerMode" style="text-align:center">
         <h1>Facilities Management</h1>
-        <h3>Register new user</h3>
-        <div class="text-center">
-            <button (click)="registerToggle()" class="btn btn-primary btn-large mr-2">Register</button>
-            <button class="btn btn-info btn-large ">Learn more</button>
-        </div>
-    </div>
-    <div *ngIf="registerMode" class="container">
-        <div class="row justify-content-center">
-            <div class="col-4">
-               <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
-            </div>
-        </div>
+        <h3>Please login</h3>
+        <form *ngIf="(accountService.currentUser$ | async) === null" #loginForm="ngForm" (ngSubmit)="login()"
+            autocomplete="off" class="text-center">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6 p-4">
+                    <input name="Username" [(ngModel)]="model.username" class="form-control m-2" type="text"
+                    placeholder="Username">
+    
+                <input name="password" [(ngModel)]="model.password" class="form-control m-2" type="password"
+                    laceholder="Password">
+    
+                <div class="d-flex justify-content-around">
+                    <div>
+                        <a href="">Forgot password?</a>
+                    </div>
+                </div>
+                <button class="btn btn-dark mt-4" type="submit">Login</button>
+                </div>
+                <div class="col-3"></div>
+            </div> 
+        </form>
     </div>
 </div>
