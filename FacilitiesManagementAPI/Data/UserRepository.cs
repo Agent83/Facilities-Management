@@ -23,7 +23,6 @@ namespace FacilitiesManagementAPI.Data
         public async Task<IEnumerable<AppUser>> GetUsersAsync()
         {
             return await _context.Users
-            .Include(p => p.Photos)
             .ToListAsync();
         }
 
@@ -35,7 +34,6 @@ namespace FacilitiesManagementAPI.Data
         public async Task<AppUser> GetUserByUserNameAsync(string username)
         {
             return await _context.Users
-            .Include(p => p.Photos)
             .SingleOrDefaultAsync(x => x.Username == username);
         }
 

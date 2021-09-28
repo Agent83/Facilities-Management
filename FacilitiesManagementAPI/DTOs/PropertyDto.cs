@@ -13,10 +13,10 @@ namespace FacilitiesManagementAPI.DTOs
         public string PhoneNumber1 { get; set; }
         public string PhoneNumber2 { get; set; }
         public string Email { get; set; }
-        public int PremisesAdrressId { get; set; }
+        public int PremisesAddressId { get; set; }
+        public PremisesAddress PremisesAddress {  get; set; }
         public ICollection<Note> Notes { get; set; }
-        public ICollection<PremisesTask> Jobs { get; set; }
-        public ICollection<PremisesCertificate> PremiseCerts { get; set; }
+        public ICollection<PremisesTask> PremisesTasks { get; set; }
 
     }
 }

@@ -1,0 +1,131 @@
+[
+  {
+    "PremiseName": "Loyds Pharm",
+    "IsDeleted": false,
+    "DateCreated": "2022-09-27T00:00:00",
+    "PhoneNumber1": "09194583748",
+    "PhoneNumber2": null,
+    "Email": "lpharm@email.com",
+    "PremisesAddressId": 1,
+    "PremisesAddress": {
+      "Id": 1,
+      "AddressLine1": "28383 baker",
+      "AddressLine2": "Add 2",
+      "City": "Tyne and wear",
+      "Town": "Wallsend",
+      "PostCode": "NE88 8ES",
+      "IsDeleted": false
+    },
+    "Notes": [
+      {
+        "NoteContent": "This is a note 1",
+        "IsDeleted": false,
+        "DateCreated": "2022-09-27T00:00:00"
+      }
+    ],
+    "PremisesTasks": [
+      {
+        "Description": "this is a job 1",
+        "NoteId": null,
+        "PremisesId": 1
+      }
+    ]
+  },
+  {
+    "PremiseName": "Hill Pharm",
+    "IsDeleted": false,
+    "DateCreated": "2022-09-27T00:00:00",
+    "PhoneNumber1": "01918374829",
+    "PhoneNumber2": "",
+    "Email": "hillpharm@email.com",
+    "PremisesAddressId": 2,
+    "PremisesAddress": {
+      "Id": 2,
+      "AddressLine1": "83 baker",
+      "AddressLine2": "Add 2",
+      "City": "Tyne and wear",
+      "Town": "Wallsend",
+      "PostCode": "NE88 8ES",
+      "IsDeleted": false
+    },
+    "Notes": [
+      {
+        "NoteContent": "This is a note 2",
+        "IsDeleted": false,
+        "DateCreated": "2022-09-27T00:00:00"
+      }
+    ],
+    "PremisesTasks": [
+      {
+        "Description": "this is a job 2",
+        "NoteId": null,
+        "PremisesId": 2
+      }
+    ]
+  },
+  {
+    "PremiseName": "high farm Pharm",
+    "IsDeleted": false,
+    "DateCreated": "2022-09-27T00:00:00",
+    "PhoneNumber1": "01912838484",
+    "PhoneNumber2": "01912838444",
+    "Email": "hfpharm@email.com",
+    "PremisesAddressId": 3,
+    "PremisesAddress": {
+      "Id": 3,
+      "AddressLine1": "28383 baker",
+      "AddressLine2": "Add 2",
+      "City": "Tyne and wear",
+      "Town": "Wallsend",
+      "PostCode": "NE88 8ES",
+      "IsDeleted": false
+    },
+    "Notes": [
+      {
+        "NoteContent": "This is a note 3",
+        "IsDeleted": false,
+        "DateCreated": "2022-09-27T00:00:00"
+      }
+    ],
+    "PremisesTasks": [
+      {
+        "Description": "this is a job 3",
+        "NoteId": null,
+        "PremisesId": 3
+      }
+    ]
+  },
+  {
+    "Id": 4,
+    "PremiseName": "tesco Pharm",
+    "IsDeleted": false,
+    "DateCreated": "2022-09-27T00:00:00",
+    "PhoneNumber1": "01912343444",
+    "PhoneNumber2": "01912736283",
+    "Email": "tescopharm@email.com",
+    "PremisesAddressId": 4,
+    "PremisesAddress": {
+      "Id": 4,
+      "AddressLine1": "28383 baker",
+      "AddressLine2": "Add 2",
+      "City": "Tyne and wear",
+      "Town": "Wallsend",
+      "PostCode": "NE88 8ES",
+      "IsDeleted": false
+    },
+    "Notes": [
+      {
+        "NoteContent": "This is a note 4",
+        "IsDeleted": false,
+        "DateCreated": "2022-09-27T00:00:00"
+      }
+    ],
+    "PremisesTasks": [
+      {
+        "Description": "this is a job 4",
+        "NoteId": null,
+        "PremisesId": 4
+      }
+    ]
+  }
+]

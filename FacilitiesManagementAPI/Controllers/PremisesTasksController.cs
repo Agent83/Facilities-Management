@@ -9,10 +9,10 @@ namespace FacilitiesManagementAPI.Controllers
 {
     public class PremisesTasksController : Controller
     {
-        private readonly IPremisesTask _premisesTask;
+        private readonly IPremisesTaskRepository _premisesTask;
         private readonly IMapper _mapper;
 
-        public PremisesTasksController(IPremisesTask premisesTask, IMapper mapper)
+        public PremisesTasksController(IPremisesTaskRepository premisesTask, IMapper mapper)
         {
             _premisesTask = premisesTask;
             _mapper = mapper;

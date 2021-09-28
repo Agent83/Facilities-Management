@@ -25,7 +25,19 @@ namespace FacilitiesManagementAPI.Data
 
                 context.Users.Add(user);
             }
+            context.SaveChanges();
+        }
 
+        public static async Task SeedPremisesAsync(DataContext context)
+        {
+            if (await context.Premises.AnyAsync()) return;
+
+            var premiseData = await System.IO.File.ReadAllTextAsync("Data/PremisesSeedData.json");
+            var premises = JsonSerializer.Deserialize<List<Premises>>(premiseData);
+            foreach (var premise in premises)
+            {
+                context.Premises.Add(premise);
+            }
             context.SaveChanges();
         }
     }

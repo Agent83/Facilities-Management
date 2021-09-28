@@ -10,12 +10,5 @@ namespace FacilitiesManagementAPI.Entities
         public bool IsDeleted { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
         
-        public Premises Premises { get; set; }
-        public int PremisesId { get; set; }
-
-        public Contractor Contractor { get; set; }
-        public int ContractorId { get; set; }
-        public PremisesCertificate PremiseCert { get; set; }
-        public int PremisesCertId { get; set; }
     }
 }

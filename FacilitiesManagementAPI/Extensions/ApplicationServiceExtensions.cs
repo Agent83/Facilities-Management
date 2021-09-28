@@ -14,6 +14,8 @@ namespace FacilitiesManagementAPI.Extensions
         {
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPremiseRepository, PremiseRepository>();
+            //services.AddScoped<IContractorRepository, ContractorRepository>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddDbContext<DataContext>(options =>
             {

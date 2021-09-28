@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace FacilitiesManagementAPI.Interfaces
 {
-    public interface IPremise
+    public interface IPremiseRepository
     {
-        void Update(Premises user);
+        void Update(Premises premise);
         Task<bool> SaveAllAsync();
         Task<IEnumerable<Premises>> GetPremisesAsync();
         Task<Premises> GetPremiseByIdAsync(int Id);

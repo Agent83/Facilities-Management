@@ -13,7 +13,5 @@ namespace FacilitiesManagementAPI.DTOs
         public string KnownAs { get; set; }
         public DateTime LastActive { get; set; } 
         public bool IsDeleted { get; set; }
-
-        public ICollection<PhotoDto> Photos { get; set; }
     }
 }

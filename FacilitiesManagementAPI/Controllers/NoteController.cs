@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FacilitiesManagementAPI.DTOs;
 using FacilitiesManagementAPI.Entities;
 using FacilitiesManagementAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,9 @@ namespace FacilitiesManagementAPI.Controllers
     public class NoteController : BaseApiController
     {
         private readonly IMapper _mapper;
-        private readonly INote _note;
+        private readonly INoteRepository _note;
 
-        public NoteController(IMapper mapper, INote note)
+        public NoteController(IMapper mapper, INoteRepository note)
         {
             _mapper = mapper;
             _note = note;
@@ -26,6 +27,15 @@ namespace FacilitiesManagementAPI.Controllers
         public async Task<ActionResult<Note>> GetNoteByIdAsync(int Id)
         {
             return await _note.GetNoteByIdAsync(Id);
+        }
+        public async Task<ActionResult<IEnumerable<NoteDto>>> GetNotesDtoAsync()
+        {
+            var notes = await _note.GetNotesDtoAsync();
+            return Ok(notes);
+        }
+        public async Task<ActionResult<NoteDto>> GetNoteDtoByIdAsync(int Id)
+        {
+            return await _note.GetNoteDtoByIdAsync(Id);
         }
     }
 }

@@ -1,0 +1,34 @@
+[
+  {
+    "AddressLine1": "345 highstreet",
+    "AddressLine2": "durham rd",
+    "City": "gateshead",
+    "Town": "lowfell",
+    "PostCode": "ne9 4ee",
+    "IsDeleted": 0
+  },
+  {
+    "AddressLine1": "78 highstreet",
+    "AddressLine2": "wessex rd",
+    "City": "Tyne and wear",
+    "Town": "Some Town",
+    "PostCode": "ne8 7th",
+    "IsDeleted": 0
+  },
+  {
+    "AddressLine1": "903 highstreet",
+    "AddressLine2": "Cross rd",
+    "City": "Tyne and wear",
+    "Town": "wallsend",
+    "PostCode": "ne28 6as",
+    "IsDeleted": 0
+  },
+  {
+    "AddressLine1": "101 highstreet",
+    "AddressLine2": "Farn rd",
+    "City": "Tyne and wear",
+    "Town": "wallsend",
+    "PostCode": "ne28 6as",
+    "IsDeleted": 0
+  }
+]

@@ -10,11 +10,13 @@ namespace FacilitiesManagementAPI.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<AppUser, MemberDto>()
-               .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src =>
-                    src.Photos.FirstOrDefault(x => x.IsMain).Url))
-                    .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
-            CreateMap<Photo, PhotoDto>();
+            CreateMap<AppUser, MemberDto>();
+            CreateMap<Contractor, ContractorDto>();
+            CreateMap<PremisesTask, PropertyTasksDto>();
+            CreateMap<Premises, PropertyDto>();
+            CreateMap<Note, NoteDto>();
+               
+            
         }
     }
 }

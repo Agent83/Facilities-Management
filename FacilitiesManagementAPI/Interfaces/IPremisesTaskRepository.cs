@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FacilitiesManagementAPI.Interfaces
 {
-    public interface IPremisesTask
+    public interface IPremisesTaskRepository
     {
         void Update(PremisesTask user);
         Task<bool> SaveAllAsync();

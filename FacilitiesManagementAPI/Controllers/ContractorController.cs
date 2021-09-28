@@ -11,9 +11,9 @@ namespace FacilitiesManagementAPI.Controllers
     public class ContractorController : BaseApiController
     {
         private readonly IMapper _mapper;
-        private readonly IContractor _contractor;
+        private readonly IContractorRepository _contractor;
 
-        public ContractorController(IMapper mapper, IContractor contractor)
+        public ContractorController(IMapper mapper, IContractorRepository contractor)
         {
             _mapper = mapper;
             _contractor = contractor;

@@ -16,12 +16,5 @@ namespace FacilitiesManagementAPI.Entities
         public DateTime LastActive { get; set; } = DateTime.Now;
         public bool IsDeleted { get; set; }
 
-        public ICollection<Photo> Photos { get; set; }
-
-        // public int GetAge()
-        // {
-        //     return DateOfBirth.CalculateAge();
-        // }
-
     }
 }

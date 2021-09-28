@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FacilitiesManagementAPI.Interfaces
 {
-    public interface IContractor
+    public interface IContractorRepository
     {
         void Update(Contractor user);
         Task<bool> SaveAllAsync();
