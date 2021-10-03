@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FacilitiesManagementAPI.Controllers
 {
-    public class PremisesTasksController : Controller
+    public class PremisesTasksController : BaseApiController
     {
         private readonly IPremisesTaskRepository _premisesTask;
         private readonly IMapper _mapper;
@@ -21,7 +21,7 @@ namespace FacilitiesManagementAPI.Controllers
         [HttpGet]
         public async Task <ActionResult<IEnumerable<PropertyTasksDto>>> GetPropTasks()
         {
-            var propTasks = _premisesTask.GetTasks();
+            var propTasks = await _premisesTask.GetTasks();
             return Ok(propTasks);  
         }
 

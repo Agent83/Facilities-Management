@@ -1,22 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Member } from '../_models/member';
-
+import { Property } from '../_models/property';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MembersService {
+export class PropertyService {
   baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
-  getMembers() {
-    return this.http.get<Member[]>(this.baseUrl + 'users');
- }
+  getProperties(){
+    return this.http.get<Property[]>(this.baseUrl + 'premise');
+    
+  }
 
- getMember(username: string) {
-   return this.http.get<Member>(this.baseUrl + 'users/' + username);
- }
+  getProperty(id: number){
+    return this.http.get<Property>(this.baseUrl + 'premise/' + id);
+  }
 }

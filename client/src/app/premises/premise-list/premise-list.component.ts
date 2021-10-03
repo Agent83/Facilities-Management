@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Property } from 'src/app/_models/property';
+import { PropertyService } from 'src/app/_services/property.service';
 
 @Component({
   selector: 'app-premise-list',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./premise-list.component.css']
 })
 export class PremiseListComponent implements OnInit {
- 
-  constructor() { }
+ properties: Property[];
+  constructor(private propertyService: PropertyService) { }
 
   ngOnInit(): void {
+    this.loadProperties();
   }
-
+ loadProperties(){
+   this.propertyService.getProperties().subscribe(props => {
+     this.properties = props;
+     console.log(this.properties);
+   })
+ }
 }

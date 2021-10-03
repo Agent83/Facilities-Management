@@ -13,6 +13,7 @@ import { NotesComponent } from './notes/notes.component';
 import { PremiseJobCreateComponent } from './premiseJobs/premise-job-create/premise-job-create.component';
 import { PremiseJobsListComponent } from './premiseJobs/premise-jobs-list/premise-jobs-list.component';
 import { PremiseCreateComponent } from './premises/premise-create/premise-create.component';
+import { PremiseDetailComponent } from './premises/premise-detail/premise-detail.component';
 import { PremiseListComponent } from './premises/premise-list/premise-list.component';
 import { AuthGuard } from './_guards/auth.guard';
 
@@ -28,10 +29,11 @@ const routes: Routes = [
       { path: 'lists', component: ListsComponent },
       { path: 'notes', component: NotesComponent },
       { path: 'create-premise', component: PremiseCreateComponent },
+      { path: 'premises/:id', component: PremiseDetailComponent },
       { path: 'create-contractor', component: ContractorCreateComponent },
       { path: 'create-job', component: PremiseJobCreateComponent },
       { path: 'lists-jobs', component: PremiseJobsListComponent},
-      { path: 'lists-premises', component: PremiseListComponent},
+      { path: 'premises', component: PremiseListComponent},
       { path: 'lists-contractor', component: ContractorListComponent}
     ]
   },

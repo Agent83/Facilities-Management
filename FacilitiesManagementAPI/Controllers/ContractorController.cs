@@ -26,7 +26,7 @@ namespace FacilitiesManagementAPI.Controllers
             return Ok(contractors);
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task <ActionResult<ContractorDto>> GetContractorById(int id)
         {
             return await _contractor.GetContractorByIdAsync(id);
