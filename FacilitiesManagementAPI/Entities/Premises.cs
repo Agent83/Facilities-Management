@@ -12,7 +12,6 @@ namespace FacilitiesManagementAPI.Entities
         public string PhoneNumber1 { get; set; }
         public string PhoneNumber2 { get; set; }
         public string Email { get; set; }
-        public int PremisesAddressId { get; set; }
         public virtual PremisesAddress PremisesAddress { get; set; }
         public ICollection<Note> Notes {get;set;}
         public ICollection<PremisesTask> PremisesTasks {get; set;}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Property } from 'src/app/_models/property';
 import { PropertyService } from 'src/app/_services/property.service';
 
@@ -8,7 +9,7 @@ import { PropertyService } from 'src/app/_services/property.service';
   styleUrls: ['./premise-list.component.css']
 })
 export class PremiseListComponent implements OnInit {
- properties: Property[];
+ properties: any[];
   constructor(private propertyService: PropertyService) { }
 
   ngOnInit(): void {

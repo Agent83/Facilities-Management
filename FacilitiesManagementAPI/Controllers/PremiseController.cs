@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FacilitiesManagementAPI.Data;
 using FacilitiesManagementAPI.DTOs;
 using FacilitiesManagementAPI.Entities;
 using FacilitiesManagementAPI.Interfaces;
@@ -12,10 +13,13 @@ namespace FacilitiesManagementAPI.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IPremiseRepository _premise;
-        public PremiseController(IMapper mapper, IPremiseRepository premise)
+        private readonly DataContext _context;
+
+        public PremiseController(IMapper mapper, IPremiseRepository premise,DataContext context)
         {
             _mapper = mapper;
             _premise = premise;
+            _context = context;
         }
         
         [HttpGet]
@@ -31,5 +35,15 @@ namespace FacilitiesManagementAPI.Controllers
             return await _premise.GetPropertyByIdAsync(id);
         }
     
+        [HttpPost("property")]
+        public async Task<ActionResult<PropertyDto>> CreateProperty(CreatePropertyDto propertyDto)
+        {
+            var premise = _mapper.Map<Premises>(propertyDto);
+ 
+            _context.Premises.Add(premise);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }

@@ -1,135 +1,112 @@
-<div class="row" *ngIf="property">
-  <div class="col-4">
-      <div class="card-body">
-          <div>
-              <strong>Address</strong>
-              <p>{{property.premisesAddress.addressLine1}}
-                 {{property.premisesAddress.addressLine2}}
-                 {{property.premisesAddress.town}}
-                 {{property.premisesAddress.postCode}}</p>
-          </div>
-
-          <div>
-              <strong>Last Active</strong>
-              <p>{{property.phoneNumber1}}</p>
-              <p>{{property.phoneNumber2}}</p>
-          </div>
-          <div>
-              <strong>Created</strong>
-              <!-- <p>{{member.created}}</p> -->
-          </div>
-      </div>
-  </div>
-  <div class="col-4">
+<div *ngIf="property">
+  <div class="row">
     <div class="col-4">
-      <div class="card-body"> middle</div>
-    </div>
-  </div>
-  <div class="col-4">
-    <div class="card-body"> 
-      <button nz-button nzType="primary" (click)="open()">Create</button>
-      <nz-drawer
-        [nzBodyStyle]="{ overflow: 'auto' }"
-        [nzMaskClosable]="false"
-        [nzWidth]="720"
-        [nzVisible]="visible"
-        nzTitle="Create"
-        [nzFooter]="footerTpl"
-        (nzOnClose)="close()"
-      >
-        <form nz-form *nzDrawerContent>
-          <div nz-row [nzGutter]="8">
-            <div nz-col nzSpan="12">
-              <nz-form-item>
-                <nz-form-label>Name</nz-form-label>
-                <nz-form-control>
-                  <input nz-input placeholder="please enter user name" />
-                </nz-form-control>
-              </nz-form-item>
-            </div>
-            <div nz-col nzSpan="12">
-              <nz-form-item>
-                <nz-form-label>Url</nz-form-label>
-                <nz-form-control>
-                  <nz-input-group nzAddOnBefore="http://" nzAddOnAfter=".com">
-                    <input type="text" nz-input placeholder="please enter url" />
-                  </nz-input-group>
-                </nz-form-control>
-              </nz-form-item>
-            </div>
-          </div>
-          <div nz-row [nzGutter]="8">
-            <div nz-col nzSpan="12">
-              <nz-form-item>
-                <nz-form-label>Owner</nz-form-label>
-                <nz-form-control>
-                  <nz-select nzPlaceHolder="Please select an owner"></nz-select>
-                </nz-form-control>
-              </nz-form-item>
-            </div>
-            <div nz-col nzSpan="12">
-              <nz-form-item>
-                <nz-form-label>Type</nz-form-label>
-                <nz-form-control>
-                  <nz-select nzPlaceHolder="Please choose the type"></nz-select>
-                </nz-form-control>
-              </nz-form-item>
-            </div>
-          </div>
-          <div nz-row [nzGutter]="8">
-            <div nz-col nzSpan="12">
-              <nz-form-item>
-                <nz-form-label>Approver</nz-form-label>
-                <nz-form-control>
-                  <nz-select nzPlaceHolder="Please choose the approver"></nz-select>
-                </nz-form-control>
-              </nz-form-item>
-            </div>
-            <div nz-col nzSpan="12">
-              <nz-form-item>
-                <nz-form-label>DateTime</nz-form-label>
-                <nz-form-control>
-                  <nz-range-picker></nz-range-picker>
-                </nz-form-control>
-              </nz-form-item>
-            </div>
-          </div>
-          <div nz-row [nzGutter]="8">
-            <div nz-col nzSpan="24">
-              <nz-form-item>
-                <nz-form-label>Description</nz-form-label>
-                <nz-form-control>
-                  <textarea
-                    nz-input
-                    placeholder="please enter url description"
-                    [nzAutosize]="{ minRows: 4, maxRows: 4 }"
-                  ></textarea>
-                </nz-form-control>
-              </nz-form-item>
-            </div>
-          </div>
-        </form>
-  
-        <ng-template #footerTpl>
-          <div style="float: right">
-            <button nz-button style="margin-right: 8px;" (click)="close()">Cancel</button>
-            <button nz-button nzType="primary" (click)="close()">Submit</button>
-          </div>
-        </ng-template>
-      </nz-drawer>
-    </div>
-  </div>
-<div class="row">
-  <div class="col-8">  
       <div class="card-body">
-         coments
+        <div>
+          <strong>Address</strong>
+          <p>{{property.premisesAddress.addressLine1}}
+            {{property.premisesAddress.addressLine2}}
+            {{property.premisesAddress.town}}
+            {{property.premisesAddress.postCode}}</p>
+        </div>
+        <div>
+          <strong>Last Active</strong>
+          <p>{{property.phoneNumber1}}</p>
+          <p>{{property.phoneNumber2}}</p>
+        </div>
       </div>
-</div>
-  <div class="col-4">
-    <div class="card-body">
-      temp task
-   </div>
+      <button nz-button nzDanger routerLink='/premises/edit/{{property.id}}'>Edit property details</button>
+    </div>
+    <div class="col-4">
+      <div class="col-4">
+        <div class="card-body"> middle</div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card-body">
+      <button nz-button nzType="primary" (click)="openTasks()">Tasks</button>
+      <nz-drawer
+        [nzClosable]="false"
+        [nzVisible]="visibleTasks"
+        nzPlacement="right"
+        nzTitle="Tasks"
+        (nzOnClose)="closeTasks()"
+      >
+        <ng-container *nzDrawerContent>
+          <div *ngIf="premiseTask.length > 0; else noTasks">
+            <ul *ngFor="let item of premiseTask">
+              <li>{{item.title}}  <button nz-button nzType="primary" (click)="showModal(item.id)">
+                <span>View/ Edit</span></button>
+                <nz-modal
+                [(nzVisible)]="modalVisible"
+                nzTitle="{{item.title}}"
+                (nzOnCancel)="handleCancel()"
+                (nzOnOk)="handleOk()"
+                [nzOkLoading]="isOkLoading"
+              >
+                <p *nzModalContent >
+                {{modalInfo[0].description}}
+                </p>
+              </nz-modal></li>
+            </ul> 
+        </div>
+        <ng-template #noTasks>
+            No tasks for this property
+        </ng-template>
+       
+        </ng-container>
+      </nz-drawer>
+      </div>
+      <div class="card-body">
+        <button nz-button nzType="primary" (click)="openContractor()">Contractor</button>
+        <nz-drawer
+          [nzClosable]="false"
+          [nzVisible]="visibleContractor"
+          nzPlacement="right"
+          nzTitle="Contractors"
+          (nzOnClose)="closeContractor()"
+        >
+          <ng-container *nzDrawerContent>
+            <ul>
+              <li>contractros go here</li>
+            </ul>
+          </ng-container>
+        </nz-drawer>
+        </div>
+    </div>
   </div>
-</div>
-
-</div>
+  <div class="row">
+    <div class="col-8">
+      <div class="card-body">
+        <nz-list *ngIf="data.length" [nzDataSource]="data" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
+          <ng-template #item let-item>
+            <nz-comment [nzAuthor]="item.author" [nzDatetime]="item.displayTime">
+              <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.avatar"></nz-avatar>
+              <nz-comment-content>
+                <p>{{ item.content }}</p>
+              </nz-comment-content>
+            </nz-comment>
+          </ng-template>
+        </nz-list>
+        <nz-comment>
+          <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
+          <nz-comment-content>
+            <nz-form-item>
+              <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
+            </nz-form-item>
+            <nz-form-item>
+              <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue"
+                (click)="handleSubmit()">
+                Add Comment
+              </button>
+            </nz-form-item>
+          </nz-comment-content>
+        </nz-comment>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card-body">
+        temp task
+      </div>
+    </div>
+  </div>

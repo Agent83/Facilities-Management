@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FacilitiesManagementAPI.Migrations
 {
-    public partial class initial : Migration
+    public partial class initail : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -74,7 +74,6 @@ namespace FacilitiesManagementAPI.Migrations
                     PhoneNumber1 = table.Column<string>(type: "TEXT", nullable: true),
                     PhoneNumber2 = table.Column<string>(type: "TEXT", nullable: true),
                     Email = table.Column<string>(type: "TEXT", nullable: true),
-                    PremisesAddressId = table.Column<int>(type: "INTEGER", nullable: false),
                     ContractorId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
@@ -146,6 +145,9 @@ namespace FacilitiesManagementAPI.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CompletionDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Title = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     NoteId = table.Column<int>(type: "INTEGER", nullable: true),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),

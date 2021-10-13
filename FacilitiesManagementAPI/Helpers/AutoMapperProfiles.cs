@@ -15,6 +15,16 @@ namespace FacilitiesManagementAPI.Helpers
             CreateMap<PremisesTask, PropertyTasksDto>();
             CreateMap<Premises, PropertyDto>();
             CreateMap<Note, NoteDto>();
+            CreateMap<CreatePropertyDto, Premises>()
+                .ForMember(dest => dest.PremisesAddress,
+                map => map.MapFrom(
+                    source => new PremisesAddress
+                    {
+                        AddressLine1 = source.AddressLine1,
+                        AddressLine2 = source.AddressLine2,
+                        City = source.City,
+                        PostCode = source.PostCode,
+                    }));
                
             
         }

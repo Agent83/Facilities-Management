@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 namespace FacilitiesManagementAPI
 {
@@ -30,6 +31,8 @@ namespace FacilitiesManagementAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FacilitiesManagementAPI", Version = "v1" });
             });
+            //services.AddControllers().AddJsonOptions(x =>
+            // x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
             services.AddCors();
 
 

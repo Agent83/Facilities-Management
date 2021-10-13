@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FacilitiesManagementAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210928211328_initial")]
-    partial class initial
+    [Migration("20211013121846_initail")]
+    partial class initail
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -165,9 +165,6 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<string>("PremiseName")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PremisesAddressId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ContractorId");
@@ -209,8 +206,14 @@ namespace FacilitiesManagementAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("CompletionDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<int?>("ContractorId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
@@ -223,6 +226,9 @@ namespace FacilitiesManagementAPI.Migrations
 
                     b.Property<int?>("PremisesId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

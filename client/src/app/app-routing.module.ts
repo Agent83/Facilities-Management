@@ -14,6 +14,7 @@ import { PremiseJobCreateComponent } from './premiseJobs/premise-job-create/prem
 import { PremiseJobsListComponent } from './premiseJobs/premise-jobs-list/premise-jobs-list.component';
 import { PremiseCreateComponent } from './premises/premise-create/premise-create.component';
 import { PremiseDetailComponent } from './premises/premise-detail/premise-detail.component';
+import { PremiseEditComponent } from './premises/premise-edit/premise-edit.component';
 import { PremiseListComponent } from './premises/premise-list/premise-list.component';
 import { AuthGuard } from './_guards/auth.guard';
 
@@ -30,6 +31,7 @@ const routes: Routes = [
       { path: 'notes', component: NotesComponent },
       { path: 'create-premise', component: PremiseCreateComponent },
       { path: 'premises/:id', component: PremiseDetailComponent },
+      { path: 'premises/edit/:id', component: PremiseEditComponent },
       { path: 'create-contractor', component: ContractorCreateComponent },
       { path: 'create-job', component: PremiseJobCreateComponent },
       { path: 'lists-jobs', component: PremiseJobsListComponent},

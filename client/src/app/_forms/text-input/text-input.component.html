@@ -1,0 +1,10 @@
+<div class="form-group">
+    <input 
+    [class.is-invalid]='ngControl.touched && ngControl.invalid'
+    type={{type}} 
+    class="form-control" 
+   [formControl]="ngControl.control"
+   >
+   <div *ngIf="ngControl.control.errors?.required &&(ngControl.dirty || ngControl.touched)" class="invalid-feeback text-danger">Please enter a {{label}}</div>
+ </div>
+

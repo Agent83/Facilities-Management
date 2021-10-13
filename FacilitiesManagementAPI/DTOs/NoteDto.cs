@@ -7,7 +7,6 @@ namespace FacilitiesManagementAPI.DTOs
     {
         public int Id { get; set; }
         public string NoteContent { get; set; }
-        public bool IsDeleted { get; set; }
         public DateTime DateCreated { get; set; } 
         public int PremisesId { get; set; }
         public int ContractorId { get; set; }

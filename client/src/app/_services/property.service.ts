@@ -13,10 +13,13 @@ export class PropertyService {
 
   getProperties(){
     return this.http.get<Property[]>(this.baseUrl + 'premise');
-    
   }
 
   getProperty(id: number){
     return this.http.get<Property>(this.baseUrl + 'premise/' + id);
+  }
+
+  createProperty(model: any){
+    return this.http.post(this.baseUrl + 'premise/property', model);
   }
 }

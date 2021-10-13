@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './nav/nav.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
@@ -13,7 +13,6 @@ import { MemberListComponent } from './members/member-list/member-list.component
 import { MemberDetailsComponent } from './members/member-details/member-details.component';
 import { ListsComponent } from './lists/lists.component';
 import { NotesComponent } from './notes/notes.component';
-import { ToastrModule } from 'ngx-toastr';
 import { ContractorListComponent } from './contractor/contractor-list/contractor-list.component';
 import { ContractorDeatialsComponent } from './contractor/contractor-deatials/contractor-deatials.component';
 import { PremiseJobsListComponent } from './premiseJobs/premise-jobs-list/premise-jobs-list.component';
@@ -34,6 +33,12 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NzCommentModule } from 'ng-zorro-antd/comment';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { DateInputComponent } from './_forms/date-input/date-input.component';
+import { PremiseEditComponent } from './premises/premise-edit/premise-edit.component';
+
 
 registerLocaleData(en);
 
@@ -60,6 +65,9 @@ registerLocaleData(en);
     NotFoundComponent,
     ServerErrorComponent,
     MemberCardComponent,
+    TextInputComponent,
+    DateInputComponent,
+    PremiseEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +75,10 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    NzCommentModule,
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
