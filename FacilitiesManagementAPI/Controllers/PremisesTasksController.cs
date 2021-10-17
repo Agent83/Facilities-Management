@@ -2,6 +2,7 @@
 using FacilitiesManagementAPI.DTOs;
 using FacilitiesManagementAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@ namespace FacilitiesManagementAPI.Controllers
         }
 
         [HttpGet("Id")]
-        public async Task <ActionResult<PropertyTasksDto>> GetPropTaskByIdAsync(int id)
+        public async Task <ActionResult<PropertyTasksDto>> GetPropTaskByIdAsync(Guid id)
         {
             return await _premisesTask.GetPropertyTaskByIdAsync(id);
         }

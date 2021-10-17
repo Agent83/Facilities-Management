@@ -3,6 +3,7 @@ using FacilitiesManagementAPI.DTOs;
 using FacilitiesManagementAPI.Entities;
 using FacilitiesManagementAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -27,7 +28,7 @@ namespace FacilitiesManagementAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task <ActionResult<ContractorDto>> GetContractorById(int id)
+        public async Task <ActionResult<ContractorDto>> GetContractorById(Guid id)
         {
             return await _contractor.GetContractorByIdAsync(id);
         }

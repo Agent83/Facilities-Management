@@ -5,7 +5,7 @@ namespace FacilitiesManagementAPI.Entities
 {
     public class Premises
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string PremiseName { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;

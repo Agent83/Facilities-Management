@@ -3,6 +3,7 @@ using FacilitiesManagementAPI.DTOs;
 using FacilitiesManagementAPI.Entities;
 using FacilitiesManagementAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -24,7 +25,7 @@ namespace FacilitiesManagementAPI.Controllers
             var notes = await _note.GetNotesAsync();
             return Ok(notes);
        }
-        public async Task<ActionResult<Note>> GetNoteByIdAsync(int Id)
+        public async Task<ActionResult<Note>> GetNoteByIdAsync(Guid Id)
         {
             return await _note.GetNoteByIdAsync(Id);
         }
@@ -33,7 +34,7 @@ namespace FacilitiesManagementAPI.Controllers
             var notes = await _note.GetNotesDtoAsync();
             return Ok(notes);
         }
-        public async Task<ActionResult<NoteDto>> GetNoteDtoByIdAsync(int Id)
+        public async Task<ActionResult<NoteDto>> GetNoteDtoByIdAsync(Guid Id)
         {
             return await _note.GetNoteDtoByIdAsync(Id);
         }

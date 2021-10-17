@@ -10,6 +10,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -28,7 +29,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
       positionClass: 'toast-bottom-right'
     }),
     TabsModule.forRoot(),
-    NgxGalleryModule
+    NgxGalleryModule,
+    NgxSpinnerModule,
   ], 
 exports: [
   BsDropdownModule,
@@ -41,6 +43,7 @@ exports: [
   NzListModule,
   NzModalModule,
   BsDatepickerModule,
+  NgxSpinnerModule
 ]
 })
 export class SharedModule { }

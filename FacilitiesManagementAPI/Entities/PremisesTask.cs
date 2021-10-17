@@ -4,7 +4,7 @@ namespace FacilitiesManagementAPI.Entities
 {
     public class PremisesTask
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
         public DateTime CompletionDate { get; set; }
         public string Title { get; set; }

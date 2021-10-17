@@ -3,7 +3,7 @@ import { PremisesAddress } from "./premisesAddress";
 import { PremisesTask } from "./premisesTask";
 
 export interface Property {   
-        id: number;
+        id: string;
         premiseName: string;
         isDeleted: boolean;
         dateCreated: Date;

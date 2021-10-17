@@ -18,9 +18,9 @@ namespace FacilitiesManagementAPI.Migrations
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.AppUser", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
@@ -53,9 +53,9 @@ namespace FacilitiesManagementAPI.Migrations
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Contractor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("BusinessName")
                         .HasColumnType("TEXT");
@@ -94,9 +94,9 @@ namespace FacilitiesManagementAPI.Migrations
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.ContractorType", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("TypeDescription")
                         .HasColumnType("TEXT");
@@ -108,12 +108,12 @@ namespace FacilitiesManagementAPI.Migrations
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Note", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
-                    b.Property<int?>("ContractorId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid?>("ContractorId")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("TEXT");
@@ -124,8 +124,8 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<string>("NoteContent")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("PremisesId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid?>("PremisesId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -138,12 +138,12 @@ namespace FacilitiesManagementAPI.Migrations
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Premises", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
-                    b.Property<int?>("ContractorId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid?>("ContractorId")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("TEXT");
@@ -172,8 +172,9 @@ namespace FacilitiesManagementAPI.Migrations
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.PremisesAddress", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("AddressLine1")
                         .HasColumnType("TEXT");
@@ -190,25 +191,31 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<string>("PostCode")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("PremisesId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Town")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PremisesId")
+                        .IsUnique();
 
                     b.ToTable("PremisesAddress");
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.PremisesTask", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CompletionDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ContractorId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid?>("ContractorId")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("TEXT");
@@ -225,6 +232,9 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<int?>("PremisesId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<Guid?>("PremisesId1")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
@@ -232,7 +242,7 @@ namespace FacilitiesManagementAPI.Migrations
 
                     b.HasIndex("ContractorId");
 
-                    b.HasIndex("PremisesId");
+                    b.HasIndex("PremisesId1");
 
                     b.ToTable("PremisesTask");
                 });
@@ -259,7 +269,7 @@ namespace FacilitiesManagementAPI.Migrations
                 {
                     b.HasOne("FacilitiesManagementAPI.Entities.Premises", "Premises")
                         .WithOne("PremisesAddress")
-                        .HasForeignKey("FacilitiesManagementAPI.Entities.PremisesAddress", "Id")
+                        .HasForeignKey("FacilitiesManagementAPI.Entities.PremisesAddress", "PremisesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -274,7 +284,7 @@ namespace FacilitiesManagementAPI.Migrations
 
                     b.HasOne("FacilitiesManagementAPI.Entities.Premises", null)
                         .WithMany("PremisesTasks")
-                        .HasForeignKey("PremisesId");
+                        .HasForeignKey("PremisesId1");
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Contractor", b =>

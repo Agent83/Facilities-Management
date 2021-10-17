@@ -4,6 +4,7 @@ using FacilitiesManagementAPI.DTOs;
 using FacilitiesManagementAPI.Entities;
 using FacilitiesManagementAPI.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,12 +27,12 @@ namespace FacilitiesManagementAPI.Data
             return await _context.Contractors.ToListAsync();
         }
 
-        public async Task<Contractor> GetContractByIdAsync(int Id)
+        public async Task<Contractor> GetContractByIdAsync(Guid Id)
         {
             return await _context.Contractors.FindAsync(Id);
         }
 
-        public async Task<ContractorDto> GetContractorByIdAsync(int id)
+        public async Task<ContractorDto> GetContractorByIdAsync(Guid id)
         {
            return await _context.Contractors
                 .Where(x => x.Id == id)

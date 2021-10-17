@@ -1,54 +1,47 @@
-<div class="my-6 p-4">
-    <form #editForm="ngForm" id="editForm" (ngSubmit)="updateProperty()">
+<div class="my-6 p-4" *ngIf="property">
+    
        <div class="shadow p-4 mb-4 bg-light">
           <h2 class="text-center">Edit property</h2>
           <div class="text-center">
              <div class="form-group row">
                <div class="col-2">
- 
+                
                </div>
-                <div class="col-8 text-left">
-                  <div class="col">
-                    <label for="premiseName">Premise name</label>
-                    <input [(ngModel)]="property.premiseName" type="text" name="premiseName">
-                </div>
-                <div class="col">
-                    <label for="addressLine1">Address line 1</label>
-                    <input [(ngModel)]="property.premisesAddress.addressLine1" type="text" name="addressLine1">
-  
+                <div class="col-8 ">
+                  <form #editForm="ngForm" id="editForm" (ngSubmit)="updateProperty()">
+                  <div class="alert alert-info" *ngIf="editForm.dirty">
+                      <strong>Information:</strong>You have made changes. Any unsaved changes will be lost!
                   </div>
-                  <div class="col">
-                    <label for="addressLine2">Address line 2</label>
-                    <input [(ngModel)]="property.premisesAddress.addressLine2" type="text" name="addressLine2">
-                </div>
-                <div class="col">
-                    <label for="cityTown">City/ Town</label>
-                    <input [(ngModel)]="property.premisesAddress.city" type="text" name="city" >
- 
-                </div>
-                <div class="col">
-                    <label for="postcode">Postcode</label>
-                    <input [(ngModel)]="property.premisesAddress.postCode" type="text" name="postCode">
-                </div>
-                <div class="col">
-                    <label for="email">Email</label>
-                    <input [(ngModel)]='property.email' type="text" name="email">
-                       
-                </div>
-                <div class="col">
+                  <div class="col text-left" >
                       
-                </div>
-                <div class="col">
-                    <label for="phoneNumber1">Phone number</label>
-                    <input [(ngModel)]="property.phoneNumber1" type="text" name="phoneNumber1">
-                </div>
-                <div class="col">
-                    <label for="phoneNumber2">Phone number</label>
-                    <input [(ngModel)]="property.phoneNumber2" type="text" name="phoneNumber2">    
+                    <label  class="mt-2" for="premiseName">Premise name</label>
+                    <input  class="form-control" [(ngModel)]="property.premiseName" name="premiseName" type="text" >
+               
+                    <label  class="mt-2" for="addressLine1">Address line 1</label>
+                    <input  class="form-control" [(ngModel)]="property.premisesAddress.addressLine1" type="text" name="addressLine1">
+  
+                    <label  class="mt-2" for="addressLine2">Address line 2</label>
+                    <input  class="form-control" [(ngModel)]="property.premisesAddress.addressLine2" type="text" name="addressLine2">
+                
+                    <label  class="mt-2" for="cityTown">City/ Town</label>
+                    <input  class="form-control" [(ngModel)]="property.premisesAddress.city" type="text" name="city" >
+ 
+                    <label  class="mt-2" for="postcode">Postcode</label>
+                    <input  class="form-control" [(ngModel)]="property.premisesAddress.postCode" type="text" name="postCode">
+ 
+                    <label  class="mt-2" for="email">Email</label>
+                    <input  class="form-control" [(ngModel)]='property.email' type="text" name="email">
+                       
+                    
+                    <label  class="mt-2" for="phoneNumber1">Phone number</label>
+                    <input  class="form-control" [(ngModel)]="property.phoneNumber1" type="text" name="phoneNumber1">
+
+                    <label  class="mt-2" for="phoneNumber2">Phone number</label>
+                    <input  class="form-control" [(ngModel)]="property.phoneNumber2" type="text" name="phoneNumber2">    
                 </div>      
-                  
+               </form>
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                    
                 </div>
              </div>
@@ -61,14 +54,15 @@
               </li>
           </ul>
       </div> -->
-          <div class="text-right">
-             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="submit" class="btn btn-light" (click)="backNav()">Cancel</button>
-             </div>
-          </div>
+         
        </div>
-    </form>
+    
+    <div class="text-right">
+      <div class="btn-group" role="group" aria-label="Basic example">
+         <button [disabled]="!editForm.dirty" form="editForm" type="submit" class="btn btn-primary">Save changes</button>
+         <button type="submit" class="btn btn-light" (click)="backNav()">Cancel</button>
+      </div>
+   </div>
  </div>
  
  
