@@ -1,8 +1,10 @@
-﻿namespace FacilitiesManagementAPI.Entities
+﻿using System;
+
+namespace FacilitiesManagementAPI.Entities
 {
     public class ContractorType
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string TypeDescription {  get; set; }
     }
 }

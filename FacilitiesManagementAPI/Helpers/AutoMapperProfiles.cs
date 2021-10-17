@@ -14,6 +14,10 @@ namespace FacilitiesManagementAPI.Helpers
             CreateMap<Contractor, ContractorDto>();
             CreateMap<PremisesTask, PropertyTasksDto>();
             CreateMap<Premises, PropertyDto>();
+            CreateMap<Premises, UpdatePremiseDto>();
+            CreateMap<UpdatePremiseDto, Premises>()
+              .ForMember(dest => dest.PremisesAddress,
+                map => map.MapFrom( source => source.PremisesAddress));
             CreateMap<Note, NoteDto>();
             CreateMap<CreatePropertyDto, Premises>()
                 .ForMember(dest => dest.PremisesAddress,

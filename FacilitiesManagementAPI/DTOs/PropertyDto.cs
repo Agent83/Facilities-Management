@@ -7,7 +7,7 @@ namespace FacilitiesManagementAPI.DTOs
 {
     public class PropertyDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string PremiseName { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime DateCreated { get; set; } 

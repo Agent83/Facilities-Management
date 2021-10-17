@@ -4,6 +4,7 @@ using FacilitiesManagementAPI.DTOs;
 using FacilitiesManagementAPI.Entities;
 using FacilitiesManagementAPI.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,10 +22,11 @@ namespace FacilitiesManagementAPI.Data
             _mapper = mapper;
         }
 
-        public async Task<Premises> GetPremiseByIdAsync(int Id)
+        public async Task<Premises> GetPremiseByIdAsync(Guid Id)
         {
             return await _context.Premises.FindAsync(Id);
         }
+
 
         public async Task<IEnumerable<Premises>> GetPremisesAsync()
         {
@@ -38,7 +40,7 @@ namespace FacilitiesManagementAPI.Data
                 .ToListAsync();
         }
 
-        public async Task<PropertyDto> GetPropertyByIdAsync(int Id)
+        public async Task<PropertyDto> GetPropertyByIdAsync(Guid Id)
         {
             return await _context.Premises
                 .Where(x => x.Id == Id)

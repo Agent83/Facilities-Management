@@ -4,6 +4,7 @@ using FacilitiesManagementAPI.DTOs;
 using FacilitiesManagementAPI.Entities;
 using FacilitiesManagementAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -30,7 +31,7 @@ namespace FacilitiesManagementAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<PropertyDto>> GetProperty(int id)
+        public async Task<ActionResult<PropertyDto>> GetProperty(Guid id)
         {
             return await _premise.GetPropertyByIdAsync(id);
         }
@@ -44,6 +45,18 @@ namespace FacilitiesManagementAPI.Controllers
             await _context.SaveChangesAsync();
 
             return Ok();
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdatePremise(UpdatePremiseDto propertyDto)
+        {
+            var premise = await _premise.GetPremiseByIdAsync(propertyDto.Id);
+            _mapper.Map(propertyDto, premise);
+            _premise.Update(premise);
+
+            if(await _premise.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Failed to update property");
         }
     }
 }

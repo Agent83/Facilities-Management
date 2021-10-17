@@ -14,7 +14,7 @@ export class PremiseDetailComponent implements OnInit {
   visibleTasks = false;
   visibleContractor = false;
   premiseTask: PremisesTask[] =[];
-  tasksCount: number;
+  tasksCount: string;
   modalInfo:any;
   property: Property
   data: any[] = [];
@@ -31,7 +31,7 @@ export class PremiseDetailComponent implements OnInit {
   }
   
   loadProperty(){
-    this.propertyService.getProperty(+this.route.snapshot.paramMap.get('id'))
+    this.propertyService.getProperty(this.route.snapshot.paramMap.get('id'))
     .subscribe(prop => {
       this.property = prop
       if ( this.property.premisesTasks.length > 0){

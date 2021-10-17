@@ -1,5 +1,5 @@
 export interface Note {
-    id: number;
+    id: string;
     noteContent: string;
     isDeleted: boolean;
     dateCreated: Date;

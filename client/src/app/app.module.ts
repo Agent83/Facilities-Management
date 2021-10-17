@@ -38,6 +38,7 @@ import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { PremiseEditComponent } from './premises/premise-edit/premise-edit.component';
+import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 
 
 registerLocaleData(en);
@@ -83,6 +84,7 @@ registerLocaleData(en);
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
     { provide: NZ_I18N, useValue: en_US }
   ],
   bootstrap: [AppComponent]

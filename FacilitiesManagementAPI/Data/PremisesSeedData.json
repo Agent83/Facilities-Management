@@ -6,9 +6,7 @@
     "PhoneNumber1": "09194583748",
     "PhoneNumber2": null,
     "Email": "lpharm@email.com",
-    "PremisesAddressId": 1,
     "PremisesAddress": {
-      "Id": 1,
       "AddressLine1": "28383 baker",
       "AddressLine2": "Add 2",
       "City": "Tyne and wear",
@@ -29,16 +27,14 @@
         "Description": "this is a job 1",
         "NoteId": null,
         "DateCreated": "2022-09-27T00:00:00",
-        "CompletionDate": "2022-10-27T00:00:00",
-        "PremisesId": 1
+        "CompletionDate": "2022-10-27T00:00:00"
       },
       {
         "Title": "task 1 Job 2",
         "Description": "this is a job 2",
         "NoteId": null,
         "DateCreated": "2022-09-27T00:00:00",
-        "CompletionDate": "2022-11-27T00:00:00",
-        "PremisesId": 1
+        "CompletionDate": "2022-11-27T00:00:00"
       }
     ]
   },
@@ -49,9 +45,7 @@
     "PhoneNumber1": "01918374829",
     "PhoneNumber2": "",
     "Email": "hillpharm@email.com",
-    "PremisesAddressId": 2,
     "PremisesAddress": {
-      "Id": 2,
       "AddressLine1": "83 baker",
       "AddressLine2": "Add 2",
       "City": "Tyne and wear",
@@ -72,16 +66,14 @@
         "Description": "this is a job 1",
         "DateCreated": "2022-09-27T00:00:00",
         "CompletionDate": "2022-11-27T00:00:00",
-        "NoteId": null,
-        "PremisesId": 2
+        "NoteId": null
       },
       {
         "Title": "task 2 Job 2",
         "Description": "this is a job 2",
         "DateCreated": "2022-09-27T00:00:00",
         "CompletionDate": "2022-11-28T00:00:00",
-        "NoteId": null,
-        "PremisesId": 2
+        "NoteId": null
       }
     ]
   },
@@ -92,9 +84,7 @@
     "PhoneNumber1": "01912838484",
     "PhoneNumber2": "01912838444",
     "Email": "hfpharm@email.com",
-    "PremisesAddressId": 3,
     "PremisesAddress": {
-      "Id": 3,
       "AddressLine1": "28383 baker",
       "AddressLine2": "Add 2",
       "City": "Tyne and wear",
@@ -113,22 +103,18 @@
       {
         "Title": "Job3",
         "Description": "this is a job 3",
-        "NoteId": null,
-        "PremisesId": 3
+        "NoteId": null
       }
     ]
   },
   {
-    "Id": 4,
     "PremiseName": "tesco Pharm",
     "IsDeleted": false,
     "DateCreated": "2022-09-27T00:00:00",
     "PhoneNumber1": "01912343444",
     "PhoneNumber2": "01912736283",
     "Email": "tescopharm@email.com",
-    "PremisesAddressId": 4,
     "PremisesAddress": {
-      "Id": 4,
       "AddressLine1": "28383 baker",
       "AddressLine2": "Add 2",
       "City": "Tyne and wear",
@@ -149,8 +135,7 @@
         "Description": "this is a job 4",
         "DateCreated": "2022-09-27T00:00:00",
         "CompletionDate": "2022-10-27T00:00:00",
-        "NoteId": null,
-        "PremisesId": 4
+        "NoteId": null
       }
     ]
   }

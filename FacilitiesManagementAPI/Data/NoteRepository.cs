@@ -4,6 +4,7 @@ using FacilitiesManagementAPI.DTOs;
 using FacilitiesManagementAPI.Entities;
 using FacilitiesManagementAPI.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,12 +22,12 @@ namespace FacilitiesManagementAPI.Data
             _mapper = mapper;
         }
 
-        public async Task<Note> GetNoteByIdAsync(int Id)
+        public async Task<Note> GetNoteByIdAsync(Guid Id)
         {
             return await _context.Note.FindAsync(Id);
         }
 
-        public async Task<NoteDto> GetNoteDtoByIdAsync(int id)
+        public async Task<NoteDto> GetNoteDtoByIdAsync(Guid id)
         {
            return await _context.Note
                 .Where(x => x.Id == id)

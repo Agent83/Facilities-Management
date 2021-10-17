@@ -5,7 +5,7 @@ namespace FacilitiesManagementAPI.DTOs
 {
     public class NoteDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string NoteContent { get; set; }
         public DateTime DateCreated { get; set; } 
         public int PremisesId { get; set; }

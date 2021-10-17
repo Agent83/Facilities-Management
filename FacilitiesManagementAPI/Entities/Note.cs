@@ -4,7 +4,7 @@ namespace FacilitiesManagementAPI.Entities
 {
     public class Note
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string NoteContent { get; set; }
 
         public bool IsDeleted { get; set; }

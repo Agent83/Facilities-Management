@@ -17,6 +17,7 @@ import { PremiseDetailComponent } from './premises/premise-detail/premise-detail
 import { PremiseEditComponent } from './premises/premise-edit/premise-edit.component';
 import { PremiseListComponent } from './premises/premise-list/premise-list.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,7 +32,7 @@ const routes: Routes = [
       { path: 'notes', component: NotesComponent },
       { path: 'create-premise', component: PremiseCreateComponent },
       { path: 'premises/:id', component: PremiseDetailComponent },
-      { path: 'premises/edit/:id', component: PremiseEditComponent },
+      { path: 'premises/edit/:id', component: PremiseEditComponent, canDeactivate: [PreventUnsavedChangesGuard] },
       { path: 'create-contractor', component: ContractorCreateComponent },
       { path: 'create-job', component: PremiseJobCreateComponent },
       { path: 'lists-jobs', component: PremiseJobsListComponent},

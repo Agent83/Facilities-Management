@@ -4,7 +4,7 @@ namespace FacilitiesManagementAPI.Entities
 {
     public class PremisesCertificate
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Description { get; set; }
         public DateTime? DateAssessed { get; set; }
         public DateTime? DatePassed { get; set; }

@@ -4,6 +4,7 @@ using FacilitiesManagementAPI.DTOs;
 using FacilitiesManagementAPI.Entities;
 using FacilitiesManagementAPI.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,12 +27,12 @@ namespace FacilitiesManagementAPI.Data
             return await _context.PremisesTask.ToListAsync();
         }
 
-        public async Task<PremisesTask> GetPremiseTaskByIdAsync(int Id)
+        public async Task<PremisesTask> GetPremiseTaskByIdAsync(Guid Id)
         {
            return await _context.PremisesTask.FindAsync(Id);
         }
 
-        public async Task<PropertyTasksDto> GetPropertyTaskByIdAsync(int id)
+        public async Task<PropertyTasksDto> GetPropertyTaskByIdAsync(Guid id)
         {
             return await _context.PremisesTask
                 .Where(x => x.Id == id)

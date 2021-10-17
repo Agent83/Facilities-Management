@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace FacilitiesManagementAPI.Data
             .ToListAsync();
         }
 
-        public async Task<AppUser> GetUserByIdAsync(int Id)
+        public async Task<AppUser> GetUserByIdAsync(Guid Id)
         {
             return await _context.Users.FindAsync(Id);
         }

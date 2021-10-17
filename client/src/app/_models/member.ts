@@ -1,7 +1,8 @@
-import { Photo } from "./photo";
+
 
 export interface Member {
-    id: number;
+    photos: any;
+    id: string;
     userName: string;
     photoUrl: string;
     age: number;
@@ -9,5 +10,4 @@ export interface Member {
     knownAs: string;
     lastActive: Date;
     isDeleted: boolean;
-    photos: Photo[];
 }
