@@ -1,112 +1,105 @@
+
 <div *ngIf="property">
-  <div class="row">
-    <div class="col-4">
-      <div class="card-body">
-        <div>
-          <strong>Address</strong>
-          <p>{{property.premisesAddress.addressLine1}}
-            {{property.premisesAddress.addressLine2}}
-            {{property.premisesAddress.town}}
-            {{property.premisesAddress.postCode}}</p>
+  <div class="container bg-info text-white">
+    <div class="row">
+      <div class="col">
+        <div class="card-body">
+          <div>
+            <strong>Address</strong>
+            <p>{{property.premisesAddress.addressLine1}}
+              {{property.premisesAddress.addressLine2}}
+              {{property.premisesAddress.town}}
+              {{property.premisesAddress.postCode}}</p>
+          </div>
+          <div>
+            <strong>Last Active</strong>
+            <p>{{property.phoneNumber1}}</p>
+            <p>{{property.phoneNumber2}}</p>
+          </div>
+        
+        <button nz-button nzDanger routerLink='/premises/edit/{{property.id}}'>Edit property details</button>
+      </div>
+      </div>
+      <div class="col">
+        
+          <div class="card-body"> middle</div>
+        
+      </div>
+      <div class="col">
+        <div class="card-body">
+          <button nz-button nzType="primary" (click)="openTasks()">Tasks {{tasksCount}}</button>
+          <nz-drawer [nzClosable]="false" [nzVisible]="visibleTasks" nzPlacement="right" nzTitle="Tasks"
+            (nzOnClose)="closeTasks()">
+            <ng-container *nzDrawerContent>
+              <div *ngIf="premiseTask.length > 0; else noTasks">
+                <ul *ngFor="let item of premiseTask">
+                  <li>{{item.title}} <button nz-button nzType="primary" (click)="showModal(item.id)">
+                      <span>View/ Edit</span></button>
+                    <nz-modal [(nzVisible)]="modalVisible" nzTitle="{{item.title}}" (nzOnCancel)="handleCancel()"
+                      (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
+                      <p *nzModalContent>
+                        {{modalInfo[0].description}}
+                      </p>
+                    </nz-modal>
+                  </li>
+                </ul>
+              </div>
+              <ng-template #noTasks>
+                No tasks for this property
+              </ng-template>
+            </ng-container>
+          </nz-drawer>
         </div>
-        <div>
-          <strong>Last Active</strong>
-          <p>{{property.phoneNumber1}}</p>
-          <p>{{property.phoneNumber2}}</p>
+        <div class="card-body">
+          <button nz-button nzType="primary" (click)="openContractor()">Contractor</button>
+          <nz-drawer [nzClosable]="false" [nzVisible]="visibleContractor" nzPlacement="right" nzTitle="Contractors"
+            (nzOnClose)="closeContractor()">
+            <ng-container *nzDrawerContent>
+              <ul>
+                <li>contractros go here</li>
+              </ul>
+            </ng-container>
+          </nz-drawer>
         </div>
       </div>
-      <button nz-button nzDanger routerLink='/premises/edit/{{property.id}}'>Edit property details</button>
     </div>
-    <div class="col-4">
+    </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-8">
+        <cdk-virtual-scroll-viewport itemSize="73" >
+          <nz-list *ngIf="noteData.length" [nzDataSource]="data" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
+            <ng-template #item let-item>
+              <nz-skeleton *ngIf="!item"  [nzParagraph]="{ rows: 1 }"></nz-skeleton>
+              <nz-comment [nzAuthor]="item.author" [nzDatetime]="item.displayTime">
+                <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.avatar"></nz-avatar>
+                <nz-comment-content>
+                  <p>{{ item.content }}</p>
+                </nz-comment-content>
+              </nz-comment>
+            </ng-template>
+          </nz-list>
+        </cdk-virtual-scroll-viewport>
+          <nz-comment>
+            <!-- <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar> -->
+            <nz-comment-content>
+              <nz-form-item>
+                <textarea [(ngModel)]="inputValue" nz-input rows="4" style="width: 100%; max-width: 100%;"></textarea>
+              </nz-form-item>
+              <nz-form-item>
+                <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue"
+                  (click)="handleSubmit()">
+                  Add Comment
+                </button>
+              </nz-form-item>
+            </nz-comment-content>
+          </nz-comment>
+      </div>
       <div class="col-4">
-        <div class="card-body"> middle</div>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="card-body">
-      <button nz-button nzType="primary" (click)="openTasks()">Tasks</button>
-      <nz-drawer
-        [nzClosable]="false"
-        [nzVisible]="visibleTasks"
-        nzPlacement="right"
-        nzTitle="Tasks"
-        (nzOnClose)="closeTasks()"
-      >
-        <ng-container *nzDrawerContent>
-          <div *ngIf="premiseTask.length > 0; else noTasks">
-            <ul *ngFor="let item of premiseTask">
-              <li>{{item.title}}  <button nz-button nzType="primary" (click)="showModal(item.id)">
-                <span>View/ Edit</span></button>
-                <nz-modal
-                [(nzVisible)]="modalVisible"
-                nzTitle="{{item.title}}"
-                (nzOnCancel)="handleCancel()"
-                (nzOnOk)="handleOk()"
-                [nzOkLoading]="isOkLoading"
-              >
-                <p *nzModalContent >
-                {{modalInfo[0].description}}
-                </p>
-              </nz-modal></li>
-            </ul> 
+        <div class="container">
+          <Textarea placeholder=" temp task"></Textarea>
         </div>
-        <ng-template #noTasks>
-            No tasks for this property
-        </ng-template>
-       
-        </ng-container>
-      </nz-drawer>
-      </div>
-      <div class="card-body">
-        <button nz-button nzType="primary" (click)="openContractor()">Contractor</button>
-        <nz-drawer
-          [nzClosable]="false"
-          [nzVisible]="visibleContractor"
-          nzPlacement="right"
-          nzTitle="Contractors"
-          (nzOnClose)="closeContractor()"
-        >
-          <ng-container *nzDrawerContent>
-            <ul>
-              <li>contractros go here</li>
-            </ul>
-          </ng-container>
-        </nz-drawer>
-        </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-8">
-      <div class="card-body">
-        <nz-list *ngIf="data.length" [nzDataSource]="data" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
-          <ng-template #item let-item>
-            <nz-comment [nzAuthor]="item.author" [nzDatetime]="item.displayTime">
-              <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.avatar"></nz-avatar>
-              <nz-comment-content>
-                <p>{{ item.content }}</p>
-              </nz-comment-content>
-            </nz-comment>
-          </ng-template>
-        </nz-list>
-        <nz-comment>
-          <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
-          <nz-comment-content>
-            <nz-form-item>
-              <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
-            </nz-form-item>
-            <nz-form-item>
-              <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue"
-                (click)="handleSubmit()">
-                Add Comment
-              </button>
-            </nz-form-item>
-          </nz-comment-content>
-        </nz-comment>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="card-body">
-        temp task
       </div>
     </div>
   </div>
+</div>

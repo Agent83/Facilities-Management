@@ -4,9 +4,9 @@
             <a class="navbar-brand" routerLink='/' routerLinkActive='active'>Facilities Management</a>
               <ul class="navbar-nav me-auto " > 
                 <ng-container *ngIf="accountService.currentUser$ | async" >
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link " aria-current="page" routerLink='/members' routerLinkActive='active'>members</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                   <a class="nav-link" routerLink='/premises' routerLinkActive='active'>Properties</a>
                 </li>
@@ -17,9 +17,9 @@
                   <a class="nav-link" routerLink='/lists-jobs'routerLinkActive='active'>Jobs</a>
                 </li>
                 </ng-container>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link" routerLink='/errors'routerLinkActive='active'>errors</a>
-                </li>
+                </li> -->
               </ul>
 
               <div class="dropdown"  *ngIf="(accountService.currentUser$ |async) as user" dropdown>

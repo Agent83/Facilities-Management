@@ -52,6 +52,7 @@ namespace FacilitiesManagementAPI.Controllers
         {
             var premise = await _premise.GetPremiseByIdAsync(propertyDto.Id);
             _mapper.Map(propertyDto, premise);
+
             _premise.Update(premise);
 
             if(await _premise.SaveAllAsync()) return NoContent();

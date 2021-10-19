@@ -1,10 +1,8 @@
-﻿using FacilitiesManagementAPI.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace FacilitiesManagementAPI.DTOs
 {
-    public class ContractorDto
+    public class UpdateContractorDto
     {
         public Guid Id {  get; set; }
         public string BusinessName { get; set; }
@@ -16,11 +14,5 @@ namespace FacilitiesManagementAPI.DTOs
         public string PhoneNumber1 { get; set; }
         public string PhoneNumber2 { get; set; }
         public string Email { get; set; }
-        public bool IsDeleted { get; set; }
-        public DateTime DateCreated { get; set; }
-
-
-        public ICollection<Note> Notes { get; set; }
-        public ICollection<PremisesTask> Jobs { get; set; }
     }
 }

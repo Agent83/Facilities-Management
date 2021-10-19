@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FacilitiesManagementAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211016204633_initial")]
+    [Migration("20211017202757_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,8 +74,8 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("GreenLightId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("GreenLightEnum")
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("INTEGER");
@@ -89,6 +89,9 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<string>("PhoneNumber2")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("Rating")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.ToTable("Contractors");
@@ -96,9 +99,9 @@ namespace FacilitiesManagementAPI.Migrations
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.ContractorType", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("TypeDescription")
                         .HasColumnType("TEXT");
