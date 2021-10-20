@@ -15,8 +15,9 @@ namespace FacilitiesManagementAPI.Migrations
                     BusinessName = table.Column<string>(type: "TEXT", nullable: true),
                     FirstName = table.Column<string>(type: "TEXT", nullable: true),
                     LastName = table.Column<string>(type: "TEXT", nullable: true),
+                    Rating = table.Column<int>(type: "INTEGER", nullable: true),
                     ContractorTypeId = table.Column<int>(type: "INTEGER", nullable: true),
-                    GreenLightId = table.Column<int>(type: "INTEGER", nullable: false),
+                    GreenLightEnum = table.Column<string>(type: "TEXT", nullable: true),
                     PhoneNumber1 = table.Column<string>(type: "TEXT", nullable: true),
                     PhoneNumber2 = table.Column<string>(type: "TEXT", nullable: true),
                     Email = table.Column<string>(type: "TEXT", nullable: true),
@@ -32,7 +33,8 @@ namespace FacilitiesManagementAPI.Migrations
                 name: "ContractorTypes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     TypeDescription = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>

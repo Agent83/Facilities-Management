@@ -18,31 +18,26 @@
 <div class="container">
     <a role="button" class="btn btn-outline-primary" routerLink='/create-contractor'>Add contractor</a>
 
-    <table class="table  table-bordered table-striped mt-2 ">
+    <table class="table table-bordered table-hover table-striped mt-2">
       <thead>
-        <tr>
-          <th>Firstname</th>
-          <th>Lastname</th>
-          <th>Email</th>
-        </tr>
+      <tr>
+        <th scope="col">Business name</th>
+        <th scope="col">Contractor name</th>
+        <th scope="col">Number of properties</th>
+      </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>John</td>
-          <td>Doe</td>
-          <td>john@example.com</td>
-        </tr>
-        <tr>
-          <td>Mary</td>
-          <td>Moe</td>
-          <td>mary@example.com</td>
-        </tr>
-        <tr>
-          <td>July</td>
-          <td>Dooley</td>
-          <td>july@example.com</td>
-        </tr>
+      <tr *ngFor="let contractor of contractors$ | async "
+      routerLink='/contractor/{{contractor.id}}'>
+        <td>
+    
+          {{contractor.businessName}}
+        </td>
+        <td>{{contractor.firstName}} {{contractor.lastName}}</td>
+        <td>Task numbers </td>
+      </tr>
       </tbody>
     </table>
+    
   </div>
 

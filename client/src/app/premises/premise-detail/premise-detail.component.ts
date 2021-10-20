@@ -4,6 +4,7 @@ import { Property } from 'src/app/_models/property';
 import { PropertyService } from 'src/app/_services/property.service';
 import { formatDistance } from 'date-fns'
 import { PremisesTask } from 'src/app/_models/premisesTask';
+import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 
 @Component({
   selector: 'app-premise-detail',
@@ -14,15 +15,15 @@ export class PremiseDetailComponent implements OnInit {
   visibleTasks = false;
   visibleContractor = false;
   premiseTask: PremisesTask[] =[];
-  tasksCount: string;
+  tasksCount: number;
   modalInfo:any;
-  property: Property
-  data: any[] = [];
+  property: Property;
+  noteData: {
+    content: string,
+    datetime: Date,
+    displayTime: any,
+  }[] = [];
   submitting = false;
-  user = {
-    author: 'Han Solo',
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-  };
   inputValue = '';
   constructor(private propertyService: PropertyService, private route: ActivatedRoute) { }
 
@@ -35,12 +36,23 @@ export class PremiseDetailComponent implements OnInit {
     .subscribe(prop => {
       this.property = prop
       if ( this.property.premisesTasks.length > 0){
-        this.tasksCount = this.property.premisesTasks[0].id;
+        this.tasksCount = this.property.premisesTasks.length;
         this.property.premisesTasks.forEach(task => {
           this.premiseTask.push(task);
         });
       }
-      console.log(this.premiseTask)
+
+      if (this.property.notes.length > 0){
+        this.property.notes.forEach(note => {
+          return this.noteData.push(
+            {
+              content: note.noteContent,
+              datetime: note.dateCreated,
+              displayTime: note.dateCreated,
+            });
+        });
+      }
+      console.log(this.noteData);
     })
   }
 
@@ -64,18 +76,17 @@ export class PremiseDetailComponent implements OnInit {
     this.inputValue = '';
     setTimeout(() => {
       this.submitting = false;
-      this.data = [
-        ...this.data,
+      this.noteData.push(
         {
-          ...this.user,
           content,
           datetime: new Date(),
           displayTime: formatDistance(new Date(), new Date())
         }
-      ].map(e => ({
-        ...e,
-        displayTime: formatDistance(new Date(), e.datetime)
-      }));
+      )
+      // .map(e => ({
+      //   ...e,
+      //   displayTime: formatDistance(new Date(), e.datetime).toString()
+      // }));
     }, 1800);
   }
 
