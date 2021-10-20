@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FacilitiesManagementAPI.Data;
 using FacilitiesManagementAPI.DTOs;
 using FacilitiesManagementAPI.Entities;
 using FacilitiesManagementAPI.Interfaces;
@@ -13,11 +14,13 @@ namespace FacilitiesManagementAPI.Controllers
     {
         private readonly IMapper _mapper;
         private readonly INoteRepository _note;
+        private readonly DataContext _context;
 
-        public NoteController(IMapper mapper, INoteRepository note)
+        public NoteController(IMapper mapper, INoteRepository note, DataContext context )
         {
             _mapper = mapper;
             _note = note;
+            _context = context;
         }
        [HttpGet]
        public async Task<ActionResult<IEnumerable<Note>>> GetNotesAsync()
@@ -38,5 +41,30 @@ namespace FacilitiesManagementAPI.Controllers
         {
             return await _note.GetNoteDtoByIdAsync(Id);
         }
+
+        [HttpPost("createNote")]
+        public async Task<ActionResult<NoteDto>> CreateContractor(NoteDto noteDto)
+        {
+            var note = _mapper.Map<Note>(noteDto);
+
+            _context.Note.Add(note);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateContractor(NoteDto noteDto)
+        {
+            var note = await _note.GetNoteByIdAsync(noteDto.Id);
+            _mapper.Map(noteDto, note);
+
+            _note.Update(note);
+
+            if (await _note.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Failed to update property");
+        }
     }
 }
+

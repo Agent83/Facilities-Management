@@ -19,14 +19,14 @@ export class PropertyService {
     return this.http.get<Property[]>(this.baseUrl + 'premise').pipe(
       map(property => {
         this.property = property;
-        return property
+        return property;
       })
     );
   }
 
   getProperty(id: string){
     const property = this.property.find(x => x.id === id);
-    if(property !== undefined) return of(property)
+    if(property !== undefined) return of(property);
     return this.http.get<Property>(this.baseUrl + 'premise/' + id);
   }
 

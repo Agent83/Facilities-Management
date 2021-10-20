@@ -48,7 +48,7 @@ namespace FacilitiesManagementAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdatePremise(UpdateContractorDto contractorDto)
+        public async Task<ActionResult> UpdateContractor(UpdateContractorDto contractorDto)
         {
             var contractor = await _contractor.GetContractByIdAsync(contractorDto.Id);
             _mapper.Map(contractorDto, contractor);
