@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FacilitiesManagementAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211017202757_initial")]
+    [Migration("20211024202514_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,6 +17,23 @@ namespace FacilitiesManagementAPI.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.8");
+
+            modelBuilder.Entity("FacilitiesManagementAPI.Entities.Accountant", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Accountant");
+                });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.AppUser", b =>
                 {
@@ -234,10 +251,7 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<int?>("NoteId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("PremisesId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<Guid?>("PremisesId1")
+                    b.Property<Guid>("PremisesId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -247,7 +261,7 @@ namespace FacilitiesManagementAPI.Migrations
 
                     b.HasIndex("ContractorId");
 
-                    b.HasIndex("PremisesId1");
+                    b.HasIndex("PremisesId");
 
                     b.ToTable("PremisesTask");
                 });
@@ -287,9 +301,13 @@ namespace FacilitiesManagementAPI.Migrations
                         .WithMany("Jobs")
                         .HasForeignKey("ContractorId");
 
-                    b.HasOne("FacilitiesManagementAPI.Entities.Premises", null)
+                    b.HasOne("FacilitiesManagementAPI.Entities.Premises", "Premises")
                         .WithMany("PremisesTasks")
-                        .HasForeignKey("PremisesId1");
+                        .HasForeignKey("PremisesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Premises");
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Contractor", b =>

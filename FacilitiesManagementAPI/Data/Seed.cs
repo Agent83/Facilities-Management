@@ -40,5 +40,29 @@ namespace FacilitiesManagementAPI.Data
             }
             context.SaveChanges();
         }
+
+        public static async Task SeedContractor(DataContext context)
+        {
+            if( await context.Contractors.AnyAsync()) return;
+            var contractorData = await System.IO.File.ReadAllTextAsync("Data/contractorSeed.json");
+            var contractors = JsonSerializer.Deserialize<List<Contractor>>(contractorData);
+            foreach (var contractor in contractors)
+            {
+                context.Contractors.Add(contractor);
+            }
+            context.SaveChanges();
+        }
+
+        public static async Task SeedContractorType(DataContext context)
+        {
+            if (await context.Contractors.AnyAsync()) return;
+            var contractorTypeData = await System.IO.File.ReadAllTextAsync("Data/ContractorType.json");
+            var conTypes = JsonSerializer.Deserialize<List<ContractorType>>(contractorTypeData);
+            foreach (var conType in conTypes)
+            { 
+                context.ContractorTypes.Add(conType);
+            }
+            context.SaveChanges();
+        }
     }
 }

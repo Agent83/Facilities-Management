@@ -5,6 +5,7 @@
       <div class="col">
         <div class="card-body">
           <div>
+            <strong>Property number</strong><br>
             <strong>Address</strong>
             <p>{{property.premisesAddress.addressLine1}}
               {{property.premisesAddress.addressLine2}}
@@ -12,9 +13,10 @@
               {{property.premisesAddress.postCode}}</p>
           </div>
           <div>
-            <strong>Last Active</strong>
+            <strong>Contact details</strong>
             <p>{{property.phoneNumber1}}</p>
             <p>{{property.phoneNumber2}}</p>
+            <p>{{property.email}}</p>
           </div>
         
         <button nz-button nzDanger routerLink='/premises/edit/{{property.id}}'>Edit property details</button>
@@ -67,6 +69,27 @@
   <div class="container">
     <div class="row">
       <div class="col-8">
+        <div>
+          <cdk-virtual-scroll-viewport itemSize="73" class="demo-infinite-container">
+            <nz-list>
+              <nz-list-item *cdkVirtualFor="let item of ds">
+                <nz-skeleton *ngIf="!item" [nzAvatar]="true" [nzParagraph]="{ rows: 1 }"></nz-skeleton>
+                <nz-list-item-meta
+                  *ngIf="item"
+                  nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                  [nzDescription]="item.email"
+                >
+                  <nz-list-item-meta-title>
+                    <a href="https://ng.ant.design">{{ item.name.last }}</a>
+                  </nz-list-item-meta-title>
+                </nz-list-item-meta>
+              </nz-list-item>
+            </nz-list>
+          </cdk-virtual-scroll-viewport>
+        </div>
+
+
+
         <cdk-virtual-scroll-viewport itemSize="73" >
           <nz-list *ngIf="noteData.length" [nzDataSource]="data" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
             <ng-template #item let-item>

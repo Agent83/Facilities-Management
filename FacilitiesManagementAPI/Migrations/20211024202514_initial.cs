@@ -8,6 +8,20 @@ namespace FacilitiesManagementAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Accountant",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Accountant", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Contractors",
                 columns: table => new
                 {
@@ -148,9 +162,8 @@ namespace FacilitiesManagementAPI.Migrations
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     NoteId = table.Column<int>(type: "INTEGER", nullable: true),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
-                    PremisesId = table.Column<int>(type: "INTEGER", nullable: true),
-                    ContractorId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    PremisesId1 = table.Column<Guid>(type: "TEXT", nullable: true)
+                    PremisesId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ContractorId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -162,11 +175,11 @@ namespace FacilitiesManagementAPI.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_PremisesTask_Premises_PremisesId1",
-                        column: x => x.PremisesId1,
+                        name: "FK_PremisesTask_Premises_PremisesId",
+                        column: x => x.PremisesId,
                         principalTable: "Premises",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -196,13 +209,16 @@ namespace FacilitiesManagementAPI.Migrations
                 column: "ContractorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PremisesTask_PremisesId1",
+                name: "IX_PremisesTask_PremisesId",
                 table: "PremisesTask",
-                column: "PremisesId1");
+                column: "PremisesId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Accountant");
+
             migrationBuilder.DropTable(
                 name: "ContractorTypes");
 

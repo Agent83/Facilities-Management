@@ -25,6 +25,9 @@ namespace FacilitiesManagementAPI
                await context.Database.MigrateAsync();
                await Seed.SeedUsers(context);
                await Seed.SeedPremisesAsync(context);
+               await Seed.SeedContractorType(context);
+               await Seed.SeedContractor(context);
+                
            }
            catch (Exception ex)
            {

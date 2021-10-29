@@ -1,0 +1,35 @@
+[
+  {
+    "BusinessName": "Wood Work",
+    "FirstName": "bob",
+    "LastName": "Smith",
+    "Rating": 1,
+    "ContractorTypeId": 3,
+    "GreenLightEnum": "red",
+    "PhoneNumber1": "10928371445",
+    "PhoneNumber2": "01928384085",
+    "Email": "bob@email.com"
+  },
+  {
+    "BusinessName": "Sparky",
+    "FirstName": "Jeff",
+    "LastName": "Smith",
+    "Rating": 1,
+    "ContractorTypeId": 2,
+    "GreenLightEnum": "amber",
+    "PhoneNumber1": "10928371445",
+    "PhoneNumber2": "01928384085",
+    "Email": "sparky@email.com"
+  },
+  {
+    "BusinessName": "Stu plumbing",
+    "FirstName": "stu",
+    "LastName": "Smith",
+    "Rating": 1,
+    "ContractorTypeId": 1,
+    "GreenLightEnum": "green",
+    "PhoneNumber1": "10928371445",
+    "PhoneNumber2": "01928384085",
+    "Email": "stuplum@email.com"
+  }
+]

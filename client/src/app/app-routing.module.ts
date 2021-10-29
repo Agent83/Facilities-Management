@@ -10,8 +10,6 @@ import { ListsComponent } from './lists/lists.component';
 import { MemberDetailsComponent } from './members/member-details/member-details.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { NotesComponent } from './notes/notes.component';
-import { PremiseJobCreateComponent } from './premiseJobs/premise-job-create/premise-job-create.component';
-import { PremiseJobsListComponent } from './premiseJobs/premise-jobs-list/premise-jobs-list.component';
 import { PremiseCreateComponent } from './premises/premise-create/premise-create.component';
 import { PremiseDetailComponent } from './premises/premise-detail/premise-detail.component';
 import { PremiseEditComponent } from './premises/premise-edit/premise-edit.component';
@@ -34,8 +32,6 @@ const routes: Routes = [
       { path: 'premises/:id', component: PremiseDetailComponent },
       { path: 'premises/edit/:id', component: PremiseEditComponent, canDeactivate: [PreventUnsavedChangesGuard] },
       { path: 'create-contractor', component: ContractorCreateComponent },
-      { path: 'create-job', component: PremiseJobCreateComponent },
-      { path: 'lists-jobs', component: PremiseJobsListComponent},
       { path: 'premises', component: PremiseListComponent},
       { path: 'lists-contractor', component: ContractorListComponent}
     ]
@@ -43,7 +39,7 @@ const routes: Routes = [
   {path: 'errors', component:TestErrorComponent},
   {path: 'not-found', component:NotFoundComponent},
   {path: 'server-error', component:ServerErrorComponent},
-  { path: '**', component: NotFoundComponent, pathMatch: 'full' },
+  {path: '**', component: NotFoundComponent, pathMatch: 'full' },
 
 ];
 

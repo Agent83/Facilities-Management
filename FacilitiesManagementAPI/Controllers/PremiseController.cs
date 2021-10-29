@@ -14,15 +14,18 @@ namespace FacilitiesManagementAPI.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IPremiseRepository _premise;
+        private readonly IPremisesTaskRepository _premisesTask;
         private readonly DataContext _context;
 
-        public PremiseController(IMapper mapper, IPremiseRepository premise,DataContext context)
+        public PremiseController(IMapper mapper, IPremiseRepository premise, DataContext context
+                                  , IPremisesTaskRepository premisesTask)
         {
             _mapper = mapper;
             _premise = premise;
             _context = context;
+            _premisesTask = premisesTask;
         }
-        
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PropertyDto>>> GetPremises()
         {
@@ -56,6 +59,31 @@ namespace FacilitiesManagementAPI.Controllers
             _premise.Update(premise);
 
             if(await _premise.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Failed to update property");
+        }
+
+        [HttpPost("createTask")]
+        public async Task<ActionResult<PremisesTask>> CreateContractor(PropertyTasksDto propertyTasksDto)
+        {
+           // var property = await _premise.GetPremiseByIdAsync(propertyTasksDto.PremisesId);
+            var propTask = _mapper.Map<PremisesTask>(propertyTasksDto.PremisesId);
+
+            _context.PremisesTask.Add(propTask);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateContractor(PropertyDto propertyDto)
+        {
+            var property = await _premisesTask.GetPremiseTaskByIdAsync(propertyDto.Id);
+            _mapper.Map(propertyDto, property);
+
+            _premisesTask.Update(property);
+
+            if (await _premisesTask.SaveAllAsync()) return NoContent();
 
             return BadRequest("Failed to update property");
         }

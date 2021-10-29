@@ -18,6 +18,8 @@ namespace FacilitiesManagementAPI.Extensions
             services.AddScoped<IPremisesTaskRepository, PremisesTaskRepository>();
             services.AddScoped<IContractorRepository, ContractorRepository>();
             services.AddScoped<INoteRepository, NoteRepository>();
+            services.AddScoped<IAccountantRepository, AccountantRepository>();
+            services.AddScoped<IContractorTypeRepository, ContractorTypeRepository>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddDbContext<DataContext>(options =>
             {
