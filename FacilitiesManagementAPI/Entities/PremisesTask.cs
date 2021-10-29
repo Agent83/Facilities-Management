@@ -11,6 +11,7 @@ namespace FacilitiesManagementAPI.Entities
         public string Description { get; set; }
         public int? NoteId { get; set; }
         public bool IsDeleted { get; set; }
-        public int? PremisesId { get; set; }
+        public Guid PremisesId { get; set; }
+        public Premises Premises { get; set; }
     }
 }

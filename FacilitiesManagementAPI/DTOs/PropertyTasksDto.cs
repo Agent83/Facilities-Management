@@ -12,6 +12,6 @@ namespace FacilitiesManagementAPI.DTOs
         public int? NoteId { get; set; }
         public bool IsDeleted { get; set; }
 
-        public int PremisesId { get; set; }
+        public Guid PremisesId { get; set; }
     }
 }
