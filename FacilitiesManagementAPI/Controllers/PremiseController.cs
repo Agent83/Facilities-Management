@@ -63,29 +63,6 @@ namespace FacilitiesManagementAPI.Controllers
             return BadRequest("Failed to update property");
         }
 
-        [HttpPost("createTask")]
-        public async Task<ActionResult<PremisesTask>> CreateContractor(PropertyTasksDto propertyTasksDto)
-        {
-           // var property = await _premise.GetPremiseByIdAsync(propertyTasksDto.PremisesId);
-            var propTask = _mapper.Map<PremisesTask>(propertyTasksDto.PremisesId);
-
-            _context.PremisesTask.Add(propTask);
-            await _context.SaveChangesAsync();
-
-            return Ok();
-        }
-
-        [HttpPut]
-        public async Task<ActionResult> UpdateContractor(PropertyDto propertyDto)
-        {
-            var property = await _premisesTask.GetPremiseTaskByIdAsync(propertyDto.Id);
-            _mapper.Map(propertyDto, property);
-
-            _premisesTask.Update(property);
-
-            if (await _premisesTask.SaveAllAsync()) return NoContent();
-
-            return BadRequest("Failed to update property");
-        }
+ 
     }
 }

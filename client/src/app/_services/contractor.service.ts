@@ -29,4 +29,18 @@ contractor: Contractor[] = [];
     if(contractor !== undefined) return of(contractor);
     return this.http.get<Contractor>(this.baseUrl + 'contractor/' + id);
   }
+
+  createContractor(model:any){
+    return this.http.post(this.baseUrl + 'contractor/createcon', model);
+  }
+
+  updateContractor(contractor: Contractor){
+    let url = this.baseUrl + 'contractor';
+    return this.http.put<Contractor>(url, contractor).pipe(
+      map(() => {
+        const index = this.contractor.indexOf(contractor);
+        this.contractor[index] = contractor
+      })
+    );
+  }
 }

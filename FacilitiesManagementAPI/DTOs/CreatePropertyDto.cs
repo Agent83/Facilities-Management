@@ -7,6 +7,7 @@ namespace FacilitiesManagementAPI.DTOs
 {
     public class CreatePropertyDto
     {
+        public string PremiseNumber { get; set; }
         public string PremiseName { get; set; }
         public string PhoneNumber1 { get; set; }
         public string PhoneNumber2 { get; set; }

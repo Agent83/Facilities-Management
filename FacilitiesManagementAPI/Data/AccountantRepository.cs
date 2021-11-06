@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using FacilitiesManagementAPI.DTOs;
 using FacilitiesManagementAPI.Entities;
 using FacilitiesManagementAPI.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FacilitiesManagementAPI.Data
@@ -18,8 +21,8 @@ namespace FacilitiesManagementAPI.Data
             _context = context;
             _mapper = mapper;
         }
-
-        public async Task<Accountant> GetAccountantByIdAsync(Guid Id)
+  
+        public async Task<Accountant> GetAccountantById(int Id)
         {
             return await _context.Accountant.FindAsync(Id);
         }
@@ -27,6 +30,21 @@ namespace FacilitiesManagementAPI.Data
         public async Task<IEnumerable<Accountant>> GetAccountants()
         {
             return await _context.Accountant.ToListAsync();
+        }
+
+        public async Task<IEnumerable<PropAccountantDto>> GetAccountantsAsync()
+        {
+           return await _context.Accountant
+                .ProjectTo<PropAccountantDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+        }
+
+        public async Task<PropAccountantDto> GetPropAccountantByIDAsync(int Id)
+        {
+            return await _context.Accountant
+                .Where(x => x.Id == Id)
+                .ProjectTo<PropAccountantDto>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
         }
 
         public async Task<bool> SaveAllAsync()

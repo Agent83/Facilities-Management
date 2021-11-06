@@ -2,6 +2,7 @@
 using System.Threading.Tasks; 
 using System.Collections.Generic;
 using System;
+using FacilitiesManagementAPI.DTOs;
 
 namespace FacilitiesManagementAPI.Interfaces
 {
@@ -10,7 +11,8 @@ namespace FacilitiesManagementAPI.Interfaces
         void Update(Accountant accountant);
         Task<bool> SaveAllAsync();
         Task<IEnumerable<Accountant>> GetAccountants();
-        Task<Accountant> GetAccountantByIdAsync(Guid Id);
-        //Task<IEnumerable<AccountantDto>>
+        Task<IEnumerable<PropAccountantDto>> GetAccountantsAsync();
+        Task<Accountant> GetAccountantById(int Id);
+        Task<PropAccountantDto> GetPropAccountantByIDAsync(int Id);
     }
 }

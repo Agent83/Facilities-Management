@@ -13,7 +13,9 @@
                       <strong>Information:</strong>You have made changes. Any unsaved changes will be lost!
                   </div>
                   <div class="col text-left" >
-                      
+                    <label  class="mt-2" for="premiseName">Premise number</label>
+                    <input  class="form-control" [(ngModel)]="property.premiseNumber" name="premiseNumber" type="text" >
+                    
                     <label  class="mt-2" for="premiseName">Premise name</label>
                     <input  class="form-control" [(ngModel)]="property.premiseName" name="premiseName" type="text" >
                

@@ -23,14 +23,15 @@ export class PremiseCreateComponent implements OnInit {
  
   intitializeForm(){
     this.createPropForm = this.fb.group({
+    premiseNumber:[''],
     premiseName:['', Validators.required],
     phoneNumber1: [''],
     phoneNumber2: [''],
-    email: ['', Validators.email],
-    addressLine1: ['', Validators.required],
+    email: [''],
+    addressLine1: [''],
     addressLine2: [''],
     city: [''],
-    postCode: ['', Validators.required]
+    postCode: ['']
     })
   }
 

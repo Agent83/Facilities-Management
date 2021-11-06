@@ -15,6 +15,8 @@ namespace FacilitiesManagementAPI.Helpers
             CreateMap<UpdateContractorDto, Contractor>();
             CreateMap<PremisesTask, PropertyTasksDto>();
             CreateMap<PropertyTasksDto, PremisesTask>();
+            CreateMap<CreateAccountantDto, Accountant>();
+            CreateMap<PropAccountantDto, Accountant>();
             CreateMap<Premises, PropertyDto>();
             CreateMap<Premises, UpdatePremiseDto>();
             CreateMap<UpdatePremiseDto, Premises>()
