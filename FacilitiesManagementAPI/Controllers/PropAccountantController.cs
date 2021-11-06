@@ -7,6 +7,7 @@ using System.Collections;
 using FacilitiesManagementAPI.Entities;
 using System.Collections.Generic;
 using System;
+using FacilitiesManagementAPI.DTOs;
 
 namespace FacilitiesManagementAPI.Controllers
 {
@@ -31,23 +32,27 @@ namespace FacilitiesManagementAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Accountant>> GetAccountsAsync(Guid Id)
+        public async Task<ActionResult<Accountant>> GetAccountsAsync(int Id)
         {
-            return await _accountant.GetAccountantByIdAsync(Id);
+            return await _accountant.GetAccountantById(Id);
         }
 
         [HttpPost("accountant")]
-        public async Task<ActionResult<Accountant>> CreateAccountant(Accountant accountant)
+        public async Task<ActionResult<Accountant>> CreateAccountant(CreateAccountantDto accountant)
         {
-            _context.Accountant.Add(accountant);
+            var premAccountant = _mapper.Map<Accountant>(accountant);
+            _context.Accountant.Add(premAccountant);
             await _context.SaveChangesAsync();
 
             return Ok();
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateAccountant(Accountant accountant)
+        public async Task<ActionResult> UpdateAccountant(PropAccountantDto propAccountant)
         {
+            var accountant  = await _accountant.GetAccountantById(propAccountant.Id);
+            _mapper.Map(propAccountant, accountant);
+
             _accountant.Update(accountant);
             if (await _accountant.SaveAllAsync()) return NoContent();
 

@@ -5,5 +5,5 @@ export interface PremisesTask {
     completionDate: Date;
     noteId?: any;
     isDeleted: boolean;
-    premisesId: number;
+    premisesId: string;
 }

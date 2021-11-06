@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Property } from 'src/app/_models/property';
+import { PremTasksService } from 'src/app/_services/prem-tasks.service';
 
 @Component({
   selector: 'app-tasks-create',
@@ -6,10 +11,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tasks-create.component.css']
 })
 export class TasksCreateComponent implements OnInit {
-
-  constructor() { }
+  property: Property;
+  createTaskForm: FormGroup;
+  validationErrors: string[] = [];
+  constructor(private location: Location, private fb: FormBuilder,private toastr: ToastrService,
+    private router: Router, private porpTaskService: PremTasksService) { }
 
   ngOnInit(): void {
+    this.initializeForm();
   }
 
+   initializeForm(){
+     this.createTaskForm = this.fb.group({
+       title:[''],
+       description: [''],
+       completionDate: [Date],
+       premisesId: this.property.id,
+     })
+   }
+
+   propTaskCreate(){
+     this.porpTaskService.createTask(this.createTaskForm.value).subscribe(()=>{
+       this.createTaskForm.reset();
+       this.toastr.success('Task has been added');
+     }, error =>{
+      this.validationErrors = error;
+    });
+   }
 }
+

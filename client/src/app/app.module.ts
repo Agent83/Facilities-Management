@@ -37,6 +37,8 @@ import { PremiseEditComponent } from './premises/premise-edit/premise-edit.compo
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PremiseTasksComponent } from './premiseTasks/premise-tasks/premise-tasks.component';
 import { TasksCreateComponent } from './premiseTasks/tasks-create/tasks-create.component';
+import { RouterModule } from '@angular/router';
+import { TexareaInputComponent } from './_forms/texarea-input/texarea-input.component';
 
 
 registerLocaleData(en);
@@ -66,6 +68,7 @@ registerLocaleData(en);
     PremiseEditComponent,
     PremiseTasksComponent,
     TasksCreateComponent,
+    TexareaInputComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,8 @@ registerLocaleData(en);
     SharedModule,
     NzCommentModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot([]),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

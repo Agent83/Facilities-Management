@@ -8,6 +8,9 @@
 
               </div>
                <div class="col-8 text-left">
+                  <label class="control-label">Premise number</label>
+                  <app-text-input [formControl]='createPropForm.controls["premiseNumber"]' [label]='"premise number"'>
+                  </app-text-input>
                   <label class="control-label">Premise name</label>
                   <app-text-input [formControl]='createPropForm.controls["premiseName"]' [label]='"premise name"'>
                   </app-text-input>

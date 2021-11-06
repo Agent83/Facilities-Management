@@ -4,7 +4,12 @@ import { Property } from 'src/app/_models/property';
 import { PropertyService } from 'src/app/_services/property.service';
 import { formatDistance } from 'date-fns'
 import { PremisesTask } from 'src/app/_models/premisesTask';
-import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
+import { PremTasksService } from 'src/app/_services/prem-tasks.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { first } from 'rxjs/operators';
+import { Contractor } from 'src/app/_models/contractor';
+import { ContractorService } from 'src/app/_services/contractor.service';
 
 @Component({
   selector: 'app-premise-detail',
@@ -15,9 +20,13 @@ export class PremiseDetailComponent implements OnInit {
   visibleTasks = false;
   visibleContractor = false;
   premiseTask: PremisesTask[] =[];
+  contractorsList: Contractor[] = [];
   tasksCount: number;
   modalInfo:any;
   property: Property;
+  propId: any;
+  createTaskForm: FormGroup;
+  validationErrors: string[] = [];
   noteData: {
     content: string,
     datetime: Date,
@@ -25,16 +34,50 @@ export class PremiseDetailComponent implements OnInit {
   }[] = [];
   submitting = false;
   inputValue = '';
-  constructor(private propertyService: PropertyService, private route: ActivatedRoute) { }
+  constructor(private propertyService: PropertyService,
+    private contractorService: ContractorService, 
+    private route: ActivatedRoute,
+    private porpTaskService: PremTasksService,
+    private fb: FormBuilder,
+    private toastr: ToastrService,) { }
 
   ngOnInit(): void {
     this.loadProperty();
+    this.loadContractors();
+    this.initializeTaskForm();
   }
   
+  initializeTaskForm(){
+    this.createTaskForm = this.fb.group({
+      title:['',Validators.required],
+      description:[''],
+      completionDate: [''],
+      premisesId: [this.propId],
+    })
+  }
+
+  propTaskCreate(){
+    this.porpTaskService.createTask(this.createTaskForm.value).subscribe(()=>{
+      this.createTaskForm.reset();
+      this.premiseTask = [];
+      this.loadProperty();
+      this.toastr.success('Task has been added');
+    }, error =>{
+     this.validationErrors = error;
+   });
+  }
+
+  loadContractors(){
+    this.contractorService.getContractors().pipe(first()).subscribe(contractors =>{
+      this.contractorsList = contractors;
+    })
+  }
+
   loadProperty(){
-    this.propertyService.getProperty(this.route.snapshot.paramMap.get('id'))
+    this.propertyService.getProperty(this.route.snapshot.paramMap.get('id')).pipe(first())
     .subscribe(prop => {
       this.property = prop
+      this.propId = prop.id
       if ( this.property.premisesTasks.length > 0){
         this.tasksCount = this.property.premisesTasks.length;
         this.property.premisesTasks.forEach(task => {
@@ -57,6 +100,7 @@ export class PremiseDetailComponent implements OnInit {
   }
 
   openTasks(): void {
+    // this.initializeTaskForm();
     this.visibleTasks = true;
   }
   openContractor(): void {
@@ -64,6 +108,7 @@ export class PremiseDetailComponent implements OnInit {
   }
 
   closeTasks(): void {
+    this.createTaskForm.reset();
     this.visibleTasks = false;
   }
   closeContractor(): void {

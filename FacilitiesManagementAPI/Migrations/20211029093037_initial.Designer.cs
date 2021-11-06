@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FacilitiesManagementAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211024202514_initial")]
+    [Migration("20211029093037_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,7 +30,13 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("PremisesId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PremisesId")
+                        .IsUnique();
 
                     b.ToTable("Accountant");
                 });
@@ -185,6 +191,9 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<string>("PremiseName")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("PremiseNumber")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ContractorId");
@@ -266,6 +275,15 @@ namespace FacilitiesManagementAPI.Migrations
                     b.ToTable("PremisesTask");
                 });
 
+            modelBuilder.Entity("FacilitiesManagementAPI.Entities.Accountant", b =>
+                {
+                    b.HasOne("FacilitiesManagementAPI.Entities.Premises", null)
+                        .WithOne("Accountant")
+                        .HasForeignKey("FacilitiesManagementAPI.Entities.Accountant", "PremisesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Note", b =>
                 {
                     b.HasOne("FacilitiesManagementAPI.Entities.Contractor", null)
@@ -321,6 +339,8 @@ namespace FacilitiesManagementAPI.Migrations
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Premises", b =>
                 {
+                    b.Navigation("Accountant");
+
                     b.Navigation("Notes");
 
                     b.Navigation("PremisesAddress");

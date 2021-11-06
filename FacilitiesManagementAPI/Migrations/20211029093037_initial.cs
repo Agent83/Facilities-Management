@@ -8,20 +8,6 @@ namespace FacilitiesManagementAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Accountant",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Accountant", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Contractors",
                 columns: table => new
                 {
@@ -80,6 +66,7 @@ namespace FacilitiesManagementAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    PremiseNumber = table.Column<string>(type: "TEXT", nullable: true),
                     PremiseName = table.Column<string>(type: "TEXT", nullable: true),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -97,6 +84,27 @@ namespace FacilitiesManagementAPI.Migrations
                         principalTable: "Contractors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Accountant",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    PremisesId = table.Column<Guid>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Accountant", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Accountant_Premises_PremisesId",
+                        column: x => x.PremisesId,
+                        principalTable: "Premises",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -181,6 +189,12 @@ namespace FacilitiesManagementAPI.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Accountant_PremisesId",
+                table: "Accountant",
+                column: "PremisesId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Note_ContractorId",
