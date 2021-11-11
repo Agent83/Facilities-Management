@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContractorCreateComponent } from './contractor/contractor-create/contractor-create.component';
+import { ContractorDeatialsComponent } from './contractor/contractor-deatials/contractor-deatials.component';
+import { ContractorEditComponent } from './contractor/contractor-edit/contractor-edit.component';
 import { ContractorListComponent } from './contractor/contractor-list/contractor-list.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
@@ -33,7 +35,9 @@ const routes: Routes = [
       { path: 'premises/edit/:id', component: PremiseEditComponent, canDeactivate: [PreventUnsavedChangesGuard] },
       { path: 'create-contractor', component: ContractorCreateComponent },
       { path: 'premises', component: PremiseListComponent},
-      { path: 'lists-contractor', component: ContractorListComponent}
+      { path: 'lists-contractor', component: ContractorListComponent},
+      { path: 'contractor/:id', component:ContractorDeatialsComponent},
+      { path: 'contractor/edit/:id', component: ContractorEditComponent}
     ]
   },
   {path: 'errors', component:TestErrorComponent},

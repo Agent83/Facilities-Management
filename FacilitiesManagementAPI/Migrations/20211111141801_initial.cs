@@ -15,7 +15,6 @@ namespace FacilitiesManagementAPI.Migrations
                     BusinessName = table.Column<string>(type: "TEXT", nullable: true),
                     FirstName = table.Column<string>(type: "TEXT", nullable: true),
                     LastName = table.Column<string>(type: "TEXT", nullable: true),
-                    Rating = table.Column<int>(type: "INTEGER", nullable: true),
                     ContractorTypeId = table.Column<int>(type: "INTEGER", nullable: true),
                     GreenLightEnum = table.Column<string>(type: "TEXT", nullable: true),
                     PhoneNumber1 = table.Column<string>(type: "TEXT", nullable: true),
@@ -43,6 +42,24 @@ namespace FacilitiesManagementAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Premises",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    PremiseNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    PremiseName = table.Column<string>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    PhoneNumber1 = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumber2 = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Premises", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -62,31 +79,6 @@ namespace FacilitiesManagementAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Premises",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    PremiseNumber = table.Column<string>(type: "TEXT", nullable: true),
-                    PremiseName = table.Column<string>(type: "TEXT", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    PhoneNumber1 = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumber2 = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    ContractorId = table.Column<Guid>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Premises", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Premises_Contractors_ContractorId",
-                        column: x => x.ContractorId,
-                        principalTable: "Contractors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Accountant",
                 columns: table => new
                 {
@@ -101,6 +93,30 @@ namespace FacilitiesManagementAPI.Migrations
                     table.PrimaryKey("PK_Accountant", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Accountant_Premises_PremisesId",
+                        column: x => x.PremisesId,
+                        principalTable: "Premises",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ContractorPremises",
+                columns: table => new
+                {
+                    ContractorsId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    PremisesId = table.Column<Guid>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContractorPremises", x => new { x.ContractorsId, x.PremisesId });
+                    table.ForeignKey(
+                        name: "FK_ContractorPremises_Contractors_ContractorsId",
+                        column: x => x.ContractorsId,
+                        principalTable: "Contractors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ContractorPremises_Premises_PremisesId",
                         column: x => x.PremisesId,
                         principalTable: "Premises",
                         principalColumn: "Id",
@@ -197,6 +213,11 @@ namespace FacilitiesManagementAPI.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ContractorPremises_PremisesId",
+                table: "ContractorPremises",
+                column: "PremisesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Note_ContractorId",
                 table: "Note",
                 column: "ContractorId");
@@ -205,11 +226,6 @@ namespace FacilitiesManagementAPI.Migrations
                 name: "IX_Note_PremisesId",
                 table: "Note",
                 column: "PremisesId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Premises_ContractorId",
-                table: "Premises",
-                column: "ContractorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PremisesAddress_PremisesId",
@@ -234,6 +250,9 @@ namespace FacilitiesManagementAPI.Migrations
                 name: "Accountant");
 
             migrationBuilder.DropTable(
+                name: "ContractorPremises");
+
+            migrationBuilder.DropTable(
                 name: "ContractorTypes");
 
             migrationBuilder.DropTable(
@@ -249,10 +268,10 @@ namespace FacilitiesManagementAPI.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Premises");
+                name: "Contractors");
 
             migrationBuilder.DropTable(
-                name: "Contractors");
+                name: "Premises");
         }
     }
 }

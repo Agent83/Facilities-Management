@@ -57,7 +57,7 @@
 
               <h4 class="text-center">Create task</h4>
               <div class="text-center">
-                <form [formGroup]="createTaskForm" (ngSubmit)="createTaskForm.valid && propTaskCreate()">
+                <form [formGroup]='createTaskForm' (ngSubmit)="createTaskForm.valid && propTaskCreate()" autocomplete="off">
                   <!-- <div class="form-group row"> -->
 
                   <div class="col-8 text-left ">
@@ -101,10 +101,11 @@
           <nz-drawer [nzClosable]="false" [nzVisible]="visibleContractor" nzPlacement="right" nzTitle="Contractors"
             (nzOnClose)="closeContractor()">
             <ng-container *nzDrawerContent>
+              <div *ngIf="contractorsList"></div>
               <!-- <ul *ngFor="let item of contractorsList">
                 <li>{{item.businessName}}</li>
               </ul> -->
-              <nz-select
+              <!-- <nz-select
               nzMode="multiple"
               nzPlaceHolder="Select users"
               nzAllowClear
@@ -120,7 +121,7 @@
                 <i nz-icon nzType="loading" class="loading-icon"></i>
                 Loading Data...
               </nz-option>
-            </nz-select>
+            </nz-select> -->
             </ng-container>
           </nz-drawer>
         </div>

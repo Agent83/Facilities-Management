@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Self } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { BsDaterangepickerConfig } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-date-input',
@@ -10,7 +10,7 @@ import { BsDaterangepickerConfig } from 'ngx-bootstrap/datepicker';
 export class DateInputComponent implements ControlValueAccessor {
  @Input() label: string;
  @Input() minDate: Date;
- bsConfig: Partial<BsDaterangepickerConfig>;
+ bsConfig: Partial<BsDatepickerConfig>;
   constructor(@Self() public ngControl: NgControl) { 
     this.ngControl.valueAccessor = this;
     this.bsConfig = {

@@ -24,9 +24,15 @@ export class PremiseDetailComponent implements OnInit {
   tasksCount: number;
   modalInfo:any;
   property: Property;
-  propId: any;
+  propId: string;
   createTaskForm: FormGroup;
   validationErrors: string[] = [];
+  createTask: {
+    title:string,
+      description:string,
+      completionDate: Date,
+      premisesId: string
+  };
   noteData: {
     content: string,
     datetime: Date,
@@ -39,25 +45,29 @@ export class PremiseDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private porpTaskService: PremTasksService,
     private fb: FormBuilder,
-    private toastr: ToastrService,) { }
+    private toastr: ToastrService,
+    ) {   }
 
   ngOnInit(): void {
     this.loadProperty();
     this.loadContractors();
     this.initializeTaskForm();
+    console.log(this.contractorsList);
   }
   
   initializeTaskForm(){
     this.createTaskForm = this.fb.group({
       title:['',Validators.required],
       description:[''],
-      completionDate: [''],
-      premisesId: [this.propId],
+      completionDate: ['']
     })
   }
 
   propTaskCreate(){
-    this.porpTaskService.createTask(this.createTaskForm.value).subscribe(()=>{
+    this.createTask = Object.assign(this.createTask, this.createTaskForm.value);
+    this.createTask.premisesId = this.propId;
+    console.log(this.createTask);
+    this.porpTaskService.createTask(this.createTask).subscribe(()=>{
       this.createTaskForm.reset();
       this.premiseTask = [];
       this.loadProperty();
@@ -66,7 +76,7 @@ export class PremiseDetailComponent implements OnInit {
      this.validationErrors = error;
    });
   }
-
+ 
   loadContractors(){
     this.contractorService.getContractors().pipe(first()).subscribe(contractors =>{
       this.contractorsList = contractors;

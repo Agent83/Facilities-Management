@@ -16,6 +16,21 @@ namespace FacilitiesManagementAPI.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.8");
 
+            modelBuilder.Entity("ContractorPremises", b =>
+                {
+                    b.Property<Guid>("ContractorsId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("PremisesId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ContractorsId", "PremisesId");
+
+                    b.HasIndex("PremisesId");
+
+                    b.ToTable("ContractorPremises");
+                });
+
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Accountant", b =>
                 {
                     b.Property<int>("Id")
@@ -110,9 +125,6 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<string>("PhoneNumber2")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("Rating")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.ToTable("Contractors");
@@ -168,9 +180,6 @@ namespace FacilitiesManagementAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("ContractorId")
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("TEXT");
 
@@ -193,8 +202,6 @@ namespace FacilitiesManagementAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ContractorId");
 
                     b.ToTable("Premises");
                 });
@@ -273,13 +280,30 @@ namespace FacilitiesManagementAPI.Migrations
                     b.ToTable("PremisesTask");
                 });
 
+            modelBuilder.Entity("ContractorPremises", b =>
+                {
+                    b.HasOne("FacilitiesManagementAPI.Entities.Contractor", null)
+                        .WithMany()
+                        .HasForeignKey("ContractorsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FacilitiesManagementAPI.Entities.Premises", null)
+                        .WithMany()
+                        .HasForeignKey("PremisesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Accountant", b =>
                 {
-                    b.HasOne("FacilitiesManagementAPI.Entities.Premises", null)
+                    b.HasOne("FacilitiesManagementAPI.Entities.Premises", "Premises")
                         .WithOne("Accountant")
                         .HasForeignKey("FacilitiesManagementAPI.Entities.Accountant", "PremisesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Premises");
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Note", b =>
@@ -291,13 +315,6 @@ namespace FacilitiesManagementAPI.Migrations
                     b.HasOne("FacilitiesManagementAPI.Entities.Premises", null)
                         .WithMany("Notes")
                         .HasForeignKey("PremisesId");
-                });
-
-            modelBuilder.Entity("FacilitiesManagementAPI.Entities.Premises", b =>
-                {
-                    b.HasOne("FacilitiesManagementAPI.Entities.Contractor", null)
-                        .WithMany("Premises")
-                        .HasForeignKey("ContractorId");
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.PremisesAddress", b =>
@@ -331,8 +348,6 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Navigation("Jobs");
 
                     b.Navigation("Notes");
-
-                    b.Navigation("Premises");
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Premises", b =>

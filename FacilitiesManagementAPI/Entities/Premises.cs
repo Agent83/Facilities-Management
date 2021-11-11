@@ -15,6 +15,7 @@ namespace FacilitiesManagementAPI.Entities
         public string Email { get; set; }
         public Accountant Accountant { get; set; }
         public virtual PremisesAddress PremisesAddress { get; set; }
+        public ICollection<Contractor> Contractors { get; set; }
         public ICollection<Note> Notes {get;set;}
         public ICollection<PremisesTask> PremisesTasks {get; set;}
     
