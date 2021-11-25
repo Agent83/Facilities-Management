@@ -1,1 +1,61 @@
-<p>contractor-deatials works!</p>
+
+<div class="row">
+  <div class="col-2 mx-6">
+  </div>
+  <div class="col-8">
+    <div class="my-6 p-4" *ngIf="contractor">
+      <div class="shadow p-4 mb-4 bg-light">
+        <div class="row">
+          <div class="col-4">
+            <div class="card-body">
+              <div>
+                <strong>Business name</strong><br>
+                {{contractor.businessName}} <br>
+    
+                <strong>Contact name</strong>
+                <p>{{contractor.firstName}}
+                  {{contractor.lastName}}
+             </p>
+              </div>
+              <div>
+                <strong>Contact details</strong>
+                <p>{{contractor.phoneNumber1}}<br>
+                  {{contractor.phoneNumber2}}<br>
+                  {{contractor.email}} </p>
+              </div>
+    
+              <button nz-button nzDanger routerLink='/contractor/edit/{{contractor.id}}'>Edit property details</button>
+            </div>
+            
+    
+          </div>
+          <div class="col">
+    
+            <div class="card-body  text-right">
+              <!-- task button -->
+              <button nz-button nzType="primary" (click)="openTasks()">Tasks {{tasksCount}}</button>
+              <nz-drawer [nzClosable]="false" [nzWidth]="420" [nzVisible]="visibleTasks" nzPlacement="right" nzTitle="Tasks"
+                (nzOnClose)="closeTasks()">
+                <ng-container *nzDrawerContent>
+                  
+                  <ng-template #noTasks>
+                    No tasks for this property
+                  </ng-template>
+    
+    
+                  <h4 class="text-center">Create task</h4>
+                  <div class="text-center">
+                  </div>
+                </ng-container>
+              </nz-drawer>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-2 mx-6">
+  </div>
+</div>
+

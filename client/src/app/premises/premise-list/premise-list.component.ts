@@ -19,6 +19,13 @@ export class PremiseListComponent implements OnInit {
     this.properties$ = this.propertyService.getProperties()
   }
   
+  modalAccVisible= false;
+  showCreateAccModal(){
+    this.modalAccVisible = true;
+  }
+  handleAccCancel(){
+    this.modalAccVisible = false
+  }
   getTaskCount(){
   
   }

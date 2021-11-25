@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { updateBinary } from 'typescript';
 import { Contractor } from '../_models/contractor';
 
 @Injectable({
@@ -25,6 +24,7 @@ contractor: Contractor[] = [];
   }
 
   getContractor(id: string){
+    console.log("contractor service");
     const contractor = this.contractor.find(x => x.id === id);
     if(contractor !== undefined) return of(contractor);
     return this.http.get<Contractor>(this.baseUrl + 'contractor/' + id);

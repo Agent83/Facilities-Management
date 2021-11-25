@@ -1,75 +1,57 @@
 <div class="my-6 p-4">
-   <form>
-      <fieldset>
-<div class="shadow p-4 mb-4 bg-light">
-<h2 class="text-center ">Create contractor</h2>
-      <div class="form-group row">
-          <div class="col">
-            <label for="premiseName" class="form-label mt-4">Business Name </label>
-            <input type="text" class="form-control" id="premiseName"  placeholder="Enter Business name">
+   <form [formGroup]="createConForm" (ngSubmit)="createConForm.valid && propCreate()">
+      <div class="shadow p-4 mb-4 bg-light">
+         <h2 class="text-center">Create Contractor</h2>
+         <div class="text-center">
+            <div class="form-group row">
+              <div class="col-2">
+
+              </div>
+               <div class="col-8 text-left">
+                  <label class="control-label">Business name</label>
+                  <app-text-input [formControl]='createConForm.controls["businessName"]' [label]='"Business name"'>
+                  </app-text-input>
+                  <label class="control-label">First name</label>
+                  <app-text-input [formControl]='createConForm.controls["firstName"]' [label]='"First name"'>
+                  </app-text-input>
+
+                  <label class="control-label">Last name</label>
+                  <app-text-input [formControl]='createConForm.controls["lastName"]' [label]='"Last name"'>
+                  </app-text-input>
+
+                  <label class="control-label">Green light rating</label>
+                  <app-text-input [formControl]='createConForm.controls["greeLightEnum"]' [label]='"Green light rating"'></app-text-input>
+                 
+                  <label class="control-label">Email</label>
+                  <app-text-input [formControl]='createConForm.controls["email"]' [label]='"email"' ></app-text-input>
+                  
+                  <label class="control-label">Phone number</label>
+                  <app-text-input [formControl]='createConForm.controls["phoneNumber1"]' [label]='"phone number 1"'>
+                  </app-text-input>
+                  
+                  <label class="control-label">Phone number</label>
+                  <app-text-input [formControl]='createConForm.controls["phoneNumber2"]'[label]='"phone number 2"' >
+                  </app-text-input>
+               </div>
+               <div class="col-2">
+                  
+               </div>
+            </div>
          </div>
-         <div class="col">
-            <label for="addressLine1" class="form-label mt-4">Address first line</label>
-            <input type="text" class="form-control" id="addressLine1" placeholder="Enter Address first line">
-            <label for="addressLine2" class="form-label mt-4">Address second line</label>
-            <input type="text" class="form-control" id="addressLine2" placeholder="Enter Address second line">
+
+        <div class="row mt-5" *ngIf="validationErrors.length > 0">
+         <ul class="text-danger">
+             <li *ngFor="let error of validationErrors">
+                 {{error}}
+             </li>
+         </ul>
+     </div>
+         <div class="text-right">
+            <div class="btn-group" role="group" aria-label="Basic example">
+               <button [disabled]="!createConForm.valid" type="submit" class="btn btn-primary">Submit</button>
+               <button type="submit" class="btn btn-light" (click)="backNav()">Cancel</button>
+            </div>
          </div>
-         <div class="col">
-            <label for="town" class="form-label mt-4">Town</label>
-            <input type="text" class="form-control" id="town" placeholder="Enter Town">
-            <label for="County" class="form-label mt-4">County</label>
-            <input type="text" class="form-control" id="county" placeholder="Enter County">
-            <label for="postCode" class="form-label mt-4">PostCode</label>
-            <input type="text" class="form-control" id="postCode" placeholder="Enter PostCode">
-         </div>
-      </div> 
-    <br>
-      <hr>
-      <h3>Contact</h3>
-      <div class="form-group row">
-        <div class="col">
-          <label for="jobtitle" class="form-label mt-4">Positon/ job title </label>
-          <input type="text" class="form-control" id="jobtitle"  placeholder="Enter Position/ job title">
-       </div>
-       <div class="col">
-          <label for="firstName" class="form-label mt-4">First name</label>
-          <input type="text" class="form-control" id="firstMame" placeholder="Enter first name">
-          <label for="phoneNumber" class="form-label mt-4">Mobile/ landline 1</label>
-          <input type="text" class="form-control" id="phoneNumber" placeholder="Enter mobile/ landline 1">
-       </div>
-       <div class="col">
-          <label for="lastName" class="form-label mt-4">Last name</label>
-          <input type="text" class="form-control" id="lastName" placeholder="Enter last name">
-          <label for="phoneNumber2" class="form-label mt-4">Mobile/ landline 2</label>
-          <input type="text" class="form-control" id="phoneNumber2" placeholder="Enter mobile/ landline 2">
-       </div>
-    </div>
-    <br>
-    <div class="form-group row">
-        <div class="col">
-          <label for="jobtitle" class="form-label mt-4">Positon/ job title </label>
-          <input type="text" class="form-control" id="jobtitle"  placeholder="Enter Position/ job title">
-       </div>
-       <div class="col">
-          <label for="firstName" class="form-label mt-4">First name</label>
-          <input type="text" class="form-control" id="firstMame" placeholder="Enter first name">
-          <label for="phoneNumber" class="form-label mt-4">Mobile/ landline 1</label>
-          <input type="text" class="form-control" id="phoneNumber" placeholder="Enter mobile/ landline 1">
-       </div>
-       <div class="col">
-          <label for="lastName" class="form-label mt-4">Last name</label>
-          <input type="text" class="form-control" id="lastName" placeholder="Enter last name">
-          <label for="phoneNumber2" class="form-label mt-4">Mobile/ landline 2</label>
-          <input type="text" class="form-control" id="phoneNumber2" placeholder="Enter mobile/ landline 2">
-       </div>
-    </div>
-    </div>
-    <div class="text-right">
-      <div class="btn-group" role="group" aria-label="Basic example">
-         <button type="submit" class="btn btn-primary">Submit</button>
-         <button type="submit" class="btn btn-light" (click)="backNav()">Cancel</button>
-       </div>
-    </div>
-    </fieldset>
-  </form>
-</div>
+      </div>
+   </form>
+</div> 

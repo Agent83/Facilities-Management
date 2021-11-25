@@ -7,11 +7,11 @@
 @import "~ng-zorro-antd/comment/style/index.min.css";
 @import "~ng-zorro-antd/drawer/style/index.min.css";
 @import "~ng-zorro-antd/form/style/index.min.css";
+@import "~bootswatch/dist/solar/bootstrap.css";
 
-
-body {background-color: rgb(223, 241, 250);}
+body {background-color: rgb(171, 226, 253);}
 tab-panel {
-    border: 1px solid #ddd;
+    border: 1px solid rgb(56, 67, 131);
     padding: 10px;
     border-radius: 4px;
   }

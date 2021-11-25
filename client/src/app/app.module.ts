@@ -39,6 +39,9 @@ import { PremiseTasksComponent } from './premiseTasks/premise-tasks/premise-task
 import { TasksCreateComponent } from './premiseTasks/tasks-create/tasks-create.component';
 import { RouterModule } from '@angular/router';
 import { TexareaInputComponent } from './_forms/texarea-input/texarea-input.component';
+import { ContractorEditComponent } from './contractor/contractor-edit/contractor-edit.component';
+import { PropAccountantListComponent } from './propAccountant/prop-accountant-list/prop-accountant-list.component';
+import { PropAccountantCreateComponent } from './propAccountant/prop-accountant-create/prop-accountant-create.component';
 
 
 registerLocaleData(en);
@@ -69,6 +72,9 @@ registerLocaleData(en);
     PremiseTasksComponent,
     TasksCreateComponent,
     TexareaInputComponent,
+    ContractorEditComponent,
+    PropAccountantListComponent,
+    PropAccountantCreateComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-<div class="container p-5 my-5 bg-info text-white">
+<div class="container p-5 my-5 bg-info">
     <br>
     <h1>Properties</h1>
 <br>
@@ -23,6 +23,14 @@
       Full text search: <input class="form-control ml-2" type="text" [formControl]="filter"/>
   </div>
 </form> -->
+
+    <button nz-button nzType="primary" (click)="showCreateAccModal()">
+      <span>Add Accountant</span></button>
+<nz-modal [(nzVisible)]="modalAccVisible" [nzFooter]="null" nzTitle="Create Accountant"(nzOnCancel)="handleAccCancel()" >
+  <ng-container *nzModalContent>
+   <app-prop-accountant-create></app-prop-accountant-create>
+  </ng-container>
+</nz-modal>
 
 <table class="table table-bordered table-hover table-striped mt-2">
   <thead>
