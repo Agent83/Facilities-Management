@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FacilitiesManagementAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211111141801_initial")]
+    [Migration("20211113203552_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,26 +18,11 @@ namespace FacilitiesManagementAPI.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.8");
 
-            modelBuilder.Entity("ContractorPremises", b =>
-                {
-                    b.Property<Guid>("ContractorsId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("PremisesId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("ContractorsId", "PremisesId");
-
-                    b.HasIndex("PremisesId");
-
-                    b.ToTable("ContractorPremises");
-                });
-
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Accountant", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
@@ -45,13 +30,7 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("PremisesId")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PremisesId")
-                        .IsUnique();
 
                     b.ToTable("Accountant");
                 });
@@ -182,6 +161,9 @@ namespace FacilitiesManagementAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("AccountantId")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("TEXT");
 
@@ -204,6 +186,8 @@ namespace FacilitiesManagementAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountantId");
 
                     b.ToTable("Premises");
                 });
@@ -241,6 +225,21 @@ namespace FacilitiesManagementAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("PremisesAddress");
+                });
+
+            modelBuilder.Entity("FacilitiesManagementAPI.Entities.PremisesContractor", b =>
+                {
+                    b.Property<Guid>("ContractorId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("PremisesId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ContractorId", "PremisesId");
+
+                    b.HasIndex("PremisesId");
+
+                    b.ToTable("PremisesContractor");
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.PremisesTask", b =>
@@ -282,32 +281,6 @@ namespace FacilitiesManagementAPI.Migrations
                     b.ToTable("PremisesTask");
                 });
 
-            modelBuilder.Entity("ContractorPremises", b =>
-                {
-                    b.HasOne("FacilitiesManagementAPI.Entities.Contractor", null)
-                        .WithMany()
-                        .HasForeignKey("ContractorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FacilitiesManagementAPI.Entities.Premises", null)
-                        .WithMany()
-                        .HasForeignKey("PremisesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("FacilitiesManagementAPI.Entities.Accountant", b =>
-                {
-                    b.HasOne("FacilitiesManagementAPI.Entities.Premises", "Premises")
-                        .WithOne("Accountant")
-                        .HasForeignKey("FacilitiesManagementAPI.Entities.Accountant", "PremisesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Premises");
-                });
-
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Note", b =>
                 {
                     b.HasOne("FacilitiesManagementAPI.Entities.Contractor", null)
@@ -319,6 +292,15 @@ namespace FacilitiesManagementAPI.Migrations
                         .HasForeignKey("PremisesId");
                 });
 
+            modelBuilder.Entity("FacilitiesManagementAPI.Entities.Premises", b =>
+                {
+                    b.HasOne("FacilitiesManagementAPI.Entities.Accountant", "Accountant")
+                        .WithMany("Premises")
+                        .HasForeignKey("AccountantId");
+
+                    b.Navigation("Accountant");
+                });
+
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.PremisesAddress", b =>
                 {
                     b.HasOne("FacilitiesManagementAPI.Entities.Premises", "Premises")
@@ -326,6 +308,25 @@ namespace FacilitiesManagementAPI.Migrations
                         .HasForeignKey("FacilitiesManagementAPI.Entities.PremisesAddress", "PremisesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Premises");
+                });
+
+            modelBuilder.Entity("FacilitiesManagementAPI.Entities.PremisesContractor", b =>
+                {
+                    b.HasOne("FacilitiesManagementAPI.Entities.Contractor", "Contractor")
+                        .WithMany()
+                        .HasForeignKey("ContractorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FacilitiesManagementAPI.Entities.Premises", "Premises")
+                        .WithMany()
+                        .HasForeignKey("PremisesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Contractor");
 
                     b.Navigation("Premises");
                 });
@@ -345,6 +346,11 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Navigation("Premises");
                 });
 
+            modelBuilder.Entity("FacilitiesManagementAPI.Entities.Accountant", b =>
+                {
+                    b.Navigation("Premises");
+                });
+
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Contractor", b =>
                 {
                     b.Navigation("Jobs");
@@ -354,8 +360,6 @@ namespace FacilitiesManagementAPI.Migrations
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Premises", b =>
                 {
-                    b.Navigation("Accountant");
-
                     b.Navigation("Notes");
 
                     b.Navigation("PremisesAddress");

@@ -5,11 +5,14 @@ import { PropertyService } from 'src/app/_services/property.service';
 import { formatDistance } from 'date-fns'
 import { PremisesTask } from 'src/app/_models/premisesTask';
 import { PremTasksService } from 'src/app/_services/prem-tasks.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import { Contractor } from 'src/app/_models/contractor';
 import { ContractorService } from 'src/app/_services/contractor.service';
+import { PropAccountant } from 'src/app/_models/propAccountant';
+import { PropAccountantService } from 'src/app/_services/prop-accountant.service';
+import { pipe } from 'rxjs';
 
 @Component({
   selector: 'app-premise-detail',
@@ -21,29 +24,44 @@ export class PremiseDetailComponent implements OnInit {
   visibleContractor = false;
   premiseTask: PremisesTask[] =[];
   contractorsList: Contractor[] = [];
+  propAccountant: PropAccountant[] = [];
+  propAccList: PropAccountant[] = [];
+  property: Property;
   tasksCount: number;
   modalInfo:any;
-  property: Property;
   propId: string;
+ 
+  propContractorList: Contractor[]= [];
+
   createTaskForm: FormGroup;
+  contractorSelectForm: FormGroup;
+  selectAccountantForm: FormGroup;
+
   validationErrors: string[] = [];
+ 
+  selectedContractorValue: Contractor;
+
   createTask: {
     title:string,
       description:string,
       completionDate: Date,
       premisesId: string
   };
+  
   noteData: {
     content: string,
     datetime: Date,
     displayTime: any,
   }[] = [];
+
   submitting = false;
   inputValue = '';
+
   constructor(private propertyService: PropertyService,
     private contractorService: ContractorService, 
     private route: ActivatedRoute,
     private porpTaskService: PremTasksService,
+    private propAccoutantService: PropAccountantService,
     private fb: FormBuilder,
     private toastr: ToastrService,
     ) {   }
@@ -52,7 +70,10 @@ export class PremiseDetailComponent implements OnInit {
     this.loadProperty();
     this.loadContractors();
     this.initializeTaskForm();
-    console.log(this.contractorsList);
+    // this.loadPropAccountant();
+    this.loadPropAccList();
+    this.linkAccountantToProp();
+    this.linkContractorToProp();
   }
   
   initializeTaskForm(){
@@ -63,9 +84,30 @@ export class PremiseDetailComponent implements OnInit {
     })
   }
 
+  linkContractorToProp(){
+   this.contractorSelectForm = this.fb.group({
+     contractor: ['',Validators.required],
+   });
+  }
+
+  linkAccountantToProp(){
+    this.selectAccountantForm = this.fb.group({
+      accountant:['',Validators.required],
+    });
+  }
+  
+  log(event: string){
+    console.log(event);
+  }
+
   propTaskCreate(){
-    this.createTask = Object.assign(this.createTask, this.createTaskForm.value);
-    this.createTask.premisesId = this.propId;
+    this.createTask =
+      {
+        title: this.createTaskForm.value.title,
+        description: this.createTaskForm.value.description,
+        completionDate: this.createTaskForm.value.completionDate,
+        premisesId: this.propId
+      };
     console.log(this.createTask);
     this.porpTaskService.createTask(this.createTask).subscribe(()=>{
       this.createTaskForm.reset();
@@ -79,8 +121,20 @@ export class PremiseDetailComponent implements OnInit {
  
   loadContractors(){
     this.contractorService.getContractors().pipe(first()).subscribe(contractors =>{
-      this.contractorsList = contractors;
+     this.contractorsList = contractors;
     })
+  }
+
+  // loadPropAccountant(){
+  //   this.propAccoutantService.getAccountants().pipe(first()).subscribe(propAcc => {
+  //       this.propAccountant = propAcc;
+  //     });
+  // }
+
+  loadPropAccList(){
+    this.propAccoutantService.getAccountants().pipe(first()).subscribe(propAcc => {
+        this.propAccList = propAcc;
+      });
   }
 
   loadProperty(){
@@ -88,14 +142,18 @@ export class PremiseDetailComponent implements OnInit {
     .subscribe(prop => {
       this.property = prop
       this.propId = prop.id
-      if ( this.property.premisesTasks.length > 0){
+      if ( this.property.premisesTasks.length > 0 || !undefined){
         this.tasksCount = this.property.premisesTasks.length;
         this.property.premisesTasks.forEach(task => {
           this.premiseTask.push(task);
         });
       }
-
-      if (this.property.notes.length > 0){
+      if(this.property.contractors.length > 0 || !undefined){
+        this.property.contractors.forEach(con => {
+          this.propContractorList.push(con);
+        });
+      }
+      if (this.property.notes.length > 0 || !undefined){
         this.property.notes.forEach(note => {
           return this.noteData.push(
             {
@@ -158,6 +216,23 @@ showModal(id): void {
   console.log(this.modalInfo);
 }
 
+modalAccVisible = false;
+showCreateAccModal(){
+  this.modalAccVisible = true;
+}
+
+handleAccOk(): void {
+  this.isOkLoading = true;
+  setTimeout(() => {
+    this.modalAccVisible = false;
+    this.isOkLoading = false;
+  }, 3000);
+}
+
+handleAccCancel(): void {
+  this.modalAccVisible = false;
+}
+
 handleOk(): void {
   this.isOkLoading = true;
   setTimeout(() => {
@@ -169,7 +244,17 @@ handleOk(): void {
 handleCancel(): void {
   this.modalVisible = false;
 }
-// Modal
+
+selected(){
+  console.log(this.contractorSelectForm);
+}
+
+conSelectSubmit(){
+  console.log();
+}
+accSelectSubmit(){
+  console.log();
+}
 
 }
 

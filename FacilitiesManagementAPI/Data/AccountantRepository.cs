@@ -22,7 +22,7 @@ namespace FacilitiesManagementAPI.Data
             _mapper = mapper;
         }
   
-        public async Task<Accountant> GetAccountantById(int Id)
+        public async Task<Accountant> GetAccountantById(Guid Id)
         {
             return await _context.Accountant.FindAsync(Id);
         }
@@ -39,7 +39,7 @@ namespace FacilitiesManagementAPI.Data
                 .ToListAsync();
         }
 
-        public async Task<PropAccountantDto> GetPropAccountantByIDAsync(int Id)
+        public async Task<PropAccountantDto> GetPropAccountantByIDAsync(Guid Id)
         {
             return await _context.Accountant
                 .Where(x => x.Id == Id)

@@ -19,6 +19,6 @@ namespace FacilitiesManagementAPI.DTOs
         public PremisesAddress PremisesAddress {  get; set; }
         public ICollection<Note> Notes { get; set; }
         public ICollection<PremisesTask> PremisesTasks { get; set; }
-
+        public ICollection<Contractor>  Contractors { get; set; }
     }
 }

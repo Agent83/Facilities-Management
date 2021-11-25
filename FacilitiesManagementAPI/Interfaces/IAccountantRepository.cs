@@ -12,7 +12,7 @@ namespace FacilitiesManagementAPI.Interfaces
         Task<bool> SaveAllAsync();
         Task<IEnumerable<Accountant>> GetAccountants();
         Task<IEnumerable<PropAccountantDto>> GetAccountantsAsync();
-        Task<Accountant> GetAccountantById(int Id);
-        Task<PropAccountantDto> GetPropAccountantByIDAsync(int Id);
+        Task<Accountant> GetAccountantById(Guid Id);
+        Task<PropAccountantDto> GetPropAccountantByIDAsync(Guid Id);
     }
 }

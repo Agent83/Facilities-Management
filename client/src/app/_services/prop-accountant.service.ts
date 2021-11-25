@@ -14,13 +14,13 @@ export class PropAccountantService {
   constructor(private http: HttpClient) { }
 
   getAccountants(){
-    if(this.propAccountant.length > 0) return(this.propAccountant);
+    if(this.propAccountant.length > 0) return of(this.propAccountant);
     return this.http.get<PropAccountant[]>(this.baseUrl + 'propaccountant').pipe(
-      map(propAcc => {
-        this.propAccountant = propAcc;
-        return propAcc;
+      map(propAccountant => {
+        this.propAccountant = propAccountant;
+        return propAccountant;
       })
-    )
+    );
   }
 
   getAccount(id: number){
@@ -30,6 +30,7 @@ export class PropAccountantService {
   }
 
   createAccountant(model: any){
+    console.log(model)
     return this.http.post(this.baseUrl + 'propaccountant/accountant', model);
   }
 

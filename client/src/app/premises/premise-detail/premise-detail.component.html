@@ -26,7 +26,37 @@
       </div>
       <div class="col">
         <!-- Accountant details -->
-        <div class="card-body text-center"> middle</div>
+        <div class="card-body text-center">
+          <div *ngIf="property.propAccountant; else noAccountant">
+            <ul *ngFor="let item of property.propAccountant">
+              <li>{{item.email}}</li>
+            </ul>
+          </div>
+          <ng-template #noAccountant>
+            No Accountant selected for this property select or add a Accountant
+           <ng-container *ngIf="propAccList">
+            <form nz-form [formGroup]="selectAccountantForm" (ngSubmit)="accSelectSubmit()">
+              <nz-select 
+              formControlName="accountant"
+              nzAllowClear 
+              nzShowSearch 
+              nzPlaceHolder="Select users" 
+              >
+                  <nz-option *ngFor="let item of propAccList" [nzValue]="item.name" [nzLabel]="item.name"></nz-option>
+              </nz-select>
+            </form>
+            <button nz-button nzType="primary" (click)="showCreateAccModal()">
+              <span>Add Accountant</span></button>
+           </ng-container>
+         
+            <nz-modal [(nzVisible)]="modalAccVisible" nzTitle="Create Accountant" (nzOnCancel)="handleAccCancel()"
+              (nzOnOk)="handleAccOk()" [nzOkLoading]="isOkLoading">
+              <p *nzModalContent>
+                <app-prop-accountant-create></app-prop-accountant-create>
+              </p>
+            </nz-modal>
+          </ng-template>
+        </div>
 
       </div>
       <div class="col">
@@ -57,7 +87,8 @@
 
               <h4 class="text-center">Create task</h4>
               <div class="text-center">
-                <form [formGroup]='createTaskForm' (ngSubmit)="createTaskForm.valid && propTaskCreate()" autocomplete="off">
+                <form [formGroup]='createTaskForm' (ngSubmit)="createTaskForm.valid && propTaskCreate()"
+                  autocomplete="off">
                   <!-- <div class="form-group row"> -->
 
                   <div class="col-8 text-left ">
@@ -98,30 +129,37 @@
         <div class="card-body text-right">
           <!-- contractor -->
           <button nz-button nzType="primary" (click)="openContractor()">Contractor</button>
-          <nz-drawer [nzClosable]="false" [nzVisible]="visibleContractor" nzPlacement="right" nzTitle="Contractors"
-            (nzOnClose)="closeContractor()">
+          <nz-drawer [nzClosable]="false" [nzWidth]="420" [nzVisible]="visibleContractor" nzPlacement="right"
+            nzTitle="Contractors" (nzOnClose)="closeContractor()">
             <ng-container *nzDrawerContent>
-              <div *ngIf="contractorsList"></div>
-              <!-- <ul *ngFor="let item of contractorsList">
-                <li>{{item.businessName}}</li>
-              </ul> -->
-              <!-- <nz-select
-              nzMode="multiple"
-              nzPlaceHolder="Select users"
-              nzAllowClear
-              nzShowSearch
-              nzServerSearch
-              [(ngModel)]="contractorsList"
-              (nzOnSearch)="onSearch($event)"
-            >
-              <ng-container *ngFor="let o of contractorsList">
-                <nz-option *ngIf="!isLoading" [nzValue]="o.businessName" [nzLabel]="o.businessName"></nz-option>
-              </ng-container>
-              <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
-                <i nz-icon nzType="loading" class="loading-icon"></i>
-                Loading Data...
-              </nz-option>
-            </nz-select> -->
+              <div *ngIf="propContractorList.length > 0; else noContractor">
+                <ul *ngFor="let item of propContractorList">
+                  <li>{{item.businessName}}</li>
+                </ul>
+              </div>
+              <ng-template #noContractor>
+                No contractors linked to this property
+              </ng-template >
+              <div class="mt-4">
+                <ng-container *ngIf="contractorsList.length > 0">
+                  <form nz-form [formGroup]="contractorSelectForm" (ngSubmit)="log()" >
+                    <nz-select 
+                    formControlName="contractor"
+                    nzAllowClear 
+                    nzShowSearch 
+                    nzPlaceHolder="Select users" 
+                    >
+                        <nz-option *ngFor="let item of contractorsList" [nzValue]="item.id" [nzLabel]="item.businessName"></nz-option>
+                    </nz-select>
+                    {{selectedContractorValue | json}}
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                      <button type="submit"
+                        class="btn btn-primary">Submit</button>
+                    </div>
+                  </form>
+                </ng-container>
+              
+              </div>
             </ng-container>
           </nz-drawer>
         </div>

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { updateBinary } from 'typescript';
 import { Contractor } from '../_models/contractor';
 
 @Injectable({

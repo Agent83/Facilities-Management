@@ -1,3 +1,4 @@
+import { Contractor } from "./contractor";
 import { Note } from "./note";
 import { PremisesAddress } from "./premisesAddress";
 import { PremisesTask } from "./premisesTask";
@@ -16,6 +17,7 @@ export interface Property {
         propAccountant: PropAccountant;
         premisesAddress: PremisesAddress;
         notes: Note[];
+        contractors: Contractor[];
         premisesTasks: PremisesTask[];
 }
 

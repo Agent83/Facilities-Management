@@ -32,7 +32,7 @@ namespace FacilitiesManagementAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Accountant>> GetAccountsAsync(int Id)
+        public async Task<ActionResult<Accountant>> GetAccountsAsync(Guid Id)
         {
             return await _accountant.GetAccountantById(Id);
         }
