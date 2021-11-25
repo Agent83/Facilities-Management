@@ -22,32 +22,33 @@ import { pipe } from 'rxjs';
 export class PremiseDetailComponent implements OnInit {
   visibleTasks = false;
   visibleContractor = false;
-  premiseTask: PremisesTask[] =[];
+  premiseTask: PremisesTask[] = [];
   contractorsList: Contractor[] = [];
   propAccountant: PropAccountant[] = [];
   propAccList: PropAccountant[] = [];
   property: Property;
   tasksCount: number;
-  modalInfo:any;
+  modalInfo: any;
   propId: string;
- 
-  propContractorList: Contractor[]= [];
+
+  propContractorList: Contractor[] = [];
 
   createTaskForm: FormGroup;
   contractorSelectForm: FormGroup;
   selectAccountantForm: FormGroup;
+  propAccForm: FormGroup;
 
   validationErrors: string[] = [];
- 
+
   selectedContractorValue: Contractor;
 
   createTask: {
-    title:string,
-      description:string,
-      completionDate: Date,
-      premisesId: string
+    title: string,
+    description: string,
+    completionDate: Date,
+    premisesId: string
   };
-  
+
   noteData: {
     content: string,
     datetime: Date,
@@ -58,117 +59,109 @@ export class PremiseDetailComponent implements OnInit {
   inputValue = '';
 
   constructor(private propertyService: PropertyService,
-    private contractorService: ContractorService, 
+    private contractorService: ContractorService,
     private route: ActivatedRoute,
     private porpTaskService: PremTasksService,
     private propAccoutantService: PropAccountantService,
     private fb: FormBuilder,
     private toastr: ToastrService,
-    ) {   }
+  ) { }
 
   ngOnInit(): void {
     this.loadProperty();
     this.loadContractors();
     this.initializeTaskForm();
-    // this.loadPropAccountant();
     this.loadPropAccList();
     this.linkAccountantToProp();
     this.linkContractorToProp();
   }
-  
-  initializeTaskForm(){
+
+  initializeTaskForm() {
     this.createTaskForm = this.fb.group({
-      title:['',Validators.required],
-      description:[''],
+      title: ['', Validators.required],
+      description: [''],
       completionDate: ['']
     })
   }
 
-  linkContractorToProp(){
-   this.contractorSelectForm = this.fb.group({
-     contractor: ['',Validators.required],
-   });
-  }
-
-  linkAccountantToProp(){
-    this.selectAccountantForm = this.fb.group({
-      accountant:['',Validators.required],
+  linkContractorToProp() {
+    this.contractorSelectForm = this.fb.group({
+      contractor: ['', Validators.required],
     });
   }
-  
-  log(event: string){
+
+  linkAccountantToProp() {
+    this.selectAccountantForm = this.fb.group({
+      accountant: ['', Validators.required],
+    });
+  }
+
+  log(event: string) {
     console.log(event);
   }
 
-  propTaskCreate(){
+  propTaskCreate() {
     this.createTask =
-      {
-        title: this.createTaskForm.value.title,
-        description: this.createTaskForm.value.description,
-        completionDate: this.createTaskForm.value.completionDate,
-        premisesId: this.propId
-      };
+    {
+      title: this.createTaskForm.value.title,
+      description: this.createTaskForm.value.description,
+      completionDate: this.createTaskForm.value.completionDate,
+      premisesId: this.propId
+    };
     console.log(this.createTask);
-    this.porpTaskService.createTask(this.createTask).subscribe(()=>{
+    this.porpTaskService.createTask(this.createTask).subscribe(() => {
       this.createTaskForm.reset();
       this.premiseTask = [];
       this.loadProperty();
       this.toastr.success('Task has been added');
-    }, error =>{
-     this.validationErrors = error;
-   });
+    }, error => {
+      this.validationErrors = error;
+    });
   }
- 
-  loadContractors(){
-    this.contractorService.getContractors().pipe(first()).subscribe(contractors =>{
-     this.contractorsList = contractors;
+
+  loadContractors() {
+    this.contractorService.getContractors().pipe(first()).subscribe(contractors => {
+      this.contractorsList = contractors;
     })
   }
 
-  // loadPropAccountant(){
-  //   this.propAccoutantService.getAccountants().pipe(first()).subscribe(propAcc => {
-  //       this.propAccountant = propAcc;
-  //     });
-  // }
-
-  loadPropAccList(){
+  loadPropAccList() {
     this.propAccoutantService.getAccountants().pipe(first()).subscribe(propAcc => {
-        this.propAccList = propAcc;
-      });
+      this.propAccList = propAcc;
+    });
   }
 
-  loadProperty(){
+  loadProperty() {
     this.propertyService.getProperty(this.route.snapshot.paramMap.get('id')).pipe(first())
-    .subscribe(prop => {
-      this.property = prop
-      this.propId = prop.id
-      if ( this.property.premisesTasks.length > 0 || !undefined){
-        this.tasksCount = this.property.premisesTasks.length;
-        this.property.premisesTasks.forEach(task => {
-          this.premiseTask.push(task);
-        });
-      }
-      if(this.property.contractors.length > 0 || !undefined){
-        this.property.contractors.forEach(con => {
-          this.propContractorList.push(con);
-        });
-      }
-      if (this.property.notes.length > 0 || !undefined){
-        this.property.notes.forEach(note => {
-          return this.noteData.push(
-            {
-              content: note.noteContent,
-              datetime: note.dateCreated,
-              displayTime: note.dateCreated,
-            });
-        });
-      }
-      console.log(this.noteData);
-    })
+      .subscribe(prop => {
+        this.property = prop
+        this.propId = prop.id
+        if (this.property.premisesTasks.length > 0 || !undefined) {
+          this.tasksCount = this.property.premisesTasks.length;
+          this.property.premisesTasks.forEach(task => {
+            this.premiseTask.push(task);
+          });
+        }
+        if (this.property.contractors.length > 0 || !undefined) {
+          this.property.contractors.forEach(con => {
+            this.propContractorList.push(con);
+          });
+        }
+        if (this.property.notes.length > 0 || !undefined) {
+          this.property.notes.forEach(note => {
+            return this.noteData.push(
+              {
+                content: note.noteContent,
+                datetime: note.dateCreated,
+                displayTime: note.dateCreated,
+              });
+          });
+        }
+        console.log(this.noteData);
+      })
   }
 
   openTasks(): void {
-    // this.initializeTaskForm();
     this.visibleTasks = true;
   }
   openContractor(): void {
@@ -203,58 +196,42 @@ export class PremiseDetailComponent implements OnInit {
     }, 1800);
   }
 
-// Modal
-modalVisible = false;
-isOkLoading = false;
+  // Modal
+  modalVisible = false;
+  isOkLoading = false;
 
-showModal(id): void {
-  this.modalVisible = true;
-  var tempModal = this.premiseTask.filter((info) =>{
-    return info.id == id;
-  });
-  this.modalInfo = tempModal;
-  console.log(this.modalInfo);
-}
+  showModal(id): void {
+    this.modalVisible = true;
+    var tempModal = this.premiseTask.filter((info) => {
+      return info.id == id;
+    });
+    this.modalInfo = tempModal;
+    console.log(this.modalInfo);
+  }
 
-modalAccVisible = false;
-showCreateAccModal(){
-  this.modalAccVisible = true;
-}
 
-handleAccOk(): void {
-  this.isOkLoading = true;
-  setTimeout(() => {
-    this.modalAccVisible = false;
-    this.isOkLoading = false;
-  }, 3000);
-}
+  handleOk(): void {
+    this.isOkLoading = true;
+    setTimeout(() => {
+      this.modalVisible = false;
+      this.isOkLoading = false;
+    }, 3000);
+  }
 
-handleAccCancel(): void {
-  this.modalAccVisible = false;
-}
-
-handleOk(): void {
-  this.isOkLoading = true;
-  setTimeout(() => {
+  handleCancel(): void {
     this.modalVisible = false;
-    this.isOkLoading = false;
-  }, 3000);
-}
+  }
 
-handleCancel(): void {
-  this.modalVisible = false;
-}
+  selected() {
+    console.log(this.contractorSelectForm);
+  }
 
-selected(){
-  console.log(this.contractorSelectForm);
-}
-
-conSelectSubmit(){
-  console.log();
-}
-accSelectSubmit(){
-  console.log();
-}
+  conSelectSubmit() {
+    console.log();
+  }
+  accSelectSubmit() {
+    console.log();
+  }
 
 }
 

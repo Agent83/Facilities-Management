@@ -1,22 +1,16 @@
-<div class="my-6 p-4">
-    <form [formGroup]="propAccForm" (ngSubmit)="propAccForm.valid && propAccCreate()">             
-                <div class="col-8 text-left">
-                 <label clase="control-label">Name</label>
-                 <app-text-input [formControl]='propAccForm.controls["name"]' [label]='"name"'>
-                 </app-text-input>
-                 <label class="control-label">Email</label>
-                 <app-text-input [formControl]='propAccForm.controls["email"]' [label]='"email"'>  
-                 </app-text-input>
-                </div>
-                <div class="form-group text-center">
-                    <div class="text-right">
-                      <div class="btn-group" role="group" aria-label="Basic example">
-                        <button [disabled]="!propAccForm.valid" type="submit"
-                          class="btn btn-primary">Submit</button>
-                        <!-- <button type="submit" class="btn btn-light" (click)="closeTasks()">Cancel</button> -->
-                      </div>
-                    </div>
-                  </div>
-                
-    </form>
-</div>
+<form [formGroup]="propAccForm" (ngSubmit)="propAccForm.valid && propAccCreate()">
+
+  <label clase="control-label">Name</label>
+  <app-text-input [formControl]='propAccForm.controls["name"]' [label]='"name"'>
+  </app-text-input>
+  <label class="control-label">Email</label>
+  <app-text-input [formControl]='propAccForm.controls["email"]' [label]='"email"'>
+  </app-text-input>
+  <div class="form-group text-center">
+    <div class="text-right">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button [disabled]="!propAccForm.valid" type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</form>

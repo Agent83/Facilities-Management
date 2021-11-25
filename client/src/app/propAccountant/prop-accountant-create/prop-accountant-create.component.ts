@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PropAccountantService } from 'src/app/_services/prop-accountant.service';
 import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-prop-accountant-create',
@@ -13,7 +15,7 @@ export class PropAccountantCreateComponent implements OnInit {
   propAccForm: FormGroup;
   validationErrors: string[] = [];
   constructor(private location: Location, private fb: FormBuilder,
-    private router: Router, private propAccService: PropAccountantService) { }
+    private router: Router, private propAccService: PropAccountantService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.initializForm();
@@ -21,20 +23,21 @@ export class PropAccountantCreateComponent implements OnInit {
    
   initializForm(){
     this.propAccForm = this.fb.group({
-      name: [''],
-      email: [''],
+      name: ['',Validators.required],
+      email: ['', Validators.email],
     });
   }
 
   propAccCreate(){
     this.propAccService.createAccountant(this.propAccForm.value).subscribe(response => {
-      this.router.navigateByUrl('propAccountant');
-      console.log(this.propAccForm.value)
+      this.toastr.success("Accountant created");
+      this.propAccForm.reset();
     }, error => {
       this.validationErrors = error;
+      this.toastr.error("Something went wrong!");
     })
   }
- 
+
  backNav(){
    this.location.back();
  }

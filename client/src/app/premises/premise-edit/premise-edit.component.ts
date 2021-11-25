@@ -33,7 +33,6 @@ export class PremiseEditComponent implements OnInit {
     this.propertyService.getProperty(this.route.snapshot.paramMap.get('id')).pipe(first())
     .subscribe(prop => {
       this.property = prop;    
-      console.log(this.property);
     })
   }
 
