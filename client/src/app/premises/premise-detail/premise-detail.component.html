@@ -38,7 +38,7 @@
               <div class="row mt-2"> 
                 <form nz-form [formGroup]="selectAccountantForm" (ngSubmit)="accSelectSubmit()">
                   <nz-select formControlName="accountant" nzAllowClear nzShowSearch nzPlaceHolder="Select users">
-                    <nz-option *ngFor="let item of propAccList" [nzValue]="item.name" [nzLabel]="item.name"></nz-option>
+                    <nz-option *ngFor="let item of propAccList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
                   </nz-select>
                       <button [disabled]="!selectAccountantForm.valid"type="submit"
                         class="btn btn-primary ml-2 p-1 h-24">Submit</button>
@@ -136,7 +136,7 @@
               </ng-template>
               <div class="mt-4">
                 <ng-container *ngIf="contractorsList.length > 0">
-                  <form nz-form [formGroup]="contractorSelectForm" (ngSubmit)="log()">
+                  <form nz-form [formGroup]="contractorSelectForm" (ngSubmit)="conSelectSubmit()">
                     <nz-select formControlName="contractor" nzAllowClear nzShowSearch nzPlaceHolder="Select users">
                       <nz-option *ngFor="let item of contractorsList" [nzValue]="item.id" [nzLabel]="item.businessName">
                       </nz-option>

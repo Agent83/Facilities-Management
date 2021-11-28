@@ -6,18 +6,17 @@ import { PropAccountant } from "./propAccountant";
 
 export interface Property {   
         id: string;
-        premiseNumber: string;
+        premiseNumber?: any;
         premiseName: string;
         isDeleted: boolean;
         dateCreated: Date;
         phoneNumber1: string;
-        phoneNumber2: string;
+        phoneNumber2?: any;
         email: string;
-        premisesAddressId: number;
-        propAccountant: PropAccountant;
+        accountantId: string;
         premisesAddress: PremisesAddress;
         notes: Note[];
-        contractors: Contractor[];
         premisesTasks: PremisesTask[];
+        contractors: any[];
 }
 

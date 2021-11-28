@@ -19,7 +19,6 @@ namespace FacilitiesManagementAPI.Entities
         public DateTime DateCreated { get; set; } = DateTime.Now;
         public ICollection<Premises> Premises {  get; set; }
         public ICollection<Note> Notes { get; set; }
-        public ICollection<PremisesTask> Jobs { get; set; }
 
     }
 }

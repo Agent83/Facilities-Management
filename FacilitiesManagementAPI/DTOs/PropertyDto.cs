@@ -15,7 +15,7 @@ namespace FacilitiesManagementAPI.DTOs
         public string PhoneNumber1 { get; set; }
         public string PhoneNumber2 { get; set; }
         public string Email { get; set; }
-        public Accountant Accountant { get; set; }
+        public Guid AccountantId { get; set; }
         public PremisesAddress PremisesAddress {  get; set; }
         public ICollection<Note> Notes { get; set; }
         public ICollection<PremisesTask> PremisesTasks { get; set; }

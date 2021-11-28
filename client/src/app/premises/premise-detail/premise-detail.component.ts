@@ -13,6 +13,8 @@ import { ContractorService } from 'src/app/_services/contractor.service';
 import { PropAccountant } from 'src/app/_models/propAccountant';
 import { PropAccountantService } from 'src/app/_services/prop-accountant.service';
 import { pipe } from 'rxjs';
+import { Note } from 'src/app/_models/note';
+import { PremisesAddress } from 'src/app/_models/premisesAddress';
 
 @Component({
   selector: 'app-premise-detail',
@@ -22,6 +24,8 @@ import { pipe } from 'rxjs';
 export class PremiseDetailComponent implements OnInit {
   visibleTasks = false;
   visibleContractor = false;
+  permNotes: Note[] = [];
+  tempNotes: Note[] = [];
   premiseTask: PremisesTask[] = [];
   contractorsList: Contractor[] = [];
   propAccountant: PropAccountant[] = [];
@@ -41,6 +45,21 @@ export class PremiseDetailComponent implements OnInit {
   validationErrors: string[] = [];
 
   selectedContractorValue: Contractor;
+  propertyAddAccount: {
+    id: string,
+    premiseNumber: string,
+    premisesAddress: PremisesAddress,
+    phoneNumber1: string,
+    phoneNumber2: string,
+    email: string,
+    notes: Note[],
+    isDeleted: boolean,
+    dateCreated: Date,
+    contractors: Contractor[],
+    premiseName: string,
+    premisesTasks: PremisesTask[],
+    accountantId: string,
+  };
 
   createTask: {
     title: string,
@@ -222,15 +241,40 @@ export class PremiseDetailComponent implements OnInit {
     this.modalVisible = false;
   }
 
-  selected() {
-    console.log(this.contractorSelectForm);
-  }
+  // selected() {
+  //   console.log(this.contractorSelectForm);
+  // }
+
+  updatePropertyAccountant() {
+    this.propertyAddAccount = {
+      id: this.property.id,
+      premiseNumber: this.property.premiseNumber,
+      premisesAddress: this.property.premisesAddress,
+      phoneNumber1: this.property.phoneNumber1,
+      phoneNumber2: this.property.phoneNumber2,
+      email: this.property.email,
+      notes: this.property.notes,
+      isDeleted: this.property.isDeleted,
+      dateCreated: this.property.dateCreated,
+      contractors: this.property.contractors,
+      premiseName: this.property.premiseName,
+      premisesTasks: this.property.premisesTasks,
+      accountantId: this.selectAccountantForm.value,
+    };
+    this.propertyService.updateProperty(this.propertyAddAccount).subscribe(() => {
+     this.loadProperty();
+     this.toastr.success('Property has been updated');
+    });
+ }
 
   conSelectSubmit() {
-    console.log();
+    console.log(this.contractorSelectForm.value);
   }
   accSelectSubmit() {
-    console.log();
+    this.propertyService.updateProperty(this.property).subscribe(() => { 
+      this.loadProperty();
+      this.toastr.success('Property has been updated');
+     });
   }
 
 }

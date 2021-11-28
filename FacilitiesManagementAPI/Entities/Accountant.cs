@@ -9,5 +9,6 @@ namespace FacilitiesManagementAPI.Entities
         public string Name { get; set; }
         public string Email { get; set; }
         public ICollection<Premises> Premises { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

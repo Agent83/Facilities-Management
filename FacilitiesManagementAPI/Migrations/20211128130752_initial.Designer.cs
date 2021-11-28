@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FacilitiesManagementAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211113203552_initial")]
+    [Migration("20211128130752_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,9 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
@@ -42,9 +45,6 @@ namespace FacilitiesManagementAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsDeleted")
@@ -117,6 +117,9 @@ namespace FacilitiesManagementAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("TypeDescription")
                         .HasColumnType("TEXT");
 
@@ -169,6 +172,9 @@ namespace FacilitiesManagementAPI.Migrations
 
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("INTEGER");
@@ -235,6 +241,9 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<Guid>("PremisesId")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("ContractorId", "PremisesId");
 
                     b.HasIndex("PremisesId");
@@ -249,9 +258,6 @@ namespace FacilitiesManagementAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CompletionDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("ContractorId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateCreated")
@@ -273,8 +279,6 @@ namespace FacilitiesManagementAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ContractorId");
 
                     b.HasIndex("PremisesId");
 
@@ -333,10 +337,6 @@ namespace FacilitiesManagementAPI.Migrations
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.PremisesTask", b =>
                 {
-                    b.HasOne("FacilitiesManagementAPI.Entities.Contractor", null)
-                        .WithMany("Jobs")
-                        .HasForeignKey("ContractorId");
-
                     b.HasOne("FacilitiesManagementAPI.Entities.Premises", "Premises")
                         .WithMany("PremisesTasks")
                         .HasForeignKey("PremisesId")
@@ -353,8 +353,6 @@ namespace FacilitiesManagementAPI.Migrations
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Contractor", b =>
                 {
-                    b.Navigation("Jobs");
-
                     b.Navigation("Notes");
                 });
 

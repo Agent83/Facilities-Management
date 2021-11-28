@@ -47,6 +47,16 @@ namespace FacilitiesManagementAPI.Controllers
             return Ok();
         }
 
+        [HttpPost("linkContractor")]
+        public async Task<ActionResult<PremisesContractor>> CreateContractorLink(CreateContractorDto createContractorDto)
+        {
+            var conLink = _mapper.Map<PremisesContractor>(createContractorDto);
+
+            _context.PremisesContractors.Add(conLink);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
         [HttpPut]
         public async Task<ActionResult> UpdateContractor(UpdateContractorDto contractorDto)
         {
