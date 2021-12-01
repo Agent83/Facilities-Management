@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FacilitiesManagementAPI.Entities;
+using System;
 
 namespace FacilitiesManagementAPI.DTOs
 {

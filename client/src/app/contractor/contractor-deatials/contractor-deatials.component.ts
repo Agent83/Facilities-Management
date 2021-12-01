@@ -21,7 +21,6 @@ export class ContractorDeatialsComponent implements OnInit {
     this.contractorService.getContractor(this.router.snapshot.paramMap.get('id'))
     .pipe(first()).subscribe(con => {
       this.contractor = con;
-      console.log(this.contractor);
     });
   }
 }

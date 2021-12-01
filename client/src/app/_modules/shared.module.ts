@@ -12,6 +12,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 
@@ -33,6 +34,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NgxGalleryModule,
     NgxSpinnerModule,
     NzSelectModule,
+    ScrollingModule,
   ], 
 exports: [
   BsDropdownModule,
@@ -46,7 +48,9 @@ exports: [
   NzModalModule,
   BsDatepickerModule,
   NgxSpinnerModule,
-  NzSelectModule
+  NzSelectModule,
+  ScrollingModule,
+
 ]
 })
 export class SharedModule { }

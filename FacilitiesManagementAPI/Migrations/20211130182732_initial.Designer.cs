@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FacilitiesManagementAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211128130752_initial")]
+    [Migration("20211130182732_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -143,6 +143,9 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsPerm")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("NoteContent")
                         .HasColumnType("TEXT");
 
@@ -241,14 +244,11 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<Guid>("PremisesId")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("ContractorId", "PremisesId");
 
                     b.HasIndex("PremisesId");
 
-                    b.ToTable("PremisesContractor");
+                    b.ToTable("PremisesContractors");
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.PremisesTask", b =>
@@ -299,7 +299,7 @@ namespace FacilitiesManagementAPI.Migrations
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Premises", b =>
                 {
                     b.HasOne("FacilitiesManagementAPI.Entities.Accountant", "Accountant")
-                        .WithMany("Premises")
+                        .WithMany()
                         .HasForeignKey("AccountantId");
 
                     b.Navigation("Accountant");
@@ -343,11 +343,6 @@ namespace FacilitiesManagementAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Premises");
-                });
-
-            modelBuilder.Entity("FacilitiesManagementAPI.Entities.Accountant", b =>
-                {
                     b.Navigation("Premises");
                 });
 

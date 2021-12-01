@@ -1,5 +1,5 @@
 export interface PropAccountant {
-    id: number;
+    id: string;
     name: string;
     email: string;
     premisesId: string;

@@ -44,6 +44,7 @@ namespace FacilitiesManagementAPI.Data
         {
             return await _context.Premises
                 .Where(x => x.Id == Id)
+                .Include(x => x.Accountant)
                 .ProjectTo<PropertyDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
         }

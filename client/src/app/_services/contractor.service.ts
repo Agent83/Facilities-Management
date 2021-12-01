@@ -24,7 +24,6 @@ contractor: Contractor[] = [];
   }
 
   getContractor(id: string){
-    console.log("contractor service");
     const contractor = this.contractor.find(x => x.id === id);
     if(contractor !== undefined) return of(contractor);
     return this.http.get<Contractor>(this.baseUrl + 'contractor/' + id);
@@ -32,6 +31,10 @@ contractor: Contractor[] = [];
 
   createContractor(model:any){
     return this.http.post(this.baseUrl + 'contractor/createcon', model);
+  }
+ 
+  createPremConLink(model:any){
+    return this.http.post(this.baseUrl + 'premisecontractor/conprem', model);
   }
 
   updateContractor(contractor: Contractor){

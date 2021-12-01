@@ -8,6 +8,5 @@ namespace FacilitiesManagementAPI.Entities
         public Guid ContractorId { get; set; }
         public Premises Premises { get; set; }
         public Contractor Contractor { get; set; }
-        public bool IsDeleted { get; set; }
     }
 }

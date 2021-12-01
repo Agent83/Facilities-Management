@@ -8,8 +8,8 @@ namespace FacilitiesManagementAPI.DTOs
         public Guid Id { get; set; }
         public string NoteContent { get; set; }
         public DateTime DateCreated { get; set; } 
-        public int PremisesId { get; set; }
-        public int ContractorId { get; set; }
-        public int PremisesCertId { get; set; }
+        public bool IsPerm { get; set; }
+        public Guid PremisesId { get; set; }
+        public Guid ContractorId { get; set; }
     }
 }
