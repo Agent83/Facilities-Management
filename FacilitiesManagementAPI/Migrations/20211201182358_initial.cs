@@ -108,9 +108,9 @@ namespace FacilitiesManagementAPI.Migrations
                     NoteContent = table.Column<string>(type: "TEXT", nullable: true),
                     IsPerm = table.Column<bool>(type: "INTEGER", nullable: false),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PremisesId = table.Column<Guid>(type: "TEXT", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ContractorId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    PremisesId = table.Column<Guid>(type: "TEXT", nullable: true)
+                    ContractorId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -126,7 +126,7 @@ namespace FacilitiesManagementAPI.Migrations
                         column: x => x.PremisesId,
                         principalTable: "Premises",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

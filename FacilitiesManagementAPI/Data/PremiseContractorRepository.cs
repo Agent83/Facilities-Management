@@ -1,5 +1,9 @@
 ﻿using AutoMapper;
+using FacilitiesManagementAPI.Entities;
 using FacilitiesManagementAPI.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FacilitiesManagementAPI.Data
@@ -19,5 +23,13 @@ namespace FacilitiesManagementAPI.Data
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public  IQueryable<PremisesContractor> DeleteLinkFromTable(Guid premId, Guid conId)
+        {
+            return _context.PremisesContractors.
+                FromSqlInterpolated($"DELETE FROM PremisesContractor WHERE PremisesId = {premId} AND ContractorId = {conId}");
+                
+        }
+
     }
 }

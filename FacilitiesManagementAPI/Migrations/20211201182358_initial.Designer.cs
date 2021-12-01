@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FacilitiesManagementAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211130182732_initial")]
+    [Migration("20211201182358_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -149,7 +149,7 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<string>("NoteContent")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("PremisesId")
+                    b.Property<Guid>("PremisesId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -293,7 +293,9 @@ namespace FacilitiesManagementAPI.Migrations
 
                     b.HasOne("FacilitiesManagementAPI.Entities.Premises", null)
                         .WithMany("Notes")
-                        .HasForeignKey("PremisesId");
+                        .HasForeignKey("PremisesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Premises", b =>

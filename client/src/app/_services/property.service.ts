@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { PropContractorLink } from '../_models/propContractorLink';
 import { Property } from '../_models/property';
 
 @Injectable({
@@ -11,6 +12,7 @@ import { Property } from '../_models/property';
 export class PropertyService {
   baseUrl = environment.apiUrl;
   property: Property[] = [];
+  propertyContractor: PropContractorLink;
 
   constructor(private http: HttpClient) { }
 
@@ -43,4 +45,16 @@ export class PropertyService {
       })
     );
   }
+
+  removeTask(propId: string, taskId: string){ 
+     return this.http.delete(this.baseUrl + 'premise/removeaccountant/' + propId +','+ taskId);
+  }
+
+  removeAcc(propId: string){
+    return this.http.get(this.baseUrl + 'premise/removeaccountant/'+ propId);
+  }
+
+  deleteNote(propId: string, noteId: string){ 
+    return this.http.delete(this.baseUrl + 'premise/delnote/' + propId +','+ noteId);
+ }
 }

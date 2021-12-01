@@ -36,6 +36,9 @@ contractor: Contractor[] = [];
   createPremConLink(model:any){
     return this.http.post(this.baseUrl + 'premisecontractor/conprem', model);
   }
+  removeLink(propId: string, conId: string){
+    return this.http.delete(this.baseUrl + 'premisecontractor/removelink/' + propId +','+ conId);
+ }
 
   updateContractor(contractor: Contractor){
     let url = this.baseUrl + 'contractor';

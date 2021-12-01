@@ -27,6 +27,14 @@ namespace FacilitiesManagementAPI.Data
             return await _context.Premises.FindAsync(Id);
         }
 
+        public async Task<Premises> GetPremByIdAsync(Guid Id)
+        {
+            return await _context.Premises
+                .Include(x => x.PremisesTasks)
+                .Include(x => x.Notes)
+                .Include(x => x.Accountant)
+                .SingleAsync(x  => x.Id == Id);
+        }
 
         public async Task<IEnumerable<Premises>> GetPremisesAsync()
         {
@@ -45,6 +53,15 @@ namespace FacilitiesManagementAPI.Data
             return await _context.Premises
                 .Where(x => x.Id == Id)
                 .Include(x => x.Accountant)
+                .ProjectTo<PropertyDto>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
+        }
+
+        public async Task<PropertyDto> GetPropertyContractorLink(Guid id)
+        {
+            return await _context.Premises
+                .Where(x => x.Id == id)
+                .Include(x => x.Contractors)
                 .ProjectTo<PropertyDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
         }

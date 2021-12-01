@@ -33,7 +33,7 @@
     
             <div class="card-body  text-right">
               <!-- task button -->
-              <button nz-button nzType="primary" (click)="openTasks()">Tasks {{tasksCount}}</button>
+              <!-- <button nz-button nzType="primary" (click)="openTasks()">Tasks {{tasksCount}}</button> -->
               <nz-drawer [nzClosable]="false" [nzWidth]="420" [nzVisible]="visibleTasks" nzPlacement="right" nzTitle="Tasks"
                 (nzOnClose)="closeTasks()">
                 <ng-container *nzDrawerContent>
@@ -54,8 +54,10 @@
         </div>
       </div>
     </div>
+    list of linked properties
   </div>
   <div class="col-2 mx-6">
+    
   </div>
 </div>
 

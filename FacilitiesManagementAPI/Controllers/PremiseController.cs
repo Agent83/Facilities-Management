@@ -6,7 +6,9 @@ using FacilitiesManagementAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace FacilitiesManagementAPI.Controllers
 {
@@ -63,6 +65,43 @@ namespace FacilitiesManagementAPI.Controllers
             return BadRequest("Failed to update property");
         }
 
+
+        [HttpGet("removeaccountant/{id}")]
+        public async Task<ActionResult> RemoveAccountant(Guid id)
+        {
+            var premise = await _premise.GetPremiseByIdAsync(id);
+            premise.AccountantId = null;
+            if(await _premise.SaveAllAsync()) return Ok();
+            return BadRequest("Could not remove accountant");
+            
+        }
+
+        [HttpDelete("deltasks/{propId},{taskId}")]
+        public async Task<ActionResult> DelTasks(Guid propId, Guid taskId)
+        {
+            var premise = await _premise.GetPremByIdAsync(propId);
+            var premTaskToRemove = premise.PremisesTasks
+                .Single(x => x.Id==taskId);
  
+            premise.PremisesTasks.Remove(premTaskToRemove);
+
+            if (await _premise.SaveAllAsync()) return Ok();
+
+            return BadRequest("Failed to delete task");
+         }
+
+        [HttpDelete("delnote/{propId},{noteId}")]
+        public async Task<ActionResult> DeleteNote(Guid propId, Guid noteId)
+        {
+            var premise = await _premise.GetPremByIdAsync(propId);
+            var noteToRemove = premise.Notes
+                .Single(x => x.Id == noteId);
+
+            premise.Notes.Remove(noteToRemove);
+
+            if (await _premise.SaveAllAsync()) return Ok();
+
+            return BadRequest("Failed to remove");
+        }
     }
 }

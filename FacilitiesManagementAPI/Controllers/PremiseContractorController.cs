@@ -4,6 +4,7 @@ using FacilitiesManagementAPI.DTOs;
 using FacilitiesManagementAPI.Entities;
 using FacilitiesManagementAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace FacilitiesManagementAPI.Controllers
@@ -22,12 +23,23 @@ namespace FacilitiesManagementAPI.Controllers
         }
 
         [HttpPost("ConPrem")]
-        public async Task<ActionResult<PremisesContractor>> CreateConPremLink(CreateContPremiseLinkDto conPremLink)
+        public async Task<ActionResult<PremisesContractor>> CreateConPremLink(ContPremiseLinkDto conPremLink)
         {
             var conPrem = _mapper.Map<PremisesContractor>(conPremLink);
             _context.PremisesContractors.Add(conPrem);
             await _premiseContractor.SaveAllAsync(); 
             return Ok(conPremLink);
+        }
+       
+        [HttpDelete("removelink/{propId},{conId}")]
+        public async Task<ActionResult> RemoveContractorPremiseLink(Guid propId, Guid conId)
+        {
+            var premise =  _premiseContractor.DeleteLinkFromTable(propId,conId);
+           
+           
+           if (await _premiseContractor.SaveAllAsync()) return Ok();
+
+            return BadRequest("Failed to remove");
         }
     }
 }

@@ -5,20 +5,20 @@ import { PropertyService } from 'src/app/_services/property.service';
 import { formatDistance } from 'date-fns'
 import { PremisesTask } from 'src/app/_models/premisesTask';
 import { PremTasksService } from 'src/app/_services/prem-tasks.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import { Contractor } from 'src/app/_models/contractor';
 import { ContractorService } from 'src/app/_services/contractor.service';
 import { PropAccountant } from 'src/app/_models/propAccountant';
 import { PropAccountantService } from 'src/app/_services/prop-accountant.service';
-import { pipe } from 'rxjs';
 import { Note } from 'src/app/_models/note';
 import { PremisesAddress } from 'src/app/_models/premisesAddress';
 import { NotesService } from 'src/app/_services/notes.service';
-import { Guid } from 'guid-typescript';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { PropContractorLink } from 'src/app/_models/propContractorLink';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NgxGalleryThumbnailsComponent } from '@kolkov/ngx-gallery';
+
 
 @Component({
   selector: 'app-premise-detail',
@@ -101,6 +101,7 @@ export class PremiseDetailComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService,
     private noteService: NotesService,
+    private modal: NzModalService,
   ) { }
 
   ngOnInit(): void {
@@ -227,28 +228,74 @@ export class PremiseDetailComponent implements OnInit {
           });
         }
         if(this.property.notes.length > 0){
-          
             this.permNotes = this.property.notes.filter(p => p.isPerm === true);
             this.tempNotesList = this.property.notes.filter(p => p.isPerm === false);
-            this.tempNotesList.forEach(note =>{
-              this.tempNotes.push(note.noteContent);
-                     });
-          
-          console.log("perm",this.permNotes)
-          console.log(this.tempNotesList)
         }
-
-        // if (this.property.notes.length > 0 || !undefined) {
-        //   this.property.notes.forEach(note => {
-        //     return this.noteData.push(
-        //       {
-        //         content: note.noteContent,
-        //         datetime: note.dateCreated,
-        //         displayTime: note.dateCreated,
-        //       });
-        //   });
-        // }
       })
+  }
+  showRemoveConfirm(id): void {
+    this.modal.confirm({
+      nzTitle: 'Remove contractor?',
+      nzContent: '<b style="color: red;">Click "Yes" to remove contractor from this property.</b>',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => this.contractorService.removeLink(this.propId,id).pipe(first()).subscribe(() => {
+        this.toastr.success('Contractor has been removed');
+
+        this.loadProperty();
+      }),
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel')
+    });
+  }
+  DelTempNoteConfirm(id): void {
+    this.modal.confirm({
+      nzTitle: 'Delete Note?',
+      nzContent: '<b style="color: red;">Click "Yes" to delete note.</b>',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => this.propertyService.deleteNote(this.propId,id).pipe(first()).subscribe(() => {
+        this.toastr.success('Note Has been deleted');
+
+        this.loadProperty();
+      }),
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel')
+    });
+  }
+
+  RemoveAccountantConfirm(): void {
+    this.modal.confirm({
+      nzTitle: 'Remove accountant?',
+      nzContent: '<b style="color: red;">Click "Yes" to remove accountant from this property.</b>',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => this.propertyService.removeAcc(this.propId).pipe(first()).subscribe(()=>{
+        this.toastr.success('Accountant Has been removed');
+
+        this.loadProperty();  
+      }),
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel')
+    });
+  }
+  DelTaskConfirm(id): void {
+    this.modal.confirm({
+      nzTitle: 'Delete task?',
+      nzContent: '<b style="color: red;">Click "Yes" to delete task.</b>',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => this.propertyService.removeTask(this.propId, id).pipe(first()).subscribe(() => {
+        this.toastr.success('Task has been removed');
+        this.loadProperty();
+      }),
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel')
+    });
   }
 
   openTasks(): void {
@@ -351,7 +398,7 @@ export class PremiseDetailComponent implements OnInit {
   });
   }
  private clearLists(){
-  this.tempNotes = [];
+  this.tempNotesList = [];
   this.permNotes = [];
   this.premiseTask = [];
   this.propContractorList =[];

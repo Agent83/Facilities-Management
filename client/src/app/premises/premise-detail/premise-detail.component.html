@@ -31,7 +31,8 @@
           <div *ngIf="property.accountant; else noAccountant">
             {{property.accountant.name}}<br>
             {{property.accountant.email}}
-            <button class="btn btn-sm btn-danger">Remove<i class="fa fa-trash"></i></button>
+            <button class="btn btn-sm btn-danger" (click)="RemoveAccountantConfirm(property.accountant.id)">Remove<i
+                class="fa fa-trash"></i></button>
           </div>
 
           <ng-template #noAccountant>
@@ -64,23 +65,24 @@
             (nzOnClose)="closeTasks()">
             <ng-container *nzDrawerContent>
               <div *ngIf="premiseTask.length > 0; else noTasks">
-            
-                <ul nz-list [nzDataSource]="premiseTask" >
+
+                <ul nz-list [nzDataSource]="premiseTask">
                   <li nz-list-item *ngFor="let item of premiseTask" nzNoFlex>
                     <ul nz-list-item-actions>
                       <nz-list-item-action>
-                        <a (click)="showModal(item.id)">View /edit</a>
-                   
+                        <a (click)="showModal(item.id)">View/ </a>
+                        <a (click)="showModal(item.id)">Edit/ </a>
+                        <a style="color:#FF0000;" (click)="DelTaskConfirm(item.id)">Delete</a>
                       </nz-list-item-action>
                     </ul>
                     <strong> {{ item.title }}</strong>
                     <nz-modal [(nzVisible)]="modalVisible" nzTitle="{{item.title}}" (nzOnCancel)="handleCancel()"
-                    (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
-                    <p *nzModalContent>
-                      {{modalInfo[0].description}}<br>
-                     Completion Date: {{modalInfo[0].completionDate | date}}
-                    </p>
-                  </nz-modal>
+                      [nzFooter]="null">
+                      <p *nzModalContent>
+                        {{modalInfo[0].description}}<br>
+                        Completion Date: {{modalInfo[0].completionDate | date}}
+                      </p>
+                    </nz-modal>
                   </li>
                 </ul>
               </div>
@@ -137,19 +139,19 @@
             <ng-container *nzDrawerContent>
               <div *ngIf="propContractorList.length > 0; else noContractor">
                 <ul nz-list [nzDataSource]="propContractorList" nzSize="medium">
-          
-                <li nz-list-item *ngFor="let item of propContractorList" nzNoFlex>
-                  <ul nz-list-item-actions>
-                    <nz-list-item-action> 
-                      <a (click)="msg.info('edit')">remove</a>
-                      
-                    </nz-list-item-action>
-                  </ul>
-                 <strong>{{ item.businessName }} </strong> 
-                </li>
-              </ul>
-              </div> 
-              
+
+                  <li nz-list-item *ngFor="let item of propContractorList" nzNoFlex>
+                    <ul nz-list-item-actions>
+                      <nz-list-item-action>
+                        <a style="color:#FF0000;" (click)="showRemoveConfirm(item.id)">remove</a>
+
+                      </nz-list-item-action>
+                    </ul>
+                    <strong>{{ item.businessName }} </strong>
+                  </li>
+                </ul>
+              </div>
+
               <ng-template #noContractor>
                 No contractors linked to this property
               </ng-template>
@@ -176,50 +178,44 @@
   <div class="container">
     <div class="row">
       <div class="col-8 mt-3">
-        
-          <div class="container mt-2">
-                    
-              <nz-list>
-               <ul nz-list  nzBordered nzSize="large">
+        <div class="container mt-2">
+          <nz-list>
+            <ul nz-list [nzDataSource]="permNotes" nzBordered nzSize="large">
               <nz-list-header> Notes</nz-list-header>
               <li nz-list-item *ngFor="let item of permNotes" nzNoFlex>
-               
                 {{item.dateCreated | date}}<br>
                 <strong>{{ item.noteContent }}</strong>
-                
-              </li>
-            </ul> 
-           
-              </nz-list>
-         
-            <form [formGroup]="permNoteForm" (ngSubmit)="permNoteForm.valid && createPermNote()">
-              <app-texarea-input [formControl]='permNoteForm.controls["noteContent"]' [label]='"NoteContent"'>
-              </app-texarea-input>
-              <button [disabled]="!permNoteForm.valid" type="submit" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
-        </div>
-        <div class="col-4 mt-4">
-          <div class="container ">
-            <ul nz-list [nzDataSource]="tempNotes" nzBordered nzSize="large">
-              <nz-list-header>Temp notes</nz-list-header>
-              <li nz-list-item *ngFor="let item of tempNotes" nzNoFlex>
-                <ul nz-list-item-actions>
-                  <nz-list-item-action>
-                    <!-- <a (click)="msg.info('edit')">edit</a> -->
-                    delete
-                  </nz-list-item-action>
-                </ul>
-                {{ item }}
               </li>
             </ul>
-            <form [formGroup]="tempNoteForm" (ngSubmit)="tempNoteForm.valid && createTempNote()">
-              <app-texarea-input [formControl]='tempNoteForm.controls["noteContent"]' [label]='"NoteContent"'>
-              </app-texarea-input>
-              <button [disabled]="!tempNoteForm.valid" type="submit" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
+          </nz-list>
+          <form [formGroup]="permNoteForm" (ngSubmit)="permNoteForm.valid && createPermNote()">
+            <app-texarea-input [formControl]='permNoteForm.controls["noteContent"]' [label]='"NoteContent"'>
+            </app-texarea-input>
+            <button [disabled]="!permNoteForm.valid" type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-4 mt-4">
+        <div class="container ">
+          <ul nz-list [nzDataSource]="tempNotesList" nzBordered nzSize="large">
+            <nz-list-header>Temp notes</nz-list-header>
+            <li nz-list-item *ngFor="let item of tempNotesList" nzNoFlex>
+              <ul nz-list-item-actions>
+                <nz-list-item-action>
+                  <a style="color:#FF0000;" (click)="DelTempNoteConfirm(item.id)">delete</a>
+
+                </nz-list-item-action>
+              </ul>
+              {{ item.noteContent }}
+            </li>
+          </ul>
+          <form [formGroup]="tempNoteForm" (ngSubmit)="tempNoteForm.valid && createTempNote()">
+            <app-texarea-input [formControl]='tempNoteForm.controls["noteContent"]' [label]='"NoteContent"'>
+            </app-texarea-input>
+            <button [disabled]="!tempNoteForm.valid" type="submit" class="btn btn-primary">Submit</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
+</div>
