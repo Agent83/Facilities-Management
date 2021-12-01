@@ -23,14 +23,13 @@ export class PropAccountantService {
     );
   }
 
-  getAccount(id: number){
+  getAccount(id: string){
     const accountant = this.propAccountant.find(x => x.id === id);
     if(accountant !== undefined) return of(accountant);
     return this.http.get<PropAccountant>(this.baseUrl + 'propaccountant/' + id);
   }
 
   createAccountant(model: any){
-    console.log(model)
     return this.http.post(this.baseUrl + 'propaccountant/accountant', model);
   }
 
@@ -43,5 +42,7 @@ export class PropAccountantService {
       })
     )
   }
+
+
   
 }

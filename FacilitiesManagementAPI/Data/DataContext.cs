@@ -19,6 +19,7 @@ namespace FacilitiesManagementAPI.Data
         public DbSet<Premises> Premises { get; set; }
         public DbSet<PremisesTask> PremisesTask {  get; set; }
         public DbSet<ContractorType> ContractorTypes { get; set; }
+        public DbSet<PremisesContractor> PremisesContractors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

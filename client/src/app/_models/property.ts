@@ -1,3 +1,4 @@
+import { Guid } from "guid-typescript";
 import { Contractor } from "./contractor";
 import { Note } from "./note";
 import { PremisesAddress } from "./premisesAddress";
@@ -6,18 +7,19 @@ import { PropAccountant } from "./propAccountant";
 
 export interface Property {   
         id: string;
-        premiseNumber: string;
+        premiseNumber?: any;
         premiseName: string;
+        isActive: boolean;
         isDeleted: boolean;
         dateCreated: Date;
         phoneNumber1: string;
         phoneNumber2: string;
         email: string;
-        premisesAddressId: number;
-        propAccountant: PropAccountant;
+        accountantId: string;
+        accountant: PropAccountant;
         premisesAddress: PremisesAddress;
         notes: Note[];
-        contractors: Contractor[];
         premisesTasks: PremisesTask[];
+        contractors: Contractor[];
 }
 

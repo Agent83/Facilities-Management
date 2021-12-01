@@ -6,5 +6,6 @@ export interface PremisesAddress {
     town: string;
     postCode: string;
     isDeleted: boolean;
+    premisesId: string;
     premises?: any;
 }

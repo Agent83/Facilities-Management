@@ -16,7 +16,13 @@
 </div>  
 </div>
 <div class="container">
-    <a role="button" class="btn btn-outline-primary" routerLink='/create-premise'>Add Property</a>
+
+  <div class="btn-group" role="group" >
+    <button class="btn btn-outline-primary"  routerLink='/create-premise'>Add Property</button>
+    <button class="btn btn-outline-primary" (click)="showCreateAccModal()">
+      <span>Add Accountant</span></button>
+  </div>
+   
 <br>
 <!-- <form>
   <div class="form-group form-inline">
@@ -24,8 +30,7 @@
   </div>
 </form> -->
 
-    <button nz-button nzType="primary" (click)="showCreateAccModal()">
-      <span>Add Accountant</span></button>
+    
 <nz-modal [(nzVisible)]="modalAccVisible" [nzFooter]="null" nzTitle="Create Accountant"(nzOnCancel)="handleAccCancel()" >
   <ng-container *nzModalContent>
    <app-prop-accountant-create></app-prop-accountant-create>

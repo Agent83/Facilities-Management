@@ -14,5 +14,7 @@ namespace FacilitiesManagementAPI.Interfaces
         Task<Premises> GetPremiseByIdAsync(Guid Id);
         Task<IEnumerable<PropertyDto>> GetPropertiesAsync();
         Task<PropertyDto> GetPropertyByIdAsync(Guid id);
+        Task<PropertyDto> GetPropertyContractorLink(Guid id);
+        Task<Premises> GetPremByIdAsync(Guid Id);
     }
 }

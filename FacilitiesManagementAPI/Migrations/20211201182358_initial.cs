@@ -13,7 +13,8 @@ namespace FacilitiesManagementAPI.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true)
+                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,7 +48,8 @@ namespace FacilitiesManagementAPI.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    TypeDescription = table.Column<string>(type: "TEXT", nullable: true)
+                    TypeDescription = table.Column<string>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -62,7 +64,6 @@ namespace FacilitiesManagementAPI.Migrations
                     Username = table.Column<string>(type: "TEXT", nullable: true),
                     PasswordHash = table.Column<byte[]>(type: "BLOB", nullable: true),
                     PasswordSalt = table.Column<byte[]>(type: "BLOB", nullable: true),
-                    DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Created = table.Column<DateTime>(type: "TEXT", nullable: false),
                     KnownAs = table.Column<string>(type: "TEXT", nullable: true),
                     LastActive = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -85,7 +86,8 @@ namespace FacilitiesManagementAPI.Migrations
                     PhoneNumber1 = table.Column<string>(type: "TEXT", nullable: true),
                     PhoneNumber2 = table.Column<string>(type: "TEXT", nullable: true),
                     Email = table.Column<string>(type: "TEXT", nullable: true),
-                    AccountantId = table.Column<Guid>(type: "TEXT", nullable: true)
+                    AccountantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -104,10 +106,11 @@ namespace FacilitiesManagementAPI.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     NoteContent = table.Column<string>(type: "TEXT", nullable: true),
+                    IsPerm = table.Column<bool>(type: "INTEGER", nullable: false),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PremisesId = table.Column<Guid>(type: "TEXT", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ContractorId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    PremisesId = table.Column<Guid>(type: "TEXT", nullable: true)
+                    ContractorId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -123,7 +126,7 @@ namespace FacilitiesManagementAPI.Migrations
                         column: x => x.PremisesId,
                         principalTable: "Premises",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -151,7 +154,7 @@ namespace FacilitiesManagementAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PremisesContractor",
+                name: "PremisesContractors",
                 columns: table => new
                 {
                     PremisesId = table.Column<Guid>(type: "TEXT", nullable: false),
@@ -159,15 +162,15 @@ namespace FacilitiesManagementAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PremisesContractor", x => new { x.ContractorId, x.PremisesId });
+                    table.PrimaryKey("PK_PremisesContractors", x => new { x.ContractorId, x.PremisesId });
                     table.ForeignKey(
-                        name: "FK_PremisesContractor_Contractors_ContractorId",
+                        name: "FK_PremisesContractors_Contractors_ContractorId",
                         column: x => x.ContractorId,
                         principalTable: "Contractors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PremisesContractor_Premises_PremisesId",
+                        name: "FK_PremisesContractors_Premises_PremisesId",
                         column: x => x.PremisesId,
                         principalTable: "Premises",
                         principalColumn: "Id",
@@ -185,18 +188,11 @@ namespace FacilitiesManagementAPI.Migrations
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     NoteId = table.Column<int>(type: "INTEGER", nullable: true),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
-                    PremisesId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    ContractorId = table.Column<Guid>(type: "TEXT", nullable: true)
+                    PremisesId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PremisesTask", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PremisesTask_Contractors_ContractorId",
-                        column: x => x.ContractorId,
-                        principalTable: "Contractors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_PremisesTask_Premises_PremisesId",
                         column: x => x.PremisesId,
@@ -227,14 +223,9 @@ namespace FacilitiesManagementAPI.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_PremisesContractor_PremisesId",
-                table: "PremisesContractor",
+                name: "IX_PremisesContractors_PremisesId",
+                table: "PremisesContractors",
                 column: "PremisesId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PremisesTask_ContractorId",
-                table: "PremisesTask",
-                column: "ContractorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PremisesTask_PremisesId",
@@ -254,7 +245,7 @@ namespace FacilitiesManagementAPI.Migrations
                 name: "PremisesAddress");
 
             migrationBuilder.DropTable(
-                name: "PremisesContractor");
+                name: "PremisesContractors");
 
             migrationBuilder.DropTable(
                 name: "PremisesTask");

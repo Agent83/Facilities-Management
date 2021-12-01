@@ -6,5 +6,6 @@ namespace FacilitiesManagementAPI.Entities
     {
         public int Id { get; set; }
         public string TypeDescription {  get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

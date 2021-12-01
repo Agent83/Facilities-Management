@@ -11,6 +11,7 @@ namespace FacilitiesManagementAPI.DTOs
         public string PhoneNumber1 { get; set; }
         public string PhoneNumber2 { get; set; }
         public string Email { get; set; }
+        public Guid AccountantId { get; set; } 
         public PremisesAddress PremisesAddress { get; set; }
     }
 }

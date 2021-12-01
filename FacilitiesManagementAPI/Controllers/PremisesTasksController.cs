@@ -60,5 +60,6 @@ namespace FacilitiesManagementAPI.Controllers
 
             return BadRequest("Failed to update property");
         }
+
     }
 }

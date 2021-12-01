@@ -19,6 +19,8 @@ namespace FacilitiesManagementAPI.Entities
         public ICollection<Contractor> Contractors { get; set; }
         public ICollection<Note> Notes {get;set;}
         public ICollection<PremisesTask> PremisesTasks {get; set;}
-    
+
+        public bool IsActive{ get; set; }
+
     }
 }

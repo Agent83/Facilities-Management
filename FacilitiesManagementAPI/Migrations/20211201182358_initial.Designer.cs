@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FacilitiesManagementAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211113203552_initial")]
+    [Migration("20211201182358_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,9 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
@@ -42,9 +45,6 @@ namespace FacilitiesManagementAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsDeleted")
@@ -117,6 +117,9 @@ namespace FacilitiesManagementAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("TypeDescription")
                         .HasColumnType("TEXT");
 
@@ -140,10 +143,13 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsPerm")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("NoteContent")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("PremisesId")
+                    b.Property<Guid>("PremisesId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -169,6 +175,9 @@ namespace FacilitiesManagementAPI.Migrations
 
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("INTEGER");
@@ -239,7 +248,7 @@ namespace FacilitiesManagementAPI.Migrations
 
                     b.HasIndex("PremisesId");
 
-                    b.ToTable("PremisesContractor");
+                    b.ToTable("PremisesContractors");
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.PremisesTask", b =>
@@ -249,9 +258,6 @@ namespace FacilitiesManagementAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CompletionDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("ContractorId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateCreated")
@@ -274,8 +280,6 @@ namespace FacilitiesManagementAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContractorId");
-
                     b.HasIndex("PremisesId");
 
                     b.ToTable("PremisesTask");
@@ -289,13 +293,15 @@ namespace FacilitiesManagementAPI.Migrations
 
                     b.HasOne("FacilitiesManagementAPI.Entities.Premises", null)
                         .WithMany("Notes")
-                        .HasForeignKey("PremisesId");
+                        .HasForeignKey("PremisesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Premises", b =>
                 {
                     b.HasOne("FacilitiesManagementAPI.Entities.Accountant", "Accountant")
-                        .WithMany("Premises")
+                        .WithMany()
                         .HasForeignKey("AccountantId");
 
                     b.Navigation("Accountant");
@@ -333,10 +339,6 @@ namespace FacilitiesManagementAPI.Migrations
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.PremisesTask", b =>
                 {
-                    b.HasOne("FacilitiesManagementAPI.Entities.Contractor", null)
-                        .WithMany("Jobs")
-                        .HasForeignKey("ContractorId");
-
                     b.HasOne("FacilitiesManagementAPI.Entities.Premises", "Premises")
                         .WithMany("PremisesTasks")
                         .HasForeignKey("PremisesId")
@@ -346,15 +348,8 @@ namespace FacilitiesManagementAPI.Migrations
                     b.Navigation("Premises");
                 });
 
-            modelBuilder.Entity("FacilitiesManagementAPI.Entities.Accountant", b =>
-                {
-                    b.Navigation("Premises");
-                });
-
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Contractor", b =>
                 {
-                    b.Navigation("Jobs");
-
                     b.Navigation("Notes");
                 });
 
