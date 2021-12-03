@@ -1,0 +1,19 @@
+<div class="text-center">
+    <form #editForm="ngForm" id="editForm" (ngSubmit)="updateTask()">
+        <div class="alert alert-info" *ngIf="editForm.dirty">
+            <strong>Information:</strong>You have made changes. Any unsaved changes will be lost!
+        </div>
+        <label  class="mt-2" for="premiseName">Titel</label>
+        <input  class="form-control" [(ngModel)]="premTask.title" name="tile" type="text" >
+        <label  class="mt-2" for="premiseName">Titel</label>
+        <textarea  class="form-control" [(ngModel)]="premTask.description" name="description" type="text" ></textarea>   
+        <!-- <input 
+        class="form-control"
+        [(ngModel)]="premTask.completionDate"
+        placement="top"
+        placeholder="{{premTask.completionDate}}"
+        bsDatepicker
+        [bsConfig]='bsConfig'
+        >    -->
+    </form>
+  </div>

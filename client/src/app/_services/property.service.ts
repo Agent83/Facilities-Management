@@ -47,7 +47,7 @@ export class PropertyService {
   }
 
   removeTask(propId: string, taskId: string){ 
-     return this.http.delete(this.baseUrl + 'premise/removeaccountant/' + propId +','+ taskId);
+     return this.http.delete(this.baseUrl + 'premise/deltasks/' + propId +','+ taskId);
   }
 
   removeAcc(propId: string){

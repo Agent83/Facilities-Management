@@ -8,6 +8,5 @@ namespace FacilitiesManagementAPI.Interfaces
     public interface IPremiseContractorRepository
     {
         Task<bool> SaveAllAsync();
-        IQueryable<PremisesContractor> DeleteLinkFromTable(Guid premId, Guid conId);
     }
 }
