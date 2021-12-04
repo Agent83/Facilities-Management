@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http.Results;
 
 namespace FacilitiesManagementAPI.Data
 {
@@ -22,13 +23,6 @@ namespace FacilitiesManagementAPI.Data
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
-        }
-
-        public  IQueryable<PremisesContractor> DeleteLinkFromTable(Guid premId, Guid conId)
-        {
-            return _context.PremisesContractors.
-                FromSqlInterpolated($"DELETE FROM PremisesContractor WHERE PremisesId = {premId} AND ContractorId = {conId}");
-                
         }
 
     }

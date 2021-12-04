@@ -46,7 +46,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let property of properties$ | async "
+  <tr *ngFor="let property of properties"
   routerLink='/premises/{{property.id}}'>
     <td>
 
@@ -57,3 +57,17 @@
   </tr>
   </tbody>
 </table>
+<div class="d-flex justify-content-center" *ngIf="pagination">
+  <pagination 
+  [boundaryLinks]="true" 
+  [totalItems]="pagination.totalItems"
+  [itemsPerPage]="pagination.itemsPerPage"
+  [(ngModel)]="pagination.currentPage"
+  (pageChanged)="pageChanged($event)"
+  previousText="&lsaquo;" 
+  nextText="&rsaquo;" 
+  firstText="&laquo;" 
+  lastText="&raquo;">
+ 
+</pagination>
+</div>

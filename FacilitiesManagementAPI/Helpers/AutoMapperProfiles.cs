@@ -25,6 +25,7 @@ namespace FacilitiesManagementAPI.Helpers
               .ForMember(dest => dest.PremisesAddress,
                 map => map.MapFrom( source => source.PremisesAddress));
             CreateMap<Note, NoteDto>();
+            CreateMap<CreateNoteDto, Note>();
             CreateMap<NoteDto, Note>();
             CreateMap<CreateContractorDto, Contractor>();
             CreateMap<CreatePropertyDto, Premises>()

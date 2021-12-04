@@ -2,6 +2,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
+import { Pagination } from 'src/app/_models/pagination';
 import { Property } from 'src/app/_models/property';
 import { PropertyService } from 'src/app/_services/property.service';
 
@@ -11,14 +12,30 @@ import { PropertyService } from 'src/app/_services/property.service';
   styleUrls: ['./premise-list.component.css']
 })
 export class PremiseListComponent implements OnInit {
- properties$: Observable<Property[]>;
+ properties: Property[];
+ pagination: Pagination;
+ pageNumber = 1;
+ pageSize = 5;
+
  taskCount: number;
   constructor(private propertyService: PropertyService) { }
 
   ngOnInit(): void {
-    this.properties$ = this.propertyService.getProperties()
+    this.loadProperty();
   }
   
+  loadProperty(){
+    this.propertyService.getProperties(this.pageNumber, this.pageSize).subscribe(response => {
+      this.properties = response.result;
+      this.pagination = response.pagination;
+    })
+  }
+
+
+  pageChanged(event: any){
+    this.pageNumber = event.page;
+    this.loadProperty();
+  }
   modalAccVisible= false;
   showCreateAccModal(){
     this.modalAccVisible = true;

@@ -2,6 +2,8 @@
 using FacilitiesManagementAPI.Data;
 using FacilitiesManagementAPI.DTOs;
 using FacilitiesManagementAPI.Entities;
+using FacilitiesManagementAPI.Extensions;
+using FacilitiesManagementAPI.Helpers;
 using FacilitiesManagementAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,9 +31,12 @@ namespace FacilitiesManagementAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PropertyDto>>> GetPremises()
+        public async Task<ActionResult<IEnumerable<PropertyDto>>> GetPremises([FromQuery]PageListParams propListParams)
         {
-            var premises = await _premise.GetPropertiesAsync();
+            var premises = await _premise.GetPropertiesAsync(propListParams);
+
+            Response.AddPaginationHeader(premises.CurrentPage, premises.PageSize,
+                premises.TotalCount, premises.TotalPages);
             return Ok(premises);
         }
 

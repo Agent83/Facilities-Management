@@ -21,7 +21,7 @@
               {{property.email}} </p>
           </div>
 
-          <button nz-button nzDanger routerLink='/premises/edit/{{property.id}}'>Edit property details</button>
+          <button nz-button nzDanger routerLink='premises/edit/{{property.id}}'>Edit property details</button>
         </div>
       </div>
       <div class="col">
@@ -71,8 +71,8 @@
                     <ul nz-list-item-actions>
                       <nz-list-item-action>
                         <a (click)="showModal(item.id)">View/ </a>
-                        <a (click)="showModal(item.id)">Edit/ </a>
-                        <a style="color:#FF0000;" (click)="DelTaskConfirm(item.id)">Delete</a>
+                        <a (click)="showEditTaskModal(item.id)" >Edit/ </a>
+                        <a style="color:#FF0000;" (click)="DelTaskConfirm(item.id)"> Delete</a>
                       </nz-list-item-action>
                     </ul>
                     <strong> {{ item.title }}</strong>
@@ -82,6 +82,35 @@
                         {{modalInfo[0].description}}<br>
                         Completion Date: {{modalInfo[0].completionDate | date}}
                       </p>
+                    </nz-modal>
+                    <strong> {{ item.title }}</strong>
+                    <nz-modal [(nzVisible)]="modalEditTaskVisible" nzTitle="{{item.title}}" (nzOnCancel)="handleUpdateTaskCancel()"
+                      [nzFooter]="null">
+                    
+                        <div class="text-left" *nzModalContent>
+                          <form #editTaskForm="ngForm" id="editTaskForm" (ngSubmit)="taskUpdate()">
+                              <div class="alert alert-info" *ngIf="editTaskForm.dirty">
+                                  <strong>Information:</strong>You have made changes. Any unsaved changes will be lost!
+                              </div>
+                              <label  class="mt-2" for="title">Title</label>
+                              <input  class="form-control" [(ngModel)]="updateTask.title" name="tile" type="text" >
+                              <label  class="mt-2" for="description">Description</label>
+                              <textarea  class="form-control mb-2" [(ngModel)]="updateTask.description" name="description" type="text" ></textarea> 
+                              <label  class="mt-2" for="completionDate">Completion Date</label>  
+                              <input  class="form-control" [(ngModel)]="updateTask.completionDate" 
+                               name="completionDate" placement="top"
+                               bsDatepicker
+                               [bsConfig]="bsConfig"
+                              >   
+                          </form>
+                        
+                        <div class="text-right mt-2">
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                             <button [disabled]="!editTaskForm.dirty" form="editTaskForm" type="submit" class="btn btn-primary">Save changes</button>
+                             <button type="submit" class="btn btn-light" (click)="handleUpdateTaskCancel()">Cancel</button>
+                          </div>
+                       </div>
+                      </div>
                     </nz-modal>
                   </li>
                 </ul>
@@ -180,7 +209,7 @@
       <div class="col-8 mt-3">
         <div class="container mt-2">
           <nz-list>
-            <ul nz-list [nzDataSource]="permNotes" nzBordered nzSize="large">
+            <ul nz-list [nzDataSource]="permNotesn " nzBordered nzSize="large">
               <nz-list-header> Notes</nz-list-header>
               <li nz-list-item *ngFor="let item of permNotes" nzNoFlex>
                 {{item.dateCreated | date}}<br>

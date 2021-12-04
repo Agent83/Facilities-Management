@@ -42,6 +42,7 @@ import { TexareaInputComponent } from './_forms/texarea-input/texarea-input.comp
 import { ContractorEditComponent } from './contractor/contractor-edit/contractor-edit.component';
 import { PropAccountantListComponent } from './propAccountant/prop-accountant-list/prop-accountant-list.component';
 import { PropAccountantCreateComponent } from './propAccountant/prop-accountant-create/prop-accountant-create.component';
+import { TaskupdateComponent } from './premises/taskupdate/taskupdate.component';
 
 
 registerLocaleData(en);
@@ -75,6 +76,7 @@ registerLocaleData(en);
     ContractorEditComponent,
     PropAccountantListComponent,
     PropAccountantCreateComponent,
+    TaskupdateComponent,
   ],
   imports: [
     BrowserModule,
