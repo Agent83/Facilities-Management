@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using FacilitiesManagementAPI.DTOs;
 using FacilitiesManagementAPI.Entities;
+using FacilitiesManagementAPI.Helpers;
 using FacilitiesManagementAPI.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -41,11 +42,13 @@ namespace FacilitiesManagementAPI.Data
             return await _context.Premises.ToListAsync();
         }
 
-        public async Task<IEnumerable<PropertyDto>> GetPropertiesAsync()
+        public async Task<PagedList<PropertyDto>> GetPropertiesAsync(PageListParams propertyParams)
         {
-            return await _context.Premises
+            var query =  _context.Premises
                 .ProjectTo<PropertyDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+                .AsNoTracking();
+            return await PagedList<PropertyDto>.CreateAsync(query, propertyParams.PageNumber, propertyParams.PageSize);
+                
         }
 
         public async Task<PropertyDto> GetPropertyByIdAsync(Guid Id)

@@ -5,7 +5,7 @@ import { PropertyService } from 'src/app/_services/property.service';
 import { formatDistance } from 'date-fns'
 import { PremisesTask } from 'src/app/_models/premisesTask';
 import { PremTasksService } from 'src/app/_services/prem-tasks.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import { Contractor } from 'src/app/_models/contractor';
@@ -17,7 +17,7 @@ import { PremisesAddress } from 'src/app/_models/premisesAddress';
 import { NotesService } from 'src/app/_services/notes.service';
 import { PropContractorLink } from 'src/app/_models/propContractorLink';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { NgxGalleryThumbnailsComponent } from '@kolkov/ngx-gallery';
+import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 
 
 @Component({
@@ -40,6 +40,7 @@ export class PremiseDetailComponent implements OnInit {
   modalInfo: any;
   propId: string;
 
+ 
   propContractorList: Contractor[] = [];
 
   createTaskForm: FormGroup;
@@ -76,6 +77,10 @@ export class PremiseDetailComponent implements OnInit {
     premisesId: string;
   }
 
+  updateTask: PremisesTask; 
+  editTaskForm: NgForm;
+  locale = 'en';
+  
   createTask: {
     title: string,
     description: string,
@@ -88,20 +93,27 @@ export class PremiseDetailComponent implements OnInit {
     datetime: Date,
     displayTime: any,
   }[] = [];
-
+  bsConfig: Partial<BsDatepickerConfig>;
+  bsValue: Date;
   submitting = false;
   inputValue = '';
 
   constructor(private propertyService: PropertyService,
     private contractorService: ContractorService,
     private route: ActivatedRoute,
-    private porpTaskService: PremTasksService,
+    private propTaskService: PremTasksService,
     private propAccoutantService: PropAccountantService,
     private fb: FormBuilder,
     private toastr: ToastrService,
     private noteService: NotesService,
     private modal: NzModalService,
-  ) { }
+    private localeService: BsLocaleService
+  ) {
+    this.bsConfig = {
+      containerClass: 'theme-dark-blue',
+      dateInputFormat: 'YYYY/MM/DD',
+    }
+   }
 
   ngOnInit(): void {
     this.loadProperty();
@@ -112,6 +124,13 @@ export class PremiseDetailComponent implements OnInit {
     this.linkContractorToProp();
     this.initialPermNoteForm();
     this.initialTempNoteForm();
+  }
+
+
+  applyLocale(pop: any) {
+    this.localeService.use(this.locale);
+    pop.hide();
+    pop.show();
   }
 
   initializeTaskForm() {
@@ -188,7 +207,7 @@ export class PremiseDetailComponent implements OnInit {
       premisesId: this.propId
     };
 
-    this.porpTaskService.createTask(this.createTask).subscribe(() => {
+    this.propTaskService.createTask(this.createTask).subscribe(() => {
       this.createTaskForm.reset();
       this.loadProperty();
       this.toastr.success('Task has been added');
@@ -331,6 +350,7 @@ export class PremiseDetailComponent implements OnInit {
 
   // Modal
   modalVisible = false;
+  modalEditTaskVisible = false;
   isOkLoading = false;
 
   showModal(id): void {
@@ -341,7 +361,25 @@ export class PremiseDetailComponent implements OnInit {
     this.modalInfo = tempModal;
   }
 
+  showEditTaskModal(id): void {
+    this.modalEditTaskVisible = true;
+    var tempModal = this.premiseTask.filter((info) => {
+      return info.id == id;
+    });
+    this.updateTask = tempModal[0];
+  //  this.bsValue = this.updateTask.completionDate;
+    console.log("open edit", this.updateTask)
+  }
 
+  taskUpdate(){
+    this.propTaskService.updateTask(this.updateTask).subscribe(() => {
+      this.toastr.success("task has be updated");
+    });
+  }
+
+handleUpdateTaskCancel(){
+  this. modalEditTaskVisible = false;
+}
   handleOk(): void {
     this.isOkLoading = true;
     setTimeout(() => {

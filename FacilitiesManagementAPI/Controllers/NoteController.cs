@@ -43,7 +43,7 @@ namespace FacilitiesManagementAPI.Controllers
         }
 
         [HttpPost("createNote")]
-        public async Task<ActionResult<NoteDto>> CreateContractor(NoteDto noteDto)
+        public async Task<ActionResult<NoteDto>> CreateContractor(CreateNoteDto noteDto)
         {
             var note = _mapper.Map<Note>(noteDto);
 

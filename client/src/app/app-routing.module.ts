@@ -34,7 +34,7 @@ const routes: Routes = [
       { path: 'create-premise', component: PremiseCreateComponent },
       { path: 'premises/:id', component: PremiseDetailComponent },
       { path: 'premises/edit/:id', component: PremiseEditComponent, canDeactivate: [PreventUnsavedChangesGuard] },
-      { path: 'taskupdate/:id', component: TaskupdateComponent},
+      { path: 'taskupdate/:id', component: TaskupdateComponent, canDeactivate: [PreventUnsavedChangesGuard] },
       { path: 'create-contractor', component: ContractorCreateComponent },
       { path: 'premises', component: PremiseListComponent},
       { path: 'lists-contractor', component: ContractorListComponent},

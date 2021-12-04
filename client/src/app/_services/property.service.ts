@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { PaginatedResult } from '../_models/pagination';
 import { PropContractorLink } from '../_models/propContractorLink';
 import { Property } from '../_models/property';
 
@@ -13,17 +14,25 @@ export class PropertyService {
   baseUrl = environment.apiUrl;
   property: Property[] = [];
   propertyContractor: PropContractorLink;
-
+  paginatedResult: PaginatedResult<Property[]> = new PaginatedResult<Property[]>();
   constructor(private http: HttpClient) { }
 
-  getProperties(){
-    if (this.property.length > 0 ) return of(this.property);
-    return this.http.get<Property[]>(this.baseUrl + 'premise').pipe(
-      map(property => {
-        this.property = property;
-        return property;
+  getProperties(page?: number, itemsPerPage?: number){
+    let params = new HttpParams();
+
+    if(page != null && itemsPerPage !== null){
+      params = params.append('pageNumber', page.toString());
+      params = params.append('pageSize', itemsPerPage.toString());
+    }
+    return this.http.get<Property[]>(this.baseUrl + 'premise',{observe: 'response', params}).pipe(
+      map(respone => {
+        this.paginatedResult.result = respone.body;
+        if(respone.headers.get('Pagination') !== null){
+          this.paginatedResult.pagination = JSON.parse(respone.headers.get('Pagination'));
+        }
+        return this.paginatedResult;
       })
-    );
+    )
   }
 
   getProperty(id: string){

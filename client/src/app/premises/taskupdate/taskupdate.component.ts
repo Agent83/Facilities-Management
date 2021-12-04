@@ -14,10 +14,11 @@ import { PremTasksService } from 'src/app/_services/prem-tasks.service';
   styleUrls: ['./taskupdate.component.css']
 })
 export class TaskupdateComponent implements OnInit {
-  @ViewChild('editForm') editForm: NgForm;
-  @Injectable({
-    providedIn: 'root'
-  })
+  // @ViewChild('editTaskForm')
+  editTaskForm: NgForm;
+  // @Injectable({
+  //   providedIn: 'root'
+  // })
   premTask: PremisesTask;
   bsConfig: Partial<BsDatepickerConfig>;
 

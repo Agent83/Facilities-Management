@@ -13,6 +13,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 
 
@@ -35,6 +36,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     NgxSpinnerModule,
     NzSelectModule,
     ScrollingModule,
+    PaginationModule.forRoot(),
   ], 
 exports: [
   BsDropdownModule,
@@ -50,7 +52,7 @@ exports: [
   NgxSpinnerModule,
   NzSelectModule,
   ScrollingModule,
-
+  PaginationModule,
 ]
 })
 export class SharedModule { }

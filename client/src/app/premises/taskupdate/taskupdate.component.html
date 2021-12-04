@@ -1,6 +1,6 @@
 <div class="text-center">
-    <form #editForm="ngForm" id="editForm" (ngSubmit)="updateTask()">
-        <div class="alert alert-info" *ngIf="editForm.dirty">
+    <form #editTaskForm="ngForm" id="editTaskForm" (ngSubmit)="updateTask()">
+        <div class="alert alert-info" *ngIf="editTaskForm.dirty">
             <strong>Information:</strong>You have made changes. Any unsaved changes will be lost!
         </div>
         <label  class="mt-2" for="premiseName">Titel</label>
