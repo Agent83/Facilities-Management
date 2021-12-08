@@ -35,7 +35,7 @@ namespace FacilitiesManagementAPI.Data
         public async Task<AppUser> GetUserByUserNameAsync(string username)
         {
             return await _context.Users
-            .SingleOrDefaultAsync(x => x.Username == username);
+            .SingleOrDefaultAsync(x => x.UserName == username);
         }
 
         public async Task<bool> SaveAllAsync()
@@ -58,7 +58,7 @@ namespace FacilitiesManagementAPI.Data
         public async Task<MemberDto> GetMemberAsync(string username)
         {
             return await _context.Users
-            .Where(x => x.Username == username)
+            .Where(x => x.UserName == username)
             .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
             .SingleOrDefaultAsync();
         }

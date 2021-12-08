@@ -44,10 +44,14 @@ namespace FacilitiesManagementAPI.Data
 
         public async Task<PagedList<PropertyDto>> GetPropertiesAsync(PageListParams propertyParams)
         {
-            var query =  _context.Premises
-                .ProjectTo<PropertyDto>(_mapper.ConfigurationProvider)
-                .AsNoTracking();
-            return await PagedList<PropertyDto>.CreateAsync(query, propertyParams.PageNumber, propertyParams.PageSize);
+            var query = _context.Premises.AsQueryable();
+
+            query = query.Where(x => x.IsArchieved == false)
+                .Include(x => x.PremisesTasks);
+                            
+            return await PagedList<PropertyDto>.CreateAsync(query.ProjectTo<PropertyDto>
+                (_mapper.ConfigurationProvider).AsNoTracking(), 
+                propertyParams.PageNumber, propertyParams.PageSize);
                 
         }
 

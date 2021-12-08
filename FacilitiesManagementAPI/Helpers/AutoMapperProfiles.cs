@@ -11,6 +11,7 @@ namespace FacilitiesManagementAPI.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<AppUser, MemberDto>();
+            CreateMap<RegisterDto, AppUser>();
             CreateMap<Contractor, ContractorDto>();
             CreateMap<UpdateContractorDto, Contractor>();
             CreateMap<PremisesTask, PropertyTasksDto>();

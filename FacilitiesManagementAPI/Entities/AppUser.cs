@@ -1,19 +1,17 @@
 using System;
 using System.Collections.Generic;
-using FacilitiesManagementAPI.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 namespace FacilitiesManagementAPI.Entities
 {
-    public class AppUser
+    public class AppUser : IdentityUser<Guid>
     {
-        public Guid  Id { get; set; }
-        public string Username { get; set; } 
-        public byte[] PasswordHash {get;set;}
-        public byte[] PasswordSalt { get; set; }
+       
         public DateTime Created { get; set; } = DateTime.Now;
         public string KnownAs { get; set; }
         public DateTime LastActive { get; set; } = DateTime.Now;
         public bool IsDeleted { get; set; }
+        public ICollection<AppUserRole> UserRoles { get; set; }
 
 
     }

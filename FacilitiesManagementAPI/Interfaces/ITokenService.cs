@@ -1,9 +1,10 @@
 using FacilitiesManagementAPI.Entities;
+using System.Threading.Tasks;
 
 namespace FacilitiesManagementAPI.Interfaces
 {
     public interface ITokenService
     {
-        string CreateToken(AppUser user);
+       Task<string> CreateToken(AppUser user);
     }
 }
