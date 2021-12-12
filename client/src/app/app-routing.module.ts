@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { ContractorCreateComponent } from './contractor/contractor-create/contractor-create.component';
 import { ContractorDeatialsComponent } from './contractor/contractor-deatials/contractor-deatials.component';
 import { ContractorEditComponent } from './contractor/contractor-edit/contractor-edit.component';
@@ -16,7 +17,6 @@ import { PremiseCreateComponent } from './premises/premise-create/premise-create
 import { PremiseDetailComponent } from './premises/premise-detail/premise-detail.component';
 import { PremiseEditComponent } from './premises/premise-edit/premise-edit.component';
 import { PremiseListComponent } from './premises/premise-list/premise-list.component';
-import { TaskupdateComponent } from './premises/taskupdate/taskupdate.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 
@@ -34,12 +34,12 @@ const routes: Routes = [
       { path: 'create-premise', component: PremiseCreateComponent },
       { path: 'premises/:id', component: PremiseDetailComponent },
       { path: 'premises/edit/:id', component: PremiseEditComponent, canDeactivate: [PreventUnsavedChangesGuard] },
-      { path: 'taskupdate/:id', component: TaskupdateComponent, canDeactivate: [PreventUnsavedChangesGuard] },
       { path: 'create-contractor', component: ContractorCreateComponent },
       { path: 'premises', component: PremiseListComponent},
       { path: 'lists-contractor', component: ContractorListComponent},
       { path: 'contractor/:id', component:ContractorDeatialsComponent},
-      { path: 'contractor/edit/:id', component: ContractorEditComponent}
+      { path: 'contractor/edit/:id', component: ContractorEditComponent},
+      { path: 'admin', component: AdminPanelComponent},
     ]
   },
   {path: 'errors', component:TestErrorComponent},

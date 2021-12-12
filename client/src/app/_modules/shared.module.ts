@@ -14,6 +14,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
@@ -37,6 +38,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     NzSelectModule,
     ScrollingModule,
     PaginationModule.forRoot(),
+    ModalModule.forRoot()
   ], 
 exports: [
   BsDropdownModule,
@@ -53,6 +55,7 @@ exports: [
   NzSelectModule,
   ScrollingModule,
   PaginationModule,
+  ModalModule
 ]
 })
 export class SharedModule { }

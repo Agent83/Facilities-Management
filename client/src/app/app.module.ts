@@ -43,6 +43,9 @@ import { ContractorEditComponent } from './contractor/contractor-edit/contractor
 import { PropAccountantListComponent } from './propAccountant/prop-accountant-list/prop-accountant-list.component';
 import { PropAccountantCreateComponent } from './propAccountant/prop-accountant-create/prop-accountant-create.component';
 import { TaskupdateComponent } from './premises/taskupdate/taskupdate.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/has-role.directive';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
 
 
 registerLocaleData(en);
@@ -77,6 +80,9 @@ registerLocaleData(en);
     PropAccountantListComponent,
     PropAccountantCreateComponent,
     TaskupdateComponent,
+    AdminPanelComponent,
+    HasRoleDirective,
+    UserManagementComponent,
   ],
   imports: [
     BrowserModule,
