@@ -10,7 +10,7 @@ namespace FacilitiesManagementAPI.DTOs
         public Guid Id { get; set; }
         public string PremiseNumber { get; set; }
         public string PremiseName { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsArchieved { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime DateCreated { get; set; } 
         public string PhoneNumber1 { get; set; }

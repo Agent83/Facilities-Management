@@ -1,77 +1,32 @@
 [
-    {
-        "Username": "Rogers",
-        "DateOfBirth": "1994-02-07",
-        "KnownAs": "Rogers",
-        "Created": "2020-06-26",
-        "LastActive": "2020-05-24"
-    },
-    {
-        "Username": "Floyd",
-        "DateOfBirth": "1993-07-20",
-        "KnownAs": "Floyd",
-        "Created": "2019-02-19",
-        "LastActive": "2020-06-14"
-    },
-    {
-        "Username": "Mejia",
-        "DateOfBirth": "1981-07-20",
-        "KnownAs": "Mejia",
-        "Created": "2019-05-03",
-        "LastActive": "2020-06-05"
+  {
+    "UserName": "Rogers",
+    "DateOfBirth": "1994-02-07",
+    "KnownAs": "Rogers",
+    "Created": "2020-06-26",
+    "LastActive": "2020-05-24"
+  },
+  {
+    "UserName": "Floyd",
+    "DateOfBirth": "1993-07-20",
+    "KnownAs": "Floyd",
+    "Created": "2019-02-19",
+    "LastActive": "2020-06-14"
+  },
+  {
+    "UserName": "Mejia",
+    "DateOfBirth": "1981-07-20",
+    "KnownAs": "Mejia",
+    "Created": "2019-05-03",
+    "LastActive": "2020-06-05"
 
-    },
-    {
-        "Username": "Christian",
-        "DateOfBirth": "1996-05-15",
-        "KnownAs": "Christian",
-        "Created": "2019-11-26",
-        "LastActive": "2020-05-20"
- 
-    },
-    {
-        "Username": "Mann",
-        "DateOfBirth": "1957-10-24",
-        "KnownAs": "Mann",
-        "Created": "2019-03-25",
-        "LastActive": "2020-06-08"
+  },
+  {
+    "UserName": "Christian",
+    "DateOfBirth": "1996-05-15",
+    "KnownAs": "Christian",
+    "Created": "2019-11-26",
+    "LastActive": "2020-05-20"
 
-    },
-    {
-        "Username": "Lorna",
-        "DateOfBirth": "1978-06-10",
-        "KnownAs": "Lorna",
-        "Created": "2019-09-11",
-        "LastActive": "2020-05-05"
-
-    },
-    {
-        "Username": "Nell",
-        "DateOfBirth": "1978-10-02",
-        "KnownAs": "Nell",
-        "Created": "2019-09-14",
-        "LastActive": "2020-05-30"
-
-    },
-    {
-        "Username": "Terra",
-        "DateOfBirth": "1996-02-18",
-        "KnownAs": "Terra",
-        "Created": "2020-03-28",
-        "LastActive": "2020-05-25"
-    },
-    {
-        "Username": "Meagan",
-        "DateOfBirth": "1984-02-17",
-        "KnownAs": "Meagan",
-        "Created": "2019-01-12",
-        "LastActive": "2020-05-25"
-    },
-    {
-        "Username": "Michael",
-        "DateOfBirth": "1955-08-10",
-        "KnownAs": "Michael",
-        "Created": "2020-03-29",
-        "LastActive": "2020-05-29"
-    }
+  }
 ]

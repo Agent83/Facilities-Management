@@ -9,5 +9,7 @@
             get => _pageSize;
             set => _pageSize = (value > MaxPagSize) ? MaxPagSize: value; 
         }
+
+        public string CurrentUserEmail { get; set; }
     }
 }

@@ -20,7 +20,6 @@ namespace FacilitiesManagementAPI.Entities
         public ICollection<Note> Notes {get;set;}
         public ICollection<PremisesTask> PremisesTasks {get; set;}
 
-        public bool IsActive{ get; set; }
-
+        public bool IsArchieved{ get; set; }
     }
 }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FacilitiesManagementAPI.Data;
+using FacilitiesManagementAPI.Entities;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,13 +24,15 @@ namespace FacilitiesManagementAPI
            try
            {
                var context = services.GetRequiredService<DataContext>();
+                var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
                await context.Database.MigrateAsync();
-               await Seed.SeedUsers(context);
-               await Seed.SeedPremisesAsync(context);
-               await Seed.SeedContractorType(context);
-               await Seed.SeedContractor(context);
-                
-           }
+                await Seed.SeedUsers(userManager, roleManager);
+                await Seed.SeedPremisesAsync(context);
+                await Seed.SeedContractorType(context);
+                await Seed.SeedContractor(context);
+
+            }
            catch (Exception ex)
            {
               var logger = services.GetRequiredService<ILogger<Program>>();
