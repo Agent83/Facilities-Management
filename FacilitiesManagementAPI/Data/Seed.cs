@@ -16,9 +16,9 @@ namespace FacilitiesManagementAPI.Data
         {
             if ( await userManager.Users.AnyAsync()) return;
 
-            var userData = await System.IO.File.ReadAllTextAsync("Data/UserSeedData.json");
-            var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
-            if(users == null) return;
+            //var userData = await System.IO.File.ReadAllTextAsync("Data/UserSeedData.json");
+            //var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
+            //if(users == null) return;
 
             var roles = new List<AppRole>
             {
@@ -32,17 +32,19 @@ namespace FacilitiesManagementAPI.Data
                 await roleManager.CreateAsync(role);
             }
 
-            foreach ( var user in users)
-            { 
-                user.UserName = user.UserName.ToLower();
+            //foreach ( var user in users)
+            //{ 
+            //    user.UserName = user.UserName.ToLower();
  
-              await userManager.CreateAsync(user, "Pa$$w0rd");
-              await userManager.AddToRoleAsync(user, "Member");
-            }
+            //  await userManager.CreateAsync(user, "Pa$$w0rd");
+            //  await userManager.AddToRoleAsync(user, "Member");
+            //}
 
             var admin = new AppUser
             {
-                UserName = "admin",
+                UserName = "chrissy@blackwoodpm.com",
+                Email = "chrissy@blackwoodpm.com",
+                KnownAs = "Chrissy"
             };
 
             await userManager.CreateAsync(admin, "Pa$$w0rd");
@@ -51,6 +53,8 @@ namespace FacilitiesManagementAPI.Data
             var superUser = new AppUser
             {
                 UserName = "alder83@hotmail.co.uk",
+                Email= "alder83@hotmail.co.uk",
+                KnownAs= "Chris"
             };
             
             await userManager.CreateAsync(superUser, "2512Blane4697!");
@@ -58,30 +62,30 @@ namespace FacilitiesManagementAPI.Data
 
         }
 
-        public static async Task SeedPremisesAsync(DataContext context)
-        {
-            if (await context.Premises.AnyAsync()) return;
+        //public static async Task SeedPremisesAsync(DataContext context)
+        //{
+        //    if (await context.Premises.AnyAsync()) return;
 
-            var premiseData = await System.IO.File.ReadAllTextAsync("Data/PremisesSeedData.json");
-            var premises = JsonSerializer.Deserialize<List<Premises>>(premiseData);
-            foreach (var premise in premises)
-            {
-                context.Premises.Add(premise);
-            }
-            context.SaveChanges();
-        }
+        //    var premiseData = await System.IO.File.ReadAllTextAsync("Data/PremisesSeedData.json");
+        //    var premises = JsonSerializer.Deserialize<List<Premises>>(premiseData);
+        //    foreach (var premise in premises)
+        //    {
+        //        context.Premises.Add(premise);
+        //    }
+        //    context.SaveChanges();
+        //}
 
-        public static async Task SeedContractor(DataContext context)
-        {
-            if( await context.Contractors.AnyAsync()) return;
-            var contractorData = await System.IO.File.ReadAllTextAsync("Data/contractorSeed.json");
-            var contractors = JsonSerializer.Deserialize<List<Contractor>>(contractorData);
-            foreach (var contractor in contractors)
-            {
-                context.Contractors.Add(contractor);
-            }
-            context.SaveChanges();
-        }
+        //public static async Task SeedContractor(DataContext context)
+        //{
+        //    if( await context.Contractors.AnyAsync()) return;
+        //    var contractorData = await System.IO.File.ReadAllTextAsync("Data/contractorSeed.json");
+        //    var contractors = JsonSerializer.Deserialize<List<Contractor>>(contractorData);
+        //    foreach (var contractor in contractors)
+        //    {
+        //        context.Contractors.Add(contractor);
+        //    }
+        //    context.SaveChanges();
+        //}
 
         public static async Task SeedContractorType(DataContext context)
         {
