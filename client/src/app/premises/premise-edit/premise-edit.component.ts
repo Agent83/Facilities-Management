@@ -27,13 +27,14 @@ export class PremiseEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProperty();
+    console.log(this.property);
   }
 
   loadProperty(){
     this.propertyService.getProperty(this.route.snapshot.paramMap.get('id')).pipe(first())
     .subscribe(prop => {
       this.property = prop;    
-    })
+    });
   }
 
   updateProperty() {
