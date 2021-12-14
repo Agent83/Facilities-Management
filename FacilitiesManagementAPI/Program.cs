@@ -28,9 +28,9 @@ namespace FacilitiesManagementAPI
                 var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
                await context.Database.MigrateAsync();
                 await Seed.SeedUsers(userManager, roleManager);
-                await Seed.SeedPremisesAsync(context);
+              //  await Seed.SeedPremisesAsync(context);
                 await Seed.SeedContractorType(context);
-                await Seed.SeedContractor(context);
+                //await Seed.SeedContractor(context);
 
             }
            catch (Exception ex)
