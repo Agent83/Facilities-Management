@@ -9,7 +9,6 @@ namespace FacilitiesManagementAPI.Interfaces
     public interface IAccountantRepository
     {
         void Update(Accountant accountant);
-        Task<bool> SaveAllAsync();
         Task<IEnumerable<Accountant>> GetAccountants();
         Task<IEnumerable<PropAccountantDto>> GetAccountantsAsync();
         Task<Accountant> GetAccountantById(Guid Id);

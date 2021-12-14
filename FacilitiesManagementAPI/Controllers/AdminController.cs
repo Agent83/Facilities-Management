@@ -17,8 +17,8 @@ namespace FacilitiesManagementAPI.Controllers
             _userManager = userManager;
         }
 
-        [Authorize(Policy = "RequireAdminRole")]
-        [HttpGet("user-with-roles")]
+        //[Authorize(Policy = "RequireAdminRole")]
+        [HttpGet("users-with-roles")]
         public async Task<ActionResult> GetUserWithRoles()
         {
             var users = await _userManager.Users
@@ -35,7 +35,7 @@ namespace FacilitiesManagementAPI.Controllers
            return Ok(users);
         }
 
-        [HttpPost("edit-roles/{username}")]
+        [HttpPost("edit-rolesadmin/{username}")]
         public async Task<ActionResult> EditRoles(string username, [FromQuery] string roles)
         {
             var selectedRoles = roles.Split(",").ToArray();

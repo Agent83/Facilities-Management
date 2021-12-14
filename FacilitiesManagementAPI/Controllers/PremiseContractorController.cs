@@ -15,13 +15,13 @@ namespace FacilitiesManagementAPI.Controllers
     public class PremiseContractorController : BaseApiController
     {
         private readonly DataContext _context;
-        private readonly IPremiseContractorRepository _premiseContractor;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public PremiseContractorController(DataContext context, IPremiseContractorRepository premiseContractor, IMapper mapper)
+        public PremiseContractorController(DataContext context, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _context = context;
-            _premiseContractor = premiseContractor;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
@@ -30,7 +30,7 @@ namespace FacilitiesManagementAPI.Controllers
         {
             var conPrem = _mapper.Map<PremisesContractor>(conPremLink);
             _context.PremisesContractors.Add(conPrem);
-            await _premiseContractor.SaveAllAsync(); 
+            await _unitOfWork.Complete(); 
             return Ok(conPremLink);
         }
        
@@ -48,7 +48,7 @@ namespace FacilitiesManagementAPI.Controllers
             if(premisesContractor != null)
             {
                 _context.Remove(premisesContractor);
-                if (await _premiseContractor.SaveAllAsync()) return Ok();
+                if (await _unitOfWork.Complete()) return Ok();
             }
 
             return BadRequest("Failed to remove");

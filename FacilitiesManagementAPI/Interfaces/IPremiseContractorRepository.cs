@@ -7,6 +7,5 @@ namespace FacilitiesManagementAPI.Interfaces
 {
     public interface IPremiseContractorRepository
     {
-        Task<bool> SaveAllAsync();
     }
 }

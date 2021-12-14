@@ -9,7 +9,6 @@ namespace FacilitiesManagementAPI.Interfaces
     public interface IPremisesTaskRepository
     {
         void Update(PremisesTask user);
-        Task<bool> SaveAllAsync();
         Task<IEnumerable<PremisesTask>> GetPremiseTaskAsync();
         Task<PremisesTask> GetPremiseTaskByIdAsync(Guid Id);
         Task<IEnumerable<PropertyTasksDto>> GetTasks();

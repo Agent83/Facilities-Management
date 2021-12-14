@@ -37,8 +37,8 @@ namespace FacilitiesManagementAPI.Extensions
             });
             services.AddAuthorization(opt =>
             {
-                opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
-                opt.AddPolicy("RequirSuperUserRole", policy => policy.RequireRole("SuperUser"));
+                opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin", "admin"));
+                opt.AddPolicy("RequirSupereUserRole", policy => policy.RequireRole("SuperUser"));
             });
             return services;
         }

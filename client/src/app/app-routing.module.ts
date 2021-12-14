@@ -17,6 +17,7 @@ import { PremiseCreateComponent } from './premises/premise-create/premise-create
 import { PremiseDetailComponent } from './premises/premise-detail/premise-detail.component';
 import { PremiseEditComponent } from './premises/premise-edit/premise-edit.component';
 import { PremiseListComponent } from './premises/premise-list/premise-list.component';
+import { AdminGuard } from './_guards/admin.guard';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 
@@ -39,7 +40,7 @@ const routes: Routes = [
       { path: 'lists-contractor', component: ContractorListComponent},
       { path: 'contractor/:id', component:ContractorDeatialsComponent},
       { path: 'contractor/edit/:id', component: ContractorEditComponent},
-      { path: 'admin', component: AdminPanelComponent},
+      { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard]},
     ]
   },
   {path: 'errors', component:TestErrorComponent},
