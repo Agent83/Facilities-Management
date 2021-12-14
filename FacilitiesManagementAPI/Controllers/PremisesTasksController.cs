@@ -12,13 +12,15 @@ namespace FacilitiesManagementAPI.Controllers
 {
     public class PremisesTasksController : BaseApiController
     {
-        private readonly IPremisesTaskRepository _premisesTask;
+       
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly DataContext _context;
 
-        public PremisesTasksController(IPremisesTaskRepository premisesTask, IMapper mapper, DataContext context)
+        public PremisesTasksController(IUnitOfWork unitOfWork, IMapper mapper, DataContext context)
         {
-            _premisesTask = premisesTask;
+            
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _context = context;
         }
@@ -26,14 +28,14 @@ namespace FacilitiesManagementAPI.Controllers
         [HttpGet]
         public async Task <ActionResult<IEnumerable<PropertyTasksDto>>> GetPropTasks()
         {
-            var propTasks = await _premisesTask.GetTasks();
+            var propTasks = await _unitOfWork.PremisesTaskRepository.GetTasks();
             return Ok(propTasks);  
         }
 
         [HttpGet("Id")]
         public async Task <ActionResult<PropertyTasksDto>> GetPropTaskByIdAsync(Guid id)
         {
-            return await _premisesTask.GetPropertyTaskByIdAsync(id);
+            return await _unitOfWork.PremisesTaskRepository.GetPropertyTaskByIdAsync(id);
         }
 
 
@@ -43,7 +45,7 @@ namespace FacilitiesManagementAPI.Controllers
             var propTask = _mapper.Map<PremisesTask>(propertyTasksDto);
 
             _context.PremisesTask.Add(propTask);
-            await _context.SaveChangesAsync();
+            await _unitOfWork.Complete();
 
             return Ok();
         }
@@ -51,12 +53,12 @@ namespace FacilitiesManagementAPI.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateTask(PropertyTasksDto propertyTasksDto)
         {
-            var propertyTask = await _premisesTask.GetPremiseTaskByIdAsync(propertyTasksDto.Id);
+            var propertyTask = await _unitOfWork.PremisesTaskRepository.GetPremiseTaskByIdAsync(propertyTasksDto.Id);
             _mapper.Map(propertyTasksDto, propertyTask);
 
-            _premisesTask.Update(propertyTask);
+            _unitOfWork.PremisesTaskRepository.Update(propertyTask);
 
-            if (await _premisesTask.SaveAllAsync()) return NoContent();
+            if (await _unitOfWork.Complete()) return NoContent();
 
             return BadRequest("Failed to update task");
         }

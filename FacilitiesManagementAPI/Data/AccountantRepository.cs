@@ -47,11 +47,6 @@ namespace FacilitiesManagementAPI.Data
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
-
         public void Update(Accountant accountant)
         {
             _context.Entry(accountant).State = EntityState.Modified;

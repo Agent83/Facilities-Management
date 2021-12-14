@@ -9,7 +9,6 @@ namespace FacilitiesManagementAPI.Interfaces
     public interface INoteRepository
     {
         void Update(Note user);
-        Task<bool> SaveAllAsync();
         Task<IEnumerable<Note>> GetNotesAsync();
         Task<Note> GetNoteByIdAsync(Guid Id);
         Task<IEnumerable<NoteDto>> GetNotesDtoAsync();

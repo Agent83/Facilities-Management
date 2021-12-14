@@ -13,33 +13,33 @@ namespace FacilitiesManagementAPI.Controllers
     public class NoteController : BaseApiController
     {
         private readonly IMapper _mapper;
-        private readonly INoteRepository _note;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly DataContext _context;
 
-        public NoteController(IMapper mapper, INoteRepository note, DataContext context )
+        public NoteController(IMapper mapper,IUnitOfWork unitOfWork, DataContext context )
         {
             _mapper = mapper;
-            _note = note;
+            _unitOfWork = unitOfWork;
             _context = context;
         }
        [HttpGet]
        public async Task<ActionResult<IEnumerable<Note>>> GetNotesAsync()
        {
-            var notes = await _note.GetNotesAsync();
+            var notes = await _unitOfWork.NoteRepository.GetNotesAsync();
             return Ok(notes);
        }
         public async Task<ActionResult<Note>> GetNoteByIdAsync(Guid Id)
         {
-            return await _note.GetNoteByIdAsync(Id);
+            return await _unitOfWork.NoteRepository.GetNoteByIdAsync(Id);
         }
         public async Task<ActionResult<IEnumerable<NoteDto>>> GetNotesDtoAsync()
         {
-            var notes = await _note.GetNotesDtoAsync();
+            var notes = await _unitOfWork.NoteRepository.GetNotesDtoAsync();
             return Ok(notes);
         }
         public async Task<ActionResult<NoteDto>> GetNoteDtoByIdAsync(Guid Id)
         {
-            return await _note.GetNoteDtoByIdAsync(Id);
+            return await _unitOfWork.NoteRepository.GetNoteDtoByIdAsync(Id);
         }
 
         [HttpPost("createNote")]
@@ -48,7 +48,7 @@ namespace FacilitiesManagementAPI.Controllers
             var note = _mapper.Map<Note>(noteDto);
 
             _context.Note.Add(note);
-            await _context.SaveChangesAsync();
+            await _unitOfWork.Complete();
 
             return Ok();
         }
@@ -56,12 +56,12 @@ namespace FacilitiesManagementAPI.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateContractor(NoteDto noteDto)
         {
-            var note = await _note.GetNoteByIdAsync(noteDto.Id);
+            var note = await _unitOfWork.NoteRepository.GetNoteByIdAsync(noteDto.Id);
             _mapper.Map(noteDto, note);
 
-            _note.Update(note);
+            _unitOfWork.NoteRepository.Update(note);
 
-            if (await _note.SaveAllAsync()) return NoContent();
+            if (await _unitOfWork.Complete()) return NoContent();
 
             return BadRequest("Failed to update property");
         }

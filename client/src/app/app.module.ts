@@ -27,7 +27,7 @@ import { MemberCardComponent } from './members/member-card/member-card.component
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
@@ -46,6 +46,7 @@ import { TaskupdateComponent } from './premises/taskupdate/taskupdate.component'
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './_directives/has-role.directive';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { RolesModalComponent } from './modal/roles-modal/roles-modal.component';
 
 
 registerLocaleData(en);
@@ -83,18 +84,20 @@ registerLocaleData(en);
     AdminPanelComponent,
     HasRoleDirective,
     UserManagementComponent,
+    RolesModalComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FormsModule,
     SharedModule,
     NzCommentModule,
     NgbModule,
     ReactiveFormsModule,
     RouterModule.forRoot([]),
+    FormsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

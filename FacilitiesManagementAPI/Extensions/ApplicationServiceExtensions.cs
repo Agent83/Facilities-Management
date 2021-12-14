@@ -13,14 +13,7 @@ namespace FacilitiesManagementAPI.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IPremiseRepository, PremiseRepository>();
-            services.AddScoped<IPremisesTaskRepository, PremisesTaskRepository>();
-            services.AddScoped<IContractorRepository, ContractorRepository>();
-            services.AddScoped<INoteRepository, NoteRepository>();
-            services.AddScoped<IAccountantRepository, AccountantRepository>();
-            services.AddScoped<IContractorTypeRepository, ContractorTypeRepository>();
-            services.AddScoped<IPremiseContractorRepository, PremiseContractorRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddDbContext<DataContext>(options =>
             {

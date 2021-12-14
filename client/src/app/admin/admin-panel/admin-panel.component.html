@@ -1,15 +1,20 @@
-<h2>Admin Panel</h2>
-<div class="tab-panel">
-    <tabset class="member-tabset">
-        <tab heading="User Management" *appHasRole='["Admin"]'>
-            <div class="container">
-                <app-user-management></app-user-management>
-            </div>
-        </tab>
-        <!-- <tab heading="User Management" *appHasRole='["Admin"]'>
-            <div class="container">
-                To Do 
-            </div>
-        </tab> -->
-    </tabset>
+<div class="container">
+    <h2>Admin Panel</h2>
+    <div class="tab-panel">
+        <tabset class="member-tabset">
+            <tab heading="User Management" *appHasRole='["Admin"]'>
+                <div class="container">
+                    <app-user-management></app-user-management>
+                </div>
+            </tab>
+            <tab heading="Create user" *appHasRole='["Admin"]'>
+                <div class="container">
+                    <div class="container m-2">
+                        <app-register></app-register>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+    </div>
 </div>
+

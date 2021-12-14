@@ -47,7 +47,8 @@ namespace FacilitiesManagementAPI.Data
             var query = _context.Premises.AsQueryable();
 
             query = query.Where(x => x.IsArchieved == false)
-                .Include(x => x.PremisesTasks);
+                .Include(x => x.PremisesTasks)
+                .OrderByDescending(x => x.PremisesTasks.First().CompletionDate); ;
                             
             return await PagedList<PropertyDto>.CreateAsync(query.ProjectTo<PropertyDto>
                 (_mapper.ConfigurationProvider).AsNoTracking(), 
@@ -71,11 +72,6 @@ namespace FacilitiesManagementAPI.Data
                 .Include(x => x.Contractors)
                 .ProjectTo<PropertyDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
-        }
-
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
         }
 
         public void Update(Premises premise)

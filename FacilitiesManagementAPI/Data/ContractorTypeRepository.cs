@@ -31,11 +31,6 @@ namespace FacilitiesManagementAPI.Data
             return await _context.ContractorTypes.FindAsync(Id);
         }
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
-
         public void Update(ContractorType contractor)
         {
             _context.Entry(contractor).State = EntityState.Modified;

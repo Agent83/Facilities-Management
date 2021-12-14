@@ -9,7 +9,6 @@ namespace FacilitiesManagementAPI.Interfaces
     public interface IContractorRepository
     {
         void Update(Contractor contractor);
-        Task<bool> SaveAllAsync();
         Task<IEnumerable<Contractor>> GetContractAsync();
         Task<Contractor> GetContractByIdAsync(Guid Id);
         Task<IEnumerable<ContractorDto>> GetContractorsAsync();

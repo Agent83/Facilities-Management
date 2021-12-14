@@ -18,10 +18,10 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
+
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
     NzDrawerModule,
     NzButtonModule,
     NzFormModule,
@@ -55,7 +55,7 @@ exports: [
   NzSelectModule,
   ScrollingModule,
   PaginationModule,
-  ModalModule
+  ModalModule,
 ]
 })
 export class SharedModule { }
