@@ -43,7 +43,6 @@ namespace FacilitiesManagementAPI.Data
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
 
-
             modelBuilder.Entity<Premises>().HasMany(x => x.Contractors)
                     .WithMany(x => x.Premises)
                     .UsingEntity<PremisesContractor>(
@@ -51,6 +50,8 @@ namespace FacilitiesManagementAPI.Data
                         .WithMany().HasForeignKey(x => x.ContractorId),
                         x => x.HasOne(x => x.Premises)
                        .WithMany().HasForeignKey(x => x.PremisesId));
+
+
 
             modelBuilder.ApplyUtcDateTimeConverter();
         }
