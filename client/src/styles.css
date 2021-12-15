@@ -9,7 +9,7 @@
 @import "~ng-zorro-antd/form/style/index.min.css";
 @import "~bootswatch/dist/solar/bootstrap.css";
 
-body {background-color: rgb(171, 226, 253);}
+body {background-color: rgb(163, 168, 170);}
 tab-panel {
     border: 1px solid rgb(56, 67, 131);
     padding: 10px;
