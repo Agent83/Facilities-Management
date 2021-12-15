@@ -25,20 +25,20 @@ namespace FacilitiesManagementAPI.Extensions
 
                     string connStr;
 
-    // Depending on if in development or production, use either Heroku-provided
-    // connection string, or development connection string from env var.
-    if (env == "Development")
-                    {
-        // Use connection string from file.
-        connStr = config.GetConnectionString("DefaultConnection");
+                    // Depending on if in development or production, use either Heroku-provided
+                    // connection string, or development connection string from env var.
+                   if (env == "Development")
+                     {
+                      // Use connection string from file.
+                      connStr = config.GetConnectionString("DefaultConnection");
                     }
                     else
                     {
-        // Use connection string provided at runtime by Heroku.
-        var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
-
-        // Parse connection URL to connection string for Npgsql
-        connUrl = connUrl.Replace("postgres://", string.Empty);
+                      // Use connection string provided at runtime by Heroku.
+                     var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+                   
+                      // Parse connection URL to connection string for Npgsql
+                      connUrl = connUrl.Replace("postgres://", string.Empty);
                         var pgUserPass = connUrl.Split("@")[0];
                         var pgHostPortDb = connUrl.Split("@")[1];
                         var pgHostPort = pgHostPortDb.Split("/")[0];
@@ -51,9 +51,9 @@ namespace FacilitiesManagementAPI.Extensions
                         connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};SSL Mode=Require;TrustServerCertificate=True";
                     }
 
-    // Whether the connection string came from the local development configuration file
-    // or from the environment variable from Heroku, use it to set up your DbContext.
-    options.UseNpgsql(connStr);
+                    // Whether the connection string came from the local development configuration file
+                    // or from the environment variable from Heroku, use it to set up your DbContext.
+                   options.UseNpgsql(connStr);
                 });
 
             });
