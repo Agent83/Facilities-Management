@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder,FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ContractorService } from 'src/app/_services/contractor.service';
@@ -17,30 +17,32 @@ export class ContractorCreateComponent implements OnInit {
     private router: Router, private contractorService: ContractorService) { }
 
   ngOnInit(): void {
+    this.intitializeConForm();
   }
   
   backNav(){
+    this.createConForm.reset();
     this.location.back();
   }
 
-  intitializeForm(){
+  intitializeConForm(){
     this.createConForm = this.fb.group({
       businessName:[''],
       firstName:['', Validators.required],
       lastName: [''],
       rating: [''],
       contractorTypeId: [''],
-      greenLightEnum: [''],
       phoneNumber1: [''],
-      email: [''],
+      email: ['',Validators.email],
       phoneNumber2: ['']
     })
   }
 
-  propCreate()
+  conCreate()
   {
    this.contractorService.createContractor(this.createConForm.value).subscribe(response =>{
-     this.router.navigateByUrl('contractor');
+     this.router.navigateByUrl('lists-contractor');
+     this.toastr.success("Contractor Created");
    }, error =>{
      this.validationErrors = error;
    });

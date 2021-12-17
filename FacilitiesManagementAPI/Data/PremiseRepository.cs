@@ -74,6 +74,11 @@ namespace FacilitiesManagementAPI.Data
                 .SingleOrDefaultAsync();
         }
 
+        public async Task<bool> SaveAllAsync()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
+
         public void Update(Premises premise)
         {
             _context.Entry(premise).State = EntityState.Modified;

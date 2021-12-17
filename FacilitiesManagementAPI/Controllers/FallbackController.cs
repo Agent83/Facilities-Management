@@ -1,17 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+namespace FacilitiesManagementAPI.Controllers;
 
-namespace FacilitiesManagementAPI.Controllers
+public class FallbackController : Controller
 {
-    public class FallbackController: Controller
+    public ActionResult Index()
     {
-        public ActionResult Index()
-        {
-            return PhysicalFile(Path.Combine(Directory.GetCurrentDirectory(),"wwwroot", "index.html"), "text/HTML");
-        }
+        return PhysicalFile(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "index.html"), "text/HTML");
     }
 }
