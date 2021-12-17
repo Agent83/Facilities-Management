@@ -22,4 +22,5 @@ global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Authorization;
 global using System.IO;
 global using FacilitiesManagementAPI.Helpers;
+global using Microsoft.OpenApi.Models;
 
