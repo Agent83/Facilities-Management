@@ -33,7 +33,7 @@ namespace FacilitiesManagementAPI.Data
             return await _context.Premises
                 .Include(x => x.PremisesTasks)
                 .Include(x => x.Notes)
-                .Include(x => x.Accountant)
+                .Include(x => x.Accountant.Id == x.AccountantId)
                 .SingleAsync(x  => x.Id == Id);
         }
 
