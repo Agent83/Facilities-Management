@@ -9,6 +9,7 @@ namespace FacilitiesManagementAPI.Interfaces
 {
     public interface IPremiseRepository
     {
+        Task<bool> SaveAllAsync();
         void Update(Premises premise);
         Task<IEnumerable<Premises>> GetPremisesAsync();
         Task<Premises> GetPremiseByIdAsync(Guid Id);

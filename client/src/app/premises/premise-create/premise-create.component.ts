@@ -39,12 +39,14 @@ export class PremiseCreateComponent implements OnInit {
   {
    this.propertyService.createProperty(this.createPropForm.value).subscribe(response =>{
      this.router.navigateByUrl('premises');
+     this.toastr.success("Property Created")
    }, error =>{
      this.validationErrors = error;
    });
   }
 
   backNav() {
+    this.createPropForm.reset();
     this.location.back();
   }
 }
