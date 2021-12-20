@@ -41,6 +41,7 @@ export class ContractorEditComponent implements OnInit {
   updateContractor(){
     this.contractorService.updateContractor(this.contractor).subscribe(() => {
      this.editForm.reset(this.contractor);
+     this.location.back();
      this.toastr.success('Contractor has been updated');  
     });
   }

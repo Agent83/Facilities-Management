@@ -15,9 +15,8 @@ export class PremiseListComponent implements OnInit {
  properties: Property[];
  pagination: Pagination;
  pageNumber = 1;
- pageSize = 5;
+ pageSize = 25;
 
- taskCount: number;
   constructor(private propertyService: PropertyService) { }
 
   ngOnInit(): void {
@@ -27,10 +26,10 @@ export class PremiseListComponent implements OnInit {
   loadProperty(){
     this.propertyService.getProperties(this.pageNumber, this.pageSize).subscribe(response => {
       this.properties = response.result;
+      console.log(this.properties)
       this.pagination = response.pagination;
     })
   }
-
 
   pageChanged(event: any){
     this.pageNumber = event.page;
@@ -43,7 +42,5 @@ export class PremiseListComponent implements OnInit {
   handleAccCancel(){
     this.modalAccVisible = false
   }
-  getTaskCount(){
-  
-  }
+
 }

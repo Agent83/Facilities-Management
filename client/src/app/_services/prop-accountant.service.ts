@@ -42,7 +42,9 @@ export class PropAccountantService {
       })
     )
   }
-
+  deleteAccountant(accId: string){ 
+    return this.http.delete(this.baseUrl + 'propaccountant/delAccountant/' + accId);
+ }
 
   
 }

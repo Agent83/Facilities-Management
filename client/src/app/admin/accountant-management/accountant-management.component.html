@@ -1,0 +1,14 @@
+<div class="row m-2">
+    <table class="table">
+        <tr>
+            <th style="width: 30%">Name</th>
+            <th style="width: 30%">Email</th>
+            <th style="width: 30%"></th>
+        </tr>
+        <tr *ngFor="let acc of accountant">
+            <td>{{acc.name}}</td>
+            <td>{{acc.email}}</td>
+            <td><button class="btn btn-danger" (click)="DelAccountantConfirm(acc.id)">Delete</button></td>
+        </tr>
+    </table>
+</div>

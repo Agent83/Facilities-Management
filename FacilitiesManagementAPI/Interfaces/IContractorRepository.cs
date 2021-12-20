@@ -8,6 +8,7 @@ namespace FacilitiesManagementAPI.Interfaces
 {
     public interface IContractorRepository
     {
+        void DeleteContractor(Contractor contractor);
         void Update(Contractor contractor);
         Task<IEnumerable<Contractor>> GetContractAsync();
         Task<Contractor> GetContractByIdAsync(Guid Id);

@@ -17,15 +17,12 @@ export class RegisterComponent implements OnInit {
  
   register(){
    this.accountService.register(this.model).subscribe(response => {
-  
-     this.cancel();
+     this.model.username = '';
+     this.model.password = '';
    }, error =>{
-    
      this.toastr.error(error.statusText === "OK"? "Unauthorisde": error.statusText, error.status);
-     
    })
   }
-
   cancel(){
     this.cancelRegister.emit(false);
   }

@@ -41,7 +41,7 @@
   <thead>
   <tr>
     <th scope="col">Property</th>
-    <th scope="col">Area</th>
+    <th scope="col">Phone number</th>
     <th scope="col">Tasks</th>
   </tr>
   </thead>
@@ -49,11 +49,10 @@
   <tr *ngFor="let property of properties"
   routerLink='/premises/{{property.id}}'>
     <td>
-
       {{property.premiseName}}
     </td>
-    <td>{{property.premisesAddress.addressLine1}}</td>
-    <td>Task numbers </td>
+    <td>{{property.phoneNumber1}}</td>
+    <td> Tasks {{property.premisesTasks.length}}</td>
   </tr>
   </tbody>
 </table>

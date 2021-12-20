@@ -47,4 +47,24 @@ public class PropAccountantController : BaseApiController
 
         return BadRequest("Failed to update accountant"); ;
     }
+
+    [HttpDelete("delAccountant/{accId}")]
+    public async Task<ActionResult> DeleteAccountant(Guid accId)
+    {
+        var accountant = await _unitOfWork.AccountantRepository.GetAccountantById(accId);
+        List<Premises> premWithAcc = new List<Premises>();
+        premWithAcc.AddRange(await _unitOfWork.PremiseRepository.GetPremWithAccAsync(accId));
+
+        foreach(var prem in premWithAcc)
+        {
+            prem.AccountantId = null;
+            prem.Accountant = null;
+        }
+
+        _unitOfWork.AccountantRepository.DeleteAccountant(accountant);
+
+        if (await _unitOfWork.Complete()) return Ok();
+
+        return BadRequest("Failed to remove");
+    }
 }
