@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Property } from 'src/app/_models/property';
 import { PropertyService } from 'src/app/_services/property.service';
 import { formatDistance } from 'date-fns'
@@ -107,7 +107,8 @@ export class PremiseDetailComponent implements OnInit {
     private toastr: ToastrService,
     private noteService: NotesService,
     private modal: NzModalService,
-    private localeService: BsLocaleService
+    private localeService: BsLocaleService,
+    private routerRoute: Router
   ) {
     this.bsConfig = {
       containerClass: 'theme-dark-blue',
@@ -279,6 +280,25 @@ export class PremiseDetailComponent implements OnInit {
       nzOnCancel: () => console.log('Cancel')
     });
   }
+
+  
+  DelPropertyConfirm(): void {
+    this.modal.confirm({
+      nzTitle: 'Delete Property?',
+      nzContent: '<b style="color: red;">Click "Yes" to delete <strong>Property</strong> .</b>',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => this.propertyService.deletePremise(this.propId ).pipe(first()).subscribe(() => {
+        this.routerRoute.navigateByUrl('/', {skipLocationChange: true}).then(()=>{
+          this.routerRoute.navigate(['premises'])
+        });
+      }),
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel')
+    });
+  }
+
 
   RemoveAccountantConfirm(): void {
     this.modal.confirm({
