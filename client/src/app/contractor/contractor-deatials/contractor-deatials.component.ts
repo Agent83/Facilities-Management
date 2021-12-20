@@ -28,7 +28,7 @@ export class ContractorDeatialsComponent implements OnInit {
     });
   }
 
-  DelAccountantConfirm(): void {
+  DelContractorConfirm(): void {
     console.log(this.conId);
     this.modal.confirm({
       nzTitle: 'Delete Note?',

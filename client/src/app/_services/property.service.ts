@@ -66,4 +66,9 @@ export class PropertyService {
   deleteNote(propId: string, noteId: string){ 
     return this.http.delete(this.baseUrl + 'premise/delnote/' + propId +','+ noteId);
  }
+
+ deletePremise(propId: string){ 
+  return this.http.delete(this.baseUrl + 'premise/delpremise/' + propId );
+}
+
 }
