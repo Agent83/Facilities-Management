@@ -33,7 +33,7 @@ namespace FacilitiesManagementAPI.Data
             return await _context.Premises
                 .Include(x => x.PremisesTasks)
                 .Include(x => x.Notes)
-                .Include(x => x.Accountant.Id == x.AccountantId)
+                .Include(x => x.Accountant)
                 .SingleAsync(x  => x.Id == Id);
         }
 
@@ -89,6 +89,11 @@ namespace FacilitiesManagementAPI.Data
         public void Update(Premises premise)
         {
             _context.Entry(premise).State = EntityState.Modified;
+        }
+
+        public void DeletePremise(Premises premises)
+        {
+            _context.Premises.Remove(premises);
         }
     }
 }

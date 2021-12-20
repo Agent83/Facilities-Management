@@ -25,7 +25,7 @@
               </div>
     
               <button nz-button nzDanger routerLink='/contractor/edit/{{contractor.id}}'>Edit property details</button>
-              <button nz-button nzDanger (click)="DelAccountantConfirm()">Delete</button>
+              <button class="btn btn-danger" (click)="DelAccountantConfirm()">Delete</button>
             </div>
             
     
@@ -40,7 +40,7 @@
                 <ng-container *nzDrawerContent>
                   
                   <ng-template #noTasks>
-                    No tasks for this property
+                    <!-- No tasks for this property -->
                   </ng-template>
     
     
@@ -55,7 +55,7 @@
         </div>
       </div>
     </div>
-    list of linked properties
+    <!-- list of linked properties -->
   </div>
   <div class="col-2 mx-6">
     

@@ -41,6 +41,7 @@ export class PremiseEditComponent implements OnInit {
      this.propertyService.updateProperty(this.property).subscribe(() => {
       this.editForm.reset(this.property);
       this.loadProperty();
+      this.location.back();
       this.toastr.success('Property has been updated');
      });
   }

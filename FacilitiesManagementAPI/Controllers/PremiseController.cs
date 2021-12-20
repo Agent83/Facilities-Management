@@ -91,4 +91,18 @@ public class PremiseController : BaseApiController
 
         return BadRequest("Failed to remove");
     }
+
+    [HttpDelete("delpremise/{propId}")]
+    public async Task<ActionResult> DeletePremis(Guid propId)
+    {
+        var premise = await _unitOfWork.PremiseRepository.GetPremByIdAsync(propId);
+        //var noteToRemove = premise.Notes
+        //    .Single(x => x.Id == noteId);
+
+       _unitOfWork.PremiseRepository.DeletePremise(premise);
+
+        if (await _unitOfWork.Complete()) return Ok();
+
+        return BadRequest("Failed to remove");
+    }
 }

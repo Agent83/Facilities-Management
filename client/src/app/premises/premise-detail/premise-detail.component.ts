@@ -156,14 +156,12 @@ export class PremiseDetailComponent implements OnInit {
   initialPermNoteForm() {
     this.permNoteForm = this.fb.group({
       noteContent: ['', Validators.required],
-      isPerm: [true],
     })
   }
 
   initialTempNoteForm() {
     this.tempNoteForm = this.fb.group({
       noteContent: ['', Validators.required],
-      isPerm: [false],
     })
   }
 
@@ -171,7 +169,7 @@ export class PremiseDetailComponent implements OnInit {
   createTempNote() {
     this.createNote = {
       noteContent: this.tempNoteForm.value.noteContent,
-      isPerm: this.tempNoteForm.value.isPerm,
+      isPerm: false,
       premisesId: this.propId,
     }
     this.noteService.createNote(this.createNote).subscribe(() => {
@@ -186,7 +184,7 @@ export class PremiseDetailComponent implements OnInit {
   createPermNote() {
     this.createNote = {
       noteContent: this.permNoteForm.value.noteContent,
-      isPerm: this.permNoteForm.value.isPerm,
+      isPerm: true,
       premisesId: this.propId,
     }
     this.noteService.createNote(this.createNote).subscribe(() => {

@@ -28,16 +28,18 @@ export class AccountService {
   }
 
   register(model: any){
-    return this.http.post(this.baseUrl + 'account/register', model).pipe(
-      map((user: User) => {
-        if (user) {
-         this.setCurrentUser(user);
-          this.currentUserSource.next(user);
-        }
-      }
+    return this.http.post(this.baseUrl + 'account/register', model)
+    
+    //.pipe(
+    //   map((user: User) => {
+    //     if (user) {
+    //      this.setCurrentUser(user);
+    //       this.currentUserSource.next(user);
+    //     }
+    //   }
 
-      )
-    )
+    //   )
+    // )
   }
   setCurrentUser(user: User) {
     user.roles = [];
