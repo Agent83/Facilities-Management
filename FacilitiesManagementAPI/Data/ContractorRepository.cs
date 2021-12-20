@@ -51,5 +51,10 @@ namespace FacilitiesManagementAPI.Data
         {
             _context.Entry(contractor).State = EntityState.Modified;
         }
+
+        public void DeleteContractor(Contractor contractor)
+        {
+            _context.Contractors.Remove(contractor);
+        }
     }
 }

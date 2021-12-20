@@ -16,12 +16,12 @@ namespace FacilitiesManagementAPI.Data
         private readonly DataContext _context;
         private readonly IMapper _mapper;
 
-        public AccountantRepository(DataContext context,IMapper mapper )
+        public AccountantRepository(DataContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
-  
+
         public async Task<Accountant> GetAccountantById(Guid Id)
         {
             return await _context.Accountant.FindAsync(Id);
@@ -34,9 +34,9 @@ namespace FacilitiesManagementAPI.Data
 
         public async Task<IEnumerable<PropAccountantDto>> GetAccountantsAsync()
         {
-           return await _context.Accountant
-                .ProjectTo<PropAccountantDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+            return await _context.Accountant
+                 .ProjectTo<PropAccountantDto>(_mapper.ConfigurationProvider)
+                 .ToListAsync();
         }
 
         public async Task<PropAccountantDto> GetPropAccountantByIDAsync(Guid Id)
@@ -50,6 +50,11 @@ namespace FacilitiesManagementAPI.Data
         public void Update(Accountant accountant)
         {
             _context.Entry(accountant).State = EntityState.Modified;
+        }
+
+        public void DeleteAccountant(Accountant accountant)
+        {
+            _context.Accountant.Remove(accountant);
         }
     }
 }

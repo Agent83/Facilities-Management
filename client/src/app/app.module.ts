@@ -47,6 +47,7 @@ import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './_directives/has-role.directive';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { RolesModalComponent } from './modal/roles-modal/roles-modal.component';
+import { AccountantManagementComponent } from './admin/accountant-management/accountant-management.component';
 
 
 registerLocaleData(en);
@@ -84,7 +85,8 @@ registerLocaleData(en);
     AdminPanelComponent,
     HasRoleDirective,
     UserManagementComponent,
-    RolesModalComponent
+    RolesModalComponent,
+    AccountantManagementComponent
   ],
   imports: [
     BrowserModule,

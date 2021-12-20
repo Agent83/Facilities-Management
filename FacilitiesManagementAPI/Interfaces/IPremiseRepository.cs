@@ -12,6 +12,8 @@ namespace FacilitiesManagementAPI.Interfaces
         Task<bool> SaveAllAsync();
         void Update(Premises premise);
         Task<IEnumerable<Premises>> GetPremisesAsync();
+        Task<IEnumerable<Premises>> GetPremWithAccAsync(Guid Id);
+
         Task<Premises> GetPremiseByIdAsync(Guid Id);
         Task<PagedList<PropertyDto>> GetPropertiesAsync(PageListParams propertyParams);
         Task<PropertyDto> GetPropertyByIdAsync(Guid id);

@@ -15,7 +15,7 @@ export class PremiseListComponent implements OnInit {
  properties: Property[];
  pagination: Pagination;
  pageNumber = 1;
- pageSize = 5;
+ pageSize = 25;
 
  taskCount: number;
   constructor(private propertyService: PropertyService) { }

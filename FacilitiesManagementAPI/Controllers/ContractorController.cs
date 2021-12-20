@@ -59,4 +59,25 @@ public class ContractorController : BaseApiController
 
         return BadRequest("Failed to update property");
     }
+
+
+    [HttpDelete("delContractor/{conId}")]
+    public async Task<ActionResult> DeleteContractor(Guid conId)
+    {
+        var contractor = await _unitOfWork.ContractorRepository.GetContractByIdAsync(conId);
+        //List<Premises> premWithAcc = new List<Premises>();
+        //premWithAcc.AddRange(await _unitOfWork.PremiseRepository.GetPremWithAccAsync(conId));
+
+        //foreach (var prem in premWithAcc)
+        //{
+        //    prem.Contractors = null;
+        //    prem.Accountant = null;
+        //}
+
+        _unitOfWork.ContractorRepository.DeleteContractor(contractor);
+
+        if (await _unitOfWork.Complete()) return Ok();
+
+        return BadRequest("Failed to remove");
+    }
 }

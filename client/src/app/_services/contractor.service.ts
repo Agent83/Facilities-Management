@@ -49,4 +49,8 @@ contractor: Contractor[] = [];
       })
     );
   }
+
+    deleteContractor(conId: string){ 
+    return this.http.delete(this.baseUrl + 'contractor/delContractor/' + conId);
+ }
 }

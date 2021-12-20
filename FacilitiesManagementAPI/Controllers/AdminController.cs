@@ -3,10 +3,13 @@
 public class AdminController : BaseApiController
 {
     private readonly UserManager<AppUser> _userManager;
+    private readonly IAccountantRepository _accountant;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public AdminController(UserManager<AppUser> userManager)
+    public AdminController(UserManager<AppUser> userManager, IUnitOfWork unitOfWork)
     {
         _userManager = userManager;
+        _unitOfWork = unitOfWork;
     }
 
     //[Authorize(Policy = "RequireAdminRole")]
@@ -45,11 +48,13 @@ public class AdminController : BaseApiController
 
     }
 
-    [Authorize(Policy = "RequirSuperUserRole")]
+    
     [HttpGet("superUser-roles")]
     public ActionResult GetSuperUserWithRoles()
     {
         return Ok("Ony super user can see this");
     }
+
+    
 }
 

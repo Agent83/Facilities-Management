@@ -42,6 +42,13 @@ namespace FacilitiesManagementAPI.Data
             return await _context.Premises.ToListAsync();
         }
 
+        public async Task<IEnumerable<Premises>> GetPremWithAccAsync(Guid Id)
+        {
+            return await _context.Premises
+                .Where(x => x.AccountantId == Id)
+                .ToListAsync();
+        }
+
         public async Task<PagedList<PropertyDto>> GetPropertiesAsync(PageListParams propertyParams)
         {
             var query = _context.Premises.AsQueryable();

@@ -18,15 +18,18 @@ public class NoteController : BaseApiController
         var notes = await _unitOfWork.NoteRepository.GetNotesAsync();
         return Ok(notes);
     }
+    [HttpGet]
     public async Task<ActionResult<Note>> GetNoteByIdAsync(Guid Id)
     {
         return await _unitOfWork.NoteRepository.GetNoteByIdAsync(Id);
     }
+    [HttpGet]
     public async Task<ActionResult<IEnumerable<NoteDto>>> GetNotesDtoAsync()
     {
         var notes = await _unitOfWork.NoteRepository.GetNotesDtoAsync();
         return Ok(notes);
     }
+    [HttpGet]
     public async Task<ActionResult<NoteDto>> GetNoteDtoByIdAsync(Guid Id)
     {
         return await _unitOfWork.NoteRepository.GetNoteDtoByIdAsync(Id);

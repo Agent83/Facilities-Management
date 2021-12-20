@@ -3,6 +3,7 @@ using System;
 using FacilitiesManagementAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FacilitiesManagementAPI.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211218204831_UpDateAccountantKey")]
+    partial class UpDateAccountantKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,7 +41,7 @@ namespace FacilitiesManagementAPI.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accountant", (string)null);
+                    b.ToTable("Accountant");
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.AppRole", b =>
@@ -199,7 +201,7 @@ namespace FacilitiesManagementAPI.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contractors", (string)null);
+                    b.ToTable("Contractors");
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.ContractorType", b =>
@@ -218,7 +220,7 @@ namespace FacilitiesManagementAPI.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ContractorTypes", (string)null);
+                    b.ToTable("ContractorTypes");
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Note", b =>
@@ -251,7 +253,7 @@ namespace FacilitiesManagementAPI.Data.Migrations
 
                     b.HasIndex("PremisesId");
 
-                    b.ToTable("Note", (string)null);
+                    b.ToTable("Note");
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.Premises", b =>
@@ -291,7 +293,7 @@ namespace FacilitiesManagementAPI.Data.Migrations
 
                     b.HasIndex("AccountantId");
 
-                    b.ToTable("Premises", (string)null);
+                    b.ToTable("Premises");
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.PremisesAddress", b =>
@@ -326,7 +328,7 @@ namespace FacilitiesManagementAPI.Data.Migrations
                     b.HasIndex("PremisesId")
                         .IsUnique();
 
-                    b.ToTable("PremisesAddress", (string)null);
+                    b.ToTable("PremisesAddress");
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.PremisesContractor", b =>
@@ -341,7 +343,7 @@ namespace FacilitiesManagementAPI.Data.Migrations
 
                     b.HasIndex("PremisesId");
 
-                    b.ToTable("PremisesContractors", (string)null);
+                    b.ToTable("PremisesContractors");
                 });
 
             modelBuilder.Entity("FacilitiesManagementAPI.Entities.PremisesTask", b =>
@@ -375,7 +377,7 @@ namespace FacilitiesManagementAPI.Data.Migrations
 
                     b.HasIndex("PremisesId");
 
-                    b.ToTable("PremisesTask", (string)null);
+                    b.ToTable("PremisesTask");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
