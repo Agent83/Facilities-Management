@@ -12,6 +12,7 @@ namespace FacilitiesManagementAPI.Interfaces
         void Update(Contractor contractor);
         Task<IEnumerable<Contractor>> GetContractAsync();
         Task<Contractor> GetContractByIdAsync(Guid Id);
+        Task<IEnumerable<ContractorDto>> GetContractorsListAsync();
         Task<PagedList<ContractorDto>> GetContractorsAsync(PageListParams pageListParams);
         Task<ContractorDto> GetContractorByIdAsync(Guid id);
     }

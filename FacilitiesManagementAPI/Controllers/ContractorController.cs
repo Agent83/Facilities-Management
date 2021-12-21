@@ -22,6 +22,14 @@ public class ContractorController : BaseApiController
         return Ok(contractors);
     }
 
+    [HttpGet("list")]
+    public async Task<ActionResult<IEnumerable<ContractorDto>>> GetContractorsList()
+    {
+        var contractors = await _unitOfWork.ContractorRepository.GetContractorsListAsync();
+        
+        return Ok(contractors);
+    }
+
     [HttpGet("{id}")]
     public async Task<ActionResult<ContractorDto>> GetContractorById(Guid id)
     {
