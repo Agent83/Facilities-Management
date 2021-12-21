@@ -7,6 +7,7 @@
           <div>
             <strong>Property number</strong><br>
             {{property.premiseNumber}} <br>
+            {{property.premiseName}}
 
             <strong>Address</strong>
             <p>{{property.premisesAddress.addressLine1}}
@@ -76,10 +77,11 @@
                         <a style="color:#FF0000;" (click)="DelTaskConfirm(item.id)"> Delete</a>
                       </nz-list-item-action>
                     </ul>
-                    <strong> {{ item.title }}</strong>
-                    <nz-modal [(nzVisible)]="modalVisible" nzTitle="{{item.title}}" (nzOnCancel)="handleCancel()"
+                    
+                    <nz-modal [(nzVisible)]="modalVisible" nzTitle="{{item.title}} Info" (nzOnCancel)="handleCancel()"
                       [nzFooter]="null">
                       <p *nzModalContent>
+                        
                         {{modalInfo[0].description}}<br>
                         Completion Date: {{modalInfo[0].completionDate | date}}
                       </p>
@@ -169,15 +171,26 @@
             <ng-container *nzDrawerContent>
               <div *ngIf="propContractorList.length > 0; else noContractor">
                 <ul nz-list [nzDataSource]="propContractorList" nzSize="medium">
-
+                    
                   <li nz-list-item *ngFor="let item of propContractorList" nzNoFlex>
                     <ul nz-list-item-actions>
                       <nz-list-item-action>
+                        <a (click)="showContractorModal(item.id)">View/ </a>
                         <a style="color:#FF0000;" (click)="showRemoveConfirm(item.id)">remove</a>
-
                       </nz-list-item-action>
                     </ul>
-                    <strong>{{ item.businessName }} </strong>
+                    <strong>Contractor Info </strong>
+                    <nz-modal [(nzVisible)]="contractorModalVisible" nzTitle="{{item.businessName}}" (nzOnCancel)="handleContractorCancel()"
+                    [nzFooter]="null">
+                    <p *nzModalContent>
+                     <strong>Business name:</strong>  {{modalInfo[0].businessName}}<br>
+                     <strong>Name:</strong>  {{modalInfo[0].firstName}} {{modalInfo[0].lastName}}<br>
+                     <strong>Contact info:</strong><br>
+                      {{modalInfo[0].phoneNumber1}}<br>
+                      {{modalInfo[0].phoneNumber2}}<br>
+                      {{modalInfo[0].email}}<br>
+                    </p>
+                  </nz-modal>
                   </li>
                 </ul>
               </div>

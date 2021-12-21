@@ -368,12 +368,21 @@ export class PremiseDetailComponent implements OnInit {
 
   // Modal
   modalVisible = false;
+  contractorModalVisible = false;
   modalEditTaskVisible = false;
   isOkLoading = false;
 
   showModal(id): void {
     this.modalVisible = true;
     var tempModal = this.premiseTask.filter((info) => {
+      return info.id == id;
+    });
+    this.modalInfo = tempModal;
+  }
+  
+  showContractorModal(id): void {
+    this.contractorModalVisible = true;
+    var tempModal = this.contractorsList.filter((info) => {
       return info.id == id;
     });
     this.modalInfo = tempModal;
@@ -394,9 +403,12 @@ export class PremiseDetailComponent implements OnInit {
       this.toastr.success("task has be updated");
     });
   }
+  handleContractorCancel(){
+    this.contractorModalVisible = false;
+  }
 
 handleUpdateTaskCancel(){
-  this. modalEditTaskVisible = false;
+  this.modalEditTaskVisible = false;
 }
   handleOk(): void {
     this.isOkLoading = true;
