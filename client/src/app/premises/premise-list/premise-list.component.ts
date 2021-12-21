@@ -29,6 +29,13 @@ export class PremiseListComponent implements OnInit {
       this.pagination = response.pagination;
     })
   }
+  searchPremise(search: string){
+    this.propertyService.searchProperties(this.pageNumber, this.pageSize, search).subscribe(response => {
+      this.properties = response.result;
+      this.pagination = response.pagination;
+    });
+  }
+
 
   pageChanged(event: any){
     this.pageNumber = event.page;

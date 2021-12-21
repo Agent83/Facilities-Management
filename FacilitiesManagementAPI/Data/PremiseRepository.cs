@@ -56,7 +56,15 @@ namespace FacilitiesManagementAPI.Data
             query = query.Where(x => x.IsArchieved == false)
                 .Include(x => x.PremisesTasks)
                 .OrderByDescending(x => x.PremisesTasks.First().CompletionDate);
-                            
+
+            if (propertyParams.Search != null)
+            {
+                query = query.Where(u => u.PremiseName.ToLower().Contains(propertyParams.Search) || 
+                u.PremiseNumber.ToLower().Contains(propertyParams.Search));  
+            }
+           
+
+
             return await PagedList<PropertyDto>.CreateAsync(query.ProjectTo<PropertyDto>
                 (_mapper.ConfigurationProvider).AsNoTracking(), 
                 propertyParams.PageNumber, propertyParams.PageSize);

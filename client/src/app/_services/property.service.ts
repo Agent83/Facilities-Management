@@ -35,6 +35,25 @@ export class PropertyService {
     )
   }
 
+  searchProperties(page?: number, itemsPerPage?: number, search?: string){
+    let params = new HttpParams();
+
+    if(page != null && itemsPerPage !== null){
+      params = params.append('pageNumber', page.toString());
+      params = params.append('pageSize', itemsPerPage.toString());
+      params = params.append('search', search);
+    }
+    return this.http.get<Property[]>(this.baseUrl + 'premise',{observe: 'response', params}).pipe(
+      map(respone => {
+        this.paginatedResult.result = respone.body;
+        if(respone.headers.get('Pagination') !== null){
+          this.paginatedResult.pagination = JSON.parse(respone.headers.get('Pagination'));
+        }
+        return this.paginatedResult;
+      })
+    )
+  }
+
   getProperty(id: string){
     const property = this.property.find(x => x.id === id);
     if(property !== undefined) return of(property);

@@ -9,8 +9,8 @@
     </div>
     <div class="col">
         <form class="d-flex">
-            <input class="form-control me-sm-2" type="text" placeholder="Search contractors">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            <input class="form-control me-sm-2" type="text" id="search" [name]="search" #search placeholder="Search business name, Contractors name">
+            <button class="btn btn-secondary my-2 my-sm-0" (click)="searchContractor(search.value)"  type="submit">Search</button>
           </form>
     </div>
 </div>  
@@ -30,7 +30,6 @@
       <tr *ngFor="let contractor of contractors "
       routerLink='/contractor/{{contractor.id}}'>
         <td>
-    
           {{contractor.businessName}}
         </td>
         <td>{{contractor.firstName}} {{contractor.lastName}}</td>

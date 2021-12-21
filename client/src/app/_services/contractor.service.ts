@@ -32,7 +32,24 @@ paginatedResult: PaginatedResult<Contractor[]> = new PaginatedResult<Contractor[
       })
     )
   }
-
+  getContractorsearch(page?: number, itemsPerPage?: number, search?: string){
+    let params = new HttpParams();
+    console.log("here in the service", search)
+    if(page != null && itemsPerPage !== null && search != null){
+      params = params.append('pageNumber', page.toString());
+      params = params.append('pageSize', itemsPerPage.toString());
+      params = params.append('search', search);
+    }
+    return this.http.get<Contractor[]>(this.baseUrl + 'contractor',{observe: 'response', params}).pipe(
+      map(respone => {
+        this.paginatedResult.result = respone.body;
+        if(respone.headers.get('Pagination') !== null){
+          this.paginatedResult.pagination = JSON.parse(respone.headers.get('Pagination'));
+        }
+        return this.paginatedResult;
+      })
+    )
+  }
   getContractorList(){
     return this.http.get<Contractor[]>(this.baseUrl + 'contractor/list').pipe(
       map(contractor => {

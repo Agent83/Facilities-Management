@@ -9,8 +9,8 @@
     </div>
     <div class="col">
         <form class="d-flex">
-            <input class="form-control me-sm-2" type="text" placeholder="Search properties">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            <input class="form-control me-sm-2" type="text" id="search" [name]="search" #search placeholder="Search Property name, Property number">
+            <button class="btn btn-secondary my-2 my-sm-0" (click)="searchPremise(search.value)" type="submit">Search</button>
           </form>
     </div>
 </div>  
@@ -24,12 +24,6 @@
   </div>
    
 <br>
-<!-- <form>
-  <div class="form-group form-inline">
-      Full text search: <input class="form-control ml-2" type="text" [formControl]="filter"/>
-  </div>
-</form> -->
-
     
 <nz-modal [(nzVisible)]="modalAccVisible" [nzFooter]="null" nzTitle="Create Accountant"(nzOnCancel)="handleAccCancel()" >
   <ng-container *nzModalContent>
