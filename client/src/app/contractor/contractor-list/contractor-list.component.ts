@@ -14,6 +14,7 @@ export class ContractorListComponent implements OnInit {
   pagination: Pagination;
   pageNumber = 1;
   pageSize = 25;
+
   constructor(private contractorService: ContractorService) { }
 
   ngOnInit(): void {
@@ -22,6 +23,14 @@ export class ContractorListComponent implements OnInit {
 
   loadContractor(){
     this.contractorService.getContractors(this.pageNumber, this.pageSize).subscribe(response => {
+      this.contractors = response.result;
+      this.pagination = response.pagination;
+    });
+  }
+
+  searchContractor(search: string){
+    console.log(search)
+    this.contractorService.getContractorsearch(this.pageNumber, this.pageSize, search).subscribe(response => {
       this.contractors = response.result;
       this.pagination = response.pagination;
     });

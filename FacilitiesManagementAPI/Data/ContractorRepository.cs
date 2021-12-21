@@ -54,6 +54,12 @@ namespace FacilitiesManagementAPI.Data
 
             query = query.Where(x => x.IsDeleted == false);
 
+            if(pageListParams.Search != null)
+            {
+                query = query.Where(u => u.BusinessName.ToLower().Contains(pageListParams.Search) ||
+                 u.FirstName.ToLower().Contains(pageListParams.Search) ||
+                 u.LastName.ToLower().Contains(pageListParams.Search));
+            }
 
             return await PagedList<ContractorDto>.CreateAsync(query.ProjectTo<ContractorDto>
             (_mapper.ConfigurationProvider).AsNoTracking(),
