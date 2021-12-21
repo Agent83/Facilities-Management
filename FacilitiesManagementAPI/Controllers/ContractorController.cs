@@ -14,9 +14,11 @@ public class ContractorController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ContractorDto>>> GetContractors()
+    public async Task<ActionResult<IEnumerable<ContractorDto>>> GetContractors([FromQuery] PageListParams pageListParams)
     {
-        var contractors = await _unitOfWork.ContractorRepository.GetContractorsAsync();
+        var contractors = await _unitOfWork.ContractorRepository.GetContractorsAsync(pageListParams);
+        Response.AddPaginationHeader(contractors.CurrentPage, contractors.PageSize,
+        contractors.TotalCount, contractors.TotalPages);
         return Ok(contractors);
     }
 

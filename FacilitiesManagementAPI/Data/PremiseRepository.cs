@@ -55,7 +55,7 @@ namespace FacilitiesManagementAPI.Data
 
             query = query.Where(x => x.IsArchieved == false)
                 .Include(x => x.PremisesTasks)
-                .OrderByDescending(x => x.PremisesTasks.First().CompletionDate); ;
+                .OrderByDescending(x => x.PremisesTasks.First().CompletionDate);
                             
             return await PagedList<PropertyDto>.CreateAsync(query.ProjectTo<PropertyDto>
                 (_mapper.ConfigurationProvider).AsNoTracking(), 
