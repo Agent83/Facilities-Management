@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Contractor } from '../_models/contractor';
+import { PaginatedResult } from '../_models/pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,28 @@ import { Contractor } from '../_models/contractor';
 export class ContractorService {
 baseUrl = environment.apiUrl;
 contractor: Contractor[] = [];
+paginatedResult: PaginatedResult<Contractor[]> = new PaginatedResult<Contractor[]>();
   constructor(private http: HttpClient) { }
 
-  getContractors(){
+  getContractors(page?: number, itemsPerPage?: number){
+    let params = new HttpParams();
+
+    if(page != null && itemsPerPage !== null){
+      params = params.append('pageNumber', page.toString());
+      params = params.append('pageSize', itemsPerPage.toString());
+    }
+    return this.http.get<Contractor[]>(this.baseUrl + 'contractor',{observe: 'response', params}).pipe(
+      map(respone => {
+        this.paginatedResult.result = respone.body;
+        if(respone.headers.get('Pagination') !== null){
+          this.paginatedResult.pagination = JSON.parse(respone.headers.get('Pagination'));
+        }
+        return this.paginatedResult;
+      })
+    )
+  }
+
+  getContractorList(){
     if (this.contractor.length > 0) return of(this.contractor);
     return this.http.get<Contractor[]>(this.baseUrl + 'contractor').pipe(
       map(contractor => {

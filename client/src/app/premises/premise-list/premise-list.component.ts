@@ -26,7 +26,6 @@ export class PremiseListComponent implements OnInit {
   loadProperty(){
     this.propertyService.getProperties(this.pageNumber, this.pageSize).subscribe(response => {
       this.properties = response.result;
-      console.log(this.properties)
       this.pagination = response.pagination;
     })
   }

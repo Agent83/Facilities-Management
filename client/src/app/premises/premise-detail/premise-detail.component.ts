@@ -216,7 +216,7 @@ export class PremiseDetailComponent implements OnInit {
   }
 
   loadContractors() {
-    this.contractorService.getContractors().pipe(first()).subscribe(contractors => {
+    this.contractorService.getContractorList().pipe(first()).subscribe(contractors => {
       this.contractorsList = contractors;
     })
   }

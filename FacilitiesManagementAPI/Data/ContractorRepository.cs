@@ -40,11 +40,17 @@ namespace FacilitiesManagementAPI.Data
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<ContractorDto>> GetContractorsAsync()
+        public async Task<PagedList<ContractorDto>> GetContractorsAsync(PageListParams pageListParams)
         {
-            return await _context.Contractors
-                .ProjectTo<ContractorDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+            var query = _context.Contractors.AsQueryable();
+
+            query = query.Where(x => x.IsDeleted == false);
+
+
+            return await PagedList<ContractorDto>.CreateAsync(query.ProjectTo<ContractorDto>
+            (_mapper.ConfigurationProvider).AsNoTracking(),
+            pageListParams.PageNumber, pageListParams.PageSize); 
+                
         }
 
         public void Update(Contractor contractor)
