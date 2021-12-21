@@ -216,20 +216,20 @@ export class PremiseDetailComponent implements OnInit {
   }
 
   loadContractors() {
-    this.contractorService.getContractorList().pipe(first()).subscribe(contractors => {
+    this.contractorService.getContractorList().subscribe(contractors => {
       this.contractorsList = contractors;
     })
   }
 
   loadPropAccList() {
-    this.propAccoutantService.getAccountants().pipe(first()).subscribe(propAcc => {
+    this.propAccoutantService.getAccountants().subscribe(propAcc => {
       this.propAccList = propAcc;
     });
   }
 
   loadProperty() {
     this.clearLists();
-    this.propertyService.getProperty(this.route.snapshot.paramMap.get('id')).pipe(first())
+    this.propertyService.getProperty(this.route.snapshot.paramMap.get('id'))
       .subscribe(prop => {
         this.property = prop
         this.propId = prop.id

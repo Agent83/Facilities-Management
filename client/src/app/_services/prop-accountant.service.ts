@@ -14,7 +14,6 @@ export class PropAccountantService {
   constructor(private http: HttpClient) { }
 
   getAccountants(){
-    if(this.propAccountant.length > 0) return of(this.propAccountant);
     return this.http.get<PropAccountant[]>(this.baseUrl + 'propaccountant').pipe(
       map(propAccountant => {
         this.propAccountant = propAccountant;

@@ -34,10 +34,10 @@ paginatedResult: PaginatedResult<Contractor[]> = new PaginatedResult<Contractor[
   }
 
   getContractorList(){
-    if (this.contractor.length > 0) return of(this.contractor);
     return this.http.get<Contractor[]>(this.baseUrl + 'contractor').pipe(
       map(contractor => {
         this.contractor = contractor;
+        console.log(this.contractor);
         return contractor;
       })
     );
