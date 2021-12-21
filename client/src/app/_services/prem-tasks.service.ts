@@ -15,7 +15,6 @@ export class PremTasksService {
   constructor(private http: HttpClient) { }
 
   getPremTasks(){
-    if(this.premTask.length > 0) return of(this.premTask);
     return this.http.get<PremisesTask[]>(this.baseUrl + 'premisestasks').pipe(
       map(premTask => {
         this.premTask = premTask;

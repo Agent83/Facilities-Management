@@ -14,7 +14,6 @@ export class NotesService {
   constructor(private http: HttpClient) { }
 
   getNotes(){
-    if(this.note.length > 0) return of(this.note);
     return this.http.get<Note[]>(this.baseUrl + 'note').pipe(
       map(note => {
         this.note = note;

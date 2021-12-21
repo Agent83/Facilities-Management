@@ -15,7 +15,6 @@ export class ContractTypeService {
   constructor(private http: HttpClient) { }
   
   getConTypes(){
-    if(this.conType.length > 0) return of(this.conType);
     return this.http.get<ContractorType[]>(this.baseUrl + 'contractortype').pipe(
       map(con => {
         this.conType = con;
