@@ -180,8 +180,8 @@
                         <a style="color:#FF0000;" (click)="showRemoveConfirm(item.id)">remove</a>
                       </nz-list-item-action>
                     </ul>
-                    <strong>Contractor Info </strong>
-                    <nz-modal [(nzVisible)]="contractorModalVisible" nzTitle="{{item.businessName}}" (nzOnCancel)="handleContractorCancel()"
+                    <strong>{{item.businessName}}</strong>
+                    <nz-modal [(nzVisible)]="contractorModalVisible" nzTitle="Contractor info" (nzOnCancel)="handleContractorCancel()"
                     [nzFooter]="null">
                     <p *nzModalContent>
                      <strong>Business name:</strong>  {{modalInfo[0].businessName}}<br>
