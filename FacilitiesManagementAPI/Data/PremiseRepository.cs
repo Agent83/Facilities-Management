@@ -55,7 +55,7 @@ namespace FacilitiesManagementAPI.Data
 
             query = query.Where(x => x.IsArchieved == false)
                 .Include(x => x.PremisesTasks)
-                .OrderByDescending(x => x.PremisesTasks.First().CompletionDate);
+                .OrderBy(x => x.PremisesTasks.First().CompletionDate);
 
             if (propertyParams.Search != null)
             {
