@@ -34,7 +34,6 @@ paginatedResult: PaginatedResult<Contractor[]> = new PaginatedResult<Contractor[
   }
   getContractorsearch(page?: number, itemsPerPage?: number, search?: string){
     let params = new HttpParams();
-    console.log("here in the service", search)
     if(page != null && itemsPerPage !== null && search != null){
       params = params.append('pageNumber', page.toString());
       params = params.append('pageSize', itemsPerPage.toString());

@@ -245,8 +245,11 @@ export class PremiseDetailComponent implements OnInit {
           });
         }
         if (this.property.notes.length > 0) {
-          this.permNotes = this.property.notes.filter(p => p.isPerm === true);
-          this.tempNotesList = this.property.notes.filter(p => p.isPerm === false);
+          this.permNotes = this.property.notes.filter(p => p.isPerm === true)
+          .sort((a, b) => new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime());
+          
+          this.tempNotesList = this.property.notes.filter(p => p.isPerm === false)
+          .sort((a, b) => new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime());;
         }
       })
   }
