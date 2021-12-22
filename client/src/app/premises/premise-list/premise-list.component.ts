@@ -36,7 +36,9 @@ export class PremiseListComponent implements OnInit {
     });
   }
 
-
+  reload(){
+    this.loadProperty();
+  }
   pageChanged(event: any){
     this.pageNumber = event.page;
     this.loadProperty();

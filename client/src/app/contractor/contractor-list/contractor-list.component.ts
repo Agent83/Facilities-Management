@@ -20,7 +20,9 @@ export class ContractorListComponent implements OnInit {
   ngOnInit(): void {
    this.loadContractor();
   }
-
+  reload(){
+    this.loadContractor();
+  }
   loadContractor(){
     this.contractorService.getContractors(this.pageNumber, this.pageSize).subscribe(response => {
       this.contractors = response.result;
