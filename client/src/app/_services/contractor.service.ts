@@ -53,7 +53,6 @@ paginatedResult: PaginatedResult<Contractor[]> = new PaginatedResult<Contractor[
     return this.http.get<Contractor[]>(this.baseUrl + 'contractor/list').pipe(
       map(contractor => {
         this.contractor = contractor;
-        console.log(this.contractor);
         return contractor;
       })
     );

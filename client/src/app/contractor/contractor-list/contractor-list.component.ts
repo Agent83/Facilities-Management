@@ -31,7 +31,6 @@ export class ContractorListComponent implements OnInit {
   }
 
   searchContractor(search: string){
-    console.log(search)
     this.contractorService.getContractorsearch(this.pageNumber, this.pageSize, search).subscribe(response => {
       this.contractors = response.result;
       this.pagination = response.pagination;

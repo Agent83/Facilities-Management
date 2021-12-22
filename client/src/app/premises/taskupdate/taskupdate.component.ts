@@ -34,7 +34,6 @@ export class TaskupdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadTask();
-    console.log(this.premTask)
   }
 
 

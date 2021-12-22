@@ -27,7 +27,6 @@ export class PremiseEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProperty();
-    console.log(this.property);
   }
 
   loadProperty(){

@@ -29,7 +29,6 @@ export class ContractorDeatialsComponent implements OnInit {
   }
 
   DelContractorConfirm(): void {
-    console.log(this.conId);
     this.modal.confirm({
       nzTitle: 'Delete Note?',
       nzContent: '<b style="color: red;">Click "Yes" to delete note.</b>',
