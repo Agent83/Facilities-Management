@@ -32,7 +32,7 @@ namespace FacilitiesManagementAPI.Data
         {
             return await _context.Premises
                 .Include(x => x.PremisesTasks)
-                .Include(x => x.Notes.OrderBy(x => x.DateCreated))
+                .Include(x => x.Notes.OrderBy(x => x.DateCreated.ToLocalTime()))
                 .Include(x => x.Accountant)
                 .SingleAsync(x  => x.Id == Id);
         }
