@@ -1,0 +1,4 @@
+web: dotnet FacilitiesManagementAPI.dll
+test: dotnet test FacilitiesManagementAPI.csproj
+
+
