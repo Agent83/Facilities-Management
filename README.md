@@ -1,6 +1,6 @@
-This project is a full-stack web application designed using .NET Core 5.30 for the back-end and Angular 11 for the front-end. The system manages tasks, contractors, and premises for a facilities management platform, providing tools for users to efficiently track, update, and manage tasks and related entities.
+This project is a full-stack web application designed using .NET Core 6 for the back-end and Angular 11 for the front-end. The system manages tasks, contractors, and premises for a facilities management platform, providing tools for users to efficiently track, update, and manage tasks and related entities.
 
-Back-End (Facilities Management API using .NET Core 5.30):
+Back-End (Facilities Management API using .NET Core 6):
 
 Controllers: Handles HTTP requests and interacts with services to manage contractors, premises, and tasks.
 DTOs (Data Transfer Objects): Facilitates clean, secure data transfer between the front-end and back-end.
