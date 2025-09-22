@@ -4,7 +4,7 @@ import { Property } from 'src/app/_models/property';
 import { PropertyService } from 'src/app/_services/property.service';
 import { Location } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
-import { FormBuilder,  NgForm,  } from '@angular/forms';
+import { UntypedFormBuilder, NgForm } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -23,7 +23,7 @@ export class PremiseEditComponent implements OnInit {
   validationErrors: string[] = [];
 
   constructor(private propertyService: PropertyService, private route: ActivatedRoute, 
-    private location: Location,private toastr: ToastrService, private fb: FormBuilder ) { }
+    private location: Location,private toastr: ToastrService, private fb: UntypedFormBuilder ) { }
 
   ngOnInit(): void {
     this.loadProperty();

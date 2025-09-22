@@ -5,7 +5,7 @@ import { PropertyService } from 'src/app/_services/property.service';
 import { formatDistance } from 'date-fns'
 import { PremisesTask } from 'src/app/_models/premisesTask';
 import { PremTasksService } from 'src/app/_services/prem-tasks.service';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import { Contractor } from 'src/app/_models/contractor';
@@ -43,12 +43,12 @@ export class PremiseDetailComponent implements OnInit {
  
   propContractorList: Contractor[] = [];
 
-  createTaskForm: FormGroup;
-  contractorSelectForm: FormGroup;
-  selectAccountantForm: FormGroup;
-  propAccForm: FormGroup;
-  permNoteForm: FormGroup;
-  tempNoteForm: FormGroup;
+  createTaskForm: UntypedFormGroup;
+  contractorSelectForm: UntypedFormGroup;
+  selectAccountantForm: UntypedFormGroup;
+  propAccForm: UntypedFormGroup;
+  permNoteForm: UntypedFormGroup;
+  tempNoteForm: UntypedFormGroup;
 
   validationErrors: string[] = [];
 
@@ -103,7 +103,7 @@ export class PremiseDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private propTaskService: PremTasksService,
     private propAccoutantService: PropAccountantService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private toastr: ToastrService,
     private noteService: NotesService,
     private modal: NzModalService,

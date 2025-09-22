@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Property } from 'src/app/_models/property';
@@ -12,9 +12,9 @@ import { PremTasksService } from 'src/app/_services/prem-tasks.service';
 })
 export class TasksCreateComponent implements OnInit {
   property: Property;
-  createTaskForm: FormGroup;
+  createTaskForm: UntypedFormGroup;
   validationErrors: string[] = [];
-  constructor(private location: Location, private fb: FormBuilder,private toastr: ToastrService,
+  constructor(private location: Location, private fb: UntypedFormBuilder,private toastr: ToastrService,
     private router: Router, private porpTaskService: PremTasksService) { }
 
   ngOnInit(): void {
