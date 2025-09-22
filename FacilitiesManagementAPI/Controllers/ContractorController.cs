@@ -48,9 +48,9 @@ public class ContractorController : BaseApiController
     }
 
     [HttpPost("linkContractor")]
-    public async Task<ActionResult<PremisesContractor>> CreateContractorLink(CreateContractorDto createContractorDto)
+    public async Task<ActionResult<PremisesContractor>> CreateContractorLink(ContPremiseLinkDto contPremiseLinkDto)
     {
-        var conLink = _mapper.Map<PremisesContractor>(createContractorDto);
+        var conLink = _mapper.Map<PremisesContractor>(contPremiseLinkDto);
 
         _context.PremisesContractors.Add(conLink);
         await _unitOfWork.Complete();
