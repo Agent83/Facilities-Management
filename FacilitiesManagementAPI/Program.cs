@@ -21,7 +21,11 @@ app.UseAuthorization();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 app.MapControllers();
-app.MapFallbackToController("Index", "Fallback");
+
+if (!app.Environment.IsEnvironment("Testing"))
+{
+    app.MapFallbackToController("Index", "Fallback");
+}
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
@@ -32,9 +36,12 @@ try
     var context = services.GetRequiredService<DataContext>();
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
     var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
-    await context.Database.MigrateAsync();
-    await Seed.SeedUsers(userManager, roleManager);
-    await Seed.SeedContractorType(context);
+    if (!string.Equals(context.Database.ProviderName, "Microsoft.EntityFrameworkCore.InMemory", StringComparison.Ordinal))
+    {
+        await context.Database.MigrateAsync();
+        await Seed.SeedUsers(userManager, roleManager);
+        await Seed.SeedContractorType(context);
+    }
 }
 catch (Exception ex)
 {
@@ -43,3 +50,7 @@ catch (Exception ex)
 }
 
 await app.RunAsync();
+
+public partial class Program
+{
+}
