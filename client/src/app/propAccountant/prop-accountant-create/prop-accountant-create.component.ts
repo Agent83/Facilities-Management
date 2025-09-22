@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PropAccountantService } from 'src/app/_services/prop-accountant.service';
 import { Location } from '@angular/common';
@@ -12,9 +12,9 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./prop-accountant-create.component.css']
 })
 export class PropAccountantCreateComponent implements OnInit {
-  propAccForm: FormGroup;
+  propAccForm: UntypedFormGroup;
   validationErrors: string[] = [];
-  constructor(private location: Location, private fb: FormBuilder,
+  constructor(private location: Location, private fb: UntypedFormBuilder,
     private router: Router, private propAccService: PropAccountantService, private toastr: ToastrService) { }
 
   ngOnInit(): void {

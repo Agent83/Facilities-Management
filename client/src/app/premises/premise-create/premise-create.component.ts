@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { PropertyService } from 'src/app/_services/property.service';
@@ -11,10 +11,10 @@ import { PropertyService } from 'src/app/_services/property.service';
   styleUrls: ['./premise-create.component.css']
 })
 export class PremiseCreateComponent implements OnInit {
-  createPropForm: FormGroup;
+  createPropForm: UntypedFormGroup;
   validationErrors: string[] = [];
 
-  constructor(private location: Location, private fb: FormBuilder, private toastr: ToastrService,
+  constructor(private location: Location, private fb: UntypedFormBuilder, private toastr: ToastrService,
     private router: Router, private propertyService: PropertyService) { }
 
   ngOnInit(): void {
