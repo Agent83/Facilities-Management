@@ -20,9 +20,15 @@ namespace FacilitiesManagementAPI.Services
 
         public TokenService(IConfiguration  config, UserManager<AppUser> userManager)
         {
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
+            var tokenKey = config["TokenKey"];
+            if (string.IsNullOrWhiteSpace(tokenKey))
+            {
+                throw new InvalidOperationException("TokenKey configuration value is missing or empty.");
+            }
+
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
             _userManager = userManager;
-        } 
+        }
 
         public async Task<string> CreateToken(AppUser user)
         {
@@ -40,7 +46,7 @@ namespace FacilitiesManagementAPI.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             { 
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = creds
             };
 

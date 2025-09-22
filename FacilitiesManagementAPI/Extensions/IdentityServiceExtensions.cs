@@ -23,18 +23,25 @@ namespace FacilitiesManagementAPI.Extensions
                 .AddRoleValidator<RoleValidator<AppRole>>()
                 .AddEntityFrameworkStores<DataContext>();
 
-
-             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
+            var tokenKey = config["TokenKey"];
+            if (string.IsNullOrWhiteSpace(tokenKey))
             {
-                options.TokenValidationParameters = new TokenValidationParameters
+                throw new InvalidOperationException("TokenKey configuration value is missing or empty.");
+            }
+
+            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
                 {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"])),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                };
-            });
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = signingKey,
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                    };
+                });
             services.AddAuthorization(opt =>
             {
                 opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin", "admin"));
