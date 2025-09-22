@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ContractorService } from 'src/app/_services/contractor.service';
@@ -11,9 +11,9 @@ import { ContractorService } from 'src/app/_services/contractor.service';
   styleUrls: ['./contractor-create.component.css']
 })
 export class ContractorCreateComponent implements OnInit {
-  createConForm: FormGroup;
+  createConForm: UntypedFormGroup;
   validationErrors: string[] = [];
-  constructor(private location: Location, private fb: FormBuilder, private toastr: ToastrService,
+  constructor(private location: Location, private fb: UntypedFormBuilder, private toastr: ToastrService,
     private router: Router, private contractorService: ContractorService) { }
 
   ngOnInit(): void {
