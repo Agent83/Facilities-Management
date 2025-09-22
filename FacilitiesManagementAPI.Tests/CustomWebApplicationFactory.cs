@@ -62,6 +62,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
                 options.UseInMemoryDatabase("FacilitiesManagementApiTests");
             });
 
+
             var sp = services.BuildServiceProvider();
 
             using var scope = sp.CreateScope();
