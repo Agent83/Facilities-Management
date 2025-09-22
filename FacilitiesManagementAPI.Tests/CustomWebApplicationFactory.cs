@@ -11,9 +11,12 @@ namespace FacilitiesManagementAPI.Tests;
 
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
+    private static readonly object SeedLock = new();
+
     public CustomWebApplicationFactory()
     {
         Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Testing");
+        Environment.SetEnvironmentVariable("TokenKey", "super_secret_testing_token_key");
     }
 
     public Guid ExistingNoteId { get; } = Guid.Parse("c3b733e5-a3d6-4b25-a66a-8b57f5c39274");
@@ -59,6 +62,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
                 options.UseInMemoryDatabase("FacilitiesManagementApiTests");
             });
 
+
             var sp = services.BuildServiceProvider();
 
             using var scope = sp.CreateScope();
@@ -74,73 +78,76 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 
     private void SeedDatabase(DataContext context)
     {
-        if (context.Premises.Any() || context.Contractors.Any() || context.Note.Any())
+        lock (SeedLock)
         {
-            return;
-        }
-
-        var premises = new Premises
-        {
-            Id = ExistingPremisesId,
-            PremiseNumber = "PM-001",
-            PremiseName = "Central Plaza",
-            IsDeleted = false,
-            PhoneNumber1 = "01234567890",
-            PhoneNumber2 = "09876543210",
-            Email = "contact@centralplaza.test",
-            PremisesAddress = new PremisesAddress
+            if (context.Premises.Any() || context.Contractors.Any() || context.Note.Any())
             {
-                Id = Guid.Parse("0bb5a39e-1c8b-4b7b-8744-b72846a9d9f1"),
-                AddressLine1 = "1 Main Street",
-                AddressLine2 = "Suite 100",
-                City = "Metropolis",
-                Town = "Metropolis",
-                PostCode = "MP1 2AB",
+                return;
+            }
+
+            var premises = new Premises
+            {
+                Id = ExistingPremisesId,
+                PremiseNumber = "PM-001",
+                PremiseName = "Central Plaza",
                 IsDeleted = false,
-                PremisesId = ExistingPremisesId
-            },
-            IsArchieved = false
-        };
+                PhoneNumber1 = "01234567890",
+                PhoneNumber2 = "09876543210",
+                Email = "contact@centralplaza.test",
+                PremisesAddress = new PremisesAddress
+                {
+                    Id = Guid.Parse("0bb5a39e-1c8b-4b7b-8744-b72846a9d9f1"),
+                    AddressLine1 = "1 Main Street",
+                    AddressLine2 = "Suite 100",
+                    City = "Metropolis",
+                    Town = "Metropolis",
+                    PostCode = "MP1 2AB",
+                    IsDeleted = false,
+                    PremisesId = ExistingPremisesId
+                },
+                IsArchieved = false
+            };
 
-        var contractor = new Contractor
-        {
-            Id = ExistingContractorId,
-            BusinessName = "Trusted Contractors Ltd",
-            FirstName = "Alex",
-            LastName = "Taylor",
-            ContractorTypeId = null,
-            GreenLightEnum = "Green",
-            PhoneNumber1 = "01111111111",
-            PhoneNumber2 = "02222222222",
-            Email = "alex.taylor@trustedcontractors.test",
-            IsDeleted = false,
-            DateCreated = DateTime.SpecifyKind(new DateTime(2024, 1, 1, 0, 0, 0), DateTimeKind.Utc)
-        };
+            var contractor = new Contractor
+            {
+                Id = ExistingContractorId,
+                BusinessName = "Trusted Contractors Ltd",
+                FirstName = "Alex",
+                LastName = "Taylor",
+                ContractorTypeId = null,
+                GreenLightEnum = "Green",
+                PhoneNumber1 = "01111111111",
+                PhoneNumber2 = "02222222222",
+                Email = "alex.taylor@trustedcontractors.test",
+                IsDeleted = false,
+                DateCreated = DateTime.SpecifyKind(new DateTime(2024, 1, 1, 0, 0, 0), DateTimeKind.Utc)
+            };
 
-        context.Premises.Add(premises);
-        context.Contractors.Add(contractor);
+            context.Premises.Add(premises);
+            context.Contractors.Add(contractor);
 
-        var firstNote = new Note
-        {
-            Id = ExistingNoteId,
-            NoteContent = "Routine safety inspection completed.",
-            IsPerm = true,
-            IsDeleted = false,
-            PremisesId = ExistingPremisesId,
-            DateCreated = DateTime.SpecifyKind(new DateTime(2024, 1, 1, 8, 30, 0), DateTimeKind.Utc)
-        };
+            var firstNote = new Note
+            {
+                Id = ExistingNoteId,
+                NoteContent = "Routine safety inspection completed.",
+                IsPerm = true,
+                IsDeleted = false,
+                PremisesId = ExistingPremisesId,
+                DateCreated = DateTime.SpecifyKind(new DateTime(2024, 1, 1, 8, 30, 0), DateTimeKind.Utc)
+            };
 
-        var secondNote = new Note
-        {
-            Id = SecondaryNoteId,
-            NoteContent = "Follow-up scheduled for next week.",
-            IsPerm = false,
-            IsDeleted = false,
-            PremisesId = ExistingPremisesId,
-            DateCreated = DateTime.SpecifyKind(new DateTime(2024, 1, 2, 9, 45, 0), DateTimeKind.Utc)
-        };
+            var secondNote = new Note
+            {
+                Id = SecondaryNoteId,
+                NoteContent = "Follow-up scheduled for next week.",
+                IsPerm = false,
+                IsDeleted = false,
+                PremisesId = ExistingPremisesId,
+                DateCreated = DateTime.SpecifyKind(new DateTime(2024, 1, 2, 9, 45, 0), DateTimeKind.Utc)
+            };
 
-        context.Note.AddRange(firstNote, secondNote);
-        context.SaveChanges();
+            context.Note.AddRange(firstNote, secondNote);
+            context.SaveChanges();
+        }
     }
 }

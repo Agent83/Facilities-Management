@@ -3,7 +3,6 @@
 public class AdminController : BaseApiController
 {
     private readonly UserManager<AppUser> _userManager;
-    private readonly IAccountantRepository _accountant;
     private readonly IUnitOfWork _unitOfWork;
 
     public AdminController(UserManager<AppUser> userManager, IUnitOfWork unitOfWork)
