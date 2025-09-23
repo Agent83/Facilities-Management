@@ -4,7 +4,17 @@ var builder = WebApplication.CreateBuilder();
 // add services to the container
 
 builder.Services.AddApplicationServices(builder.Configuration);
-builder.Services.AddIdentityService(builder.Configuration);
+try
+{
+    builder.Services.AddIdentityService(builder.Configuration);
+}
+catch (Exception ex)
+{
+    builder.Logging.AddConsole();
+    var logger = LoggerFactory.Create(b => b.AddConsole()).CreateLogger("Startup");
+    logger.LogCritical(ex, "Fatal config error: JWT TokenKey missing/invalid.");
+    throw; 
+}
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddCors();
 
