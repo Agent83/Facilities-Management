@@ -15,6 +15,7 @@ public class AccountController : BaseApiController
         _mapper = mapper;
     }
 
+    [AllowAnonymous]
     [HttpPost("register")]
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
@@ -40,7 +41,7 @@ public class AccountController : BaseApiController
         };
     }
 
-
+    [AllowAnonymous]
     [HttpPost("login")]
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
@@ -50,7 +51,7 @@ public class AccountController : BaseApiController
 
         var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
-        if (!result.Succeeded) return Unauthorized();
+        if (!result.Succeeded) return Unauthorized(new { error = "Invalid credentials" });
 
 
         return new UserDto

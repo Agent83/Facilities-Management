@@ -31,9 +31,15 @@ namespace FacilitiesManagementAPI.Middleware
             }
             catch(Exception ex)
             {
-                _logger.LogError(ex, ex.Message);
+                _logger.LogError(ex, "Unhandled exception. Path:{Path} Method:{Method} RequestId:{RequestId}",
+                context.Request?.Path.Value, context.Request?.Method, requestId);
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                await context.Response.WriteAsJsonAsync(new ProblemDetails {
+                  Status = 500,
+                  Title = "Server error",
+                  Detail = $"RequestId: {requestId}"
+                });
 
                 var response = _env.IsDevelopment()
                 ? new ApiException(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString())
