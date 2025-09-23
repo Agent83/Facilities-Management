@@ -25,6 +25,7 @@ namespace FacilitiesManagementAPI.Middleware
 
         public async Task InvokeAsync(HttpContext context)
         {
+            var requestId = context.TraceIdentifier;
             try
             {
                 await _next(context);
