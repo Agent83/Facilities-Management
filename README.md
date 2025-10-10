@@ -1,5 +1,9 @@
 This project is a full-stack web application designed using .NET Core 6 for the back-end and Angular 11 for the front-end. The system manages tasks, contractors, and premises for a facilities management platform, providing tools for users to efficiently track, update, and manage tasks and related entities.
 
+## Migrating the Front-End to Vue 3
+
+If you plan to replace the Angular client with Vue 3, follow the migration playbook outlined in [`docs/MIGRATING_TO_VUE3.md`](docs/MIGRATING_TO_VUE3.md). The guide covers auditing the current Angular modules, bootstrapping a Vue 3 + Vite project, translating routing, services, guards, and forms, and updating the .NET build pipeline to serve the new front-end.
+
 Back-End (Facilities Management API using .NET Core 6):
 
 Controllers: Handles HTTP requests and interacts with services to manage contractors, premises, and tasks.
