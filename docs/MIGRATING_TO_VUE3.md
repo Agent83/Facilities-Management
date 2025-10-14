@@ -13,8 +13,9 @@ This guide outlines the steps required to replace the existing Angular 11 front-
 
 1. From the repository root run `npm create vue@latest client-vue` and select TypeScript, Vue Router, Pinia (or your preferred state manager), ESLint, and Prettier options.
 2. Update the generated `package.json` name and version to match the existing client.
-3. Configure the dev server proxy in `vite.config.ts` so that API calls to `/api` route to the ASP.NET back-end (e.g. `target: 'https://localhost:5001'`). You can override the default by setting the `VITE_API_PROXY_TARGET` environment variable when running Vite.
-4. Replace the placeholder checklist and configuration examples inside `client-vue/src/views` with real layouts as you migrate each Angular module.
+
+3. Configure the dev server proxy in `vite.config.ts` so that API calls to `/api` route to the ASP.NET back-end (e.g. `target: 'https://localhost:5001'`).
+
 
 ## 3. Recreate Application Structure
 

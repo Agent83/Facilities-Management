@@ -2,7 +2,9 @@ This project is a full-stack web application designed using .NET Core 6 for the 
 
 ## Migrating the Front-End to Vue 3
 
-If you plan to replace the Angular client with Vue 3, follow the migration playbook outlined in [`docs/MIGRATING_TO_VUE3.md`](docs/MIGRATING_TO_VUE3.md). The guide covers auditing the current Angular modules, bootstrapping a Vue 3 + Vite project, translating routing, services, guards, and forms, and updating the .NET build pipeline to serve the new front-end. A starter Vue 3 application created with Vite now lives in [`client-vue/`](client-vue/) to accelerate the migration work.
+
+If you plan to replace the Angular client with Vue 3, follow the migration playbook outlined in [`docs/MIGRATING_TO_VUE3.md`](docs/MIGRATING_TO_VUE3.md). The guide covers auditing the current Angular modules, bootstrapping a Vue 3 + Vite project, translating routing, services, guards, and forms, and updating the .NET build pipeline to serve the new front-end.
+
 
 Back-End (Facilities Management API using .NET Core 6):
 
