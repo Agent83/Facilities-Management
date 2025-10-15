@@ -1,25 +1,30 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { computed } from 'vue'
+import { RouterView, useRoute } from 'vue-router'
+import GlobalSpinner from './components/GlobalSpinner.vue'
+import PrimaryNav from './components/navigation/PrimaryNav.vue'
+
+const route = useRoute()
+
+const layoutClass = computed(() => {
+  const layout = route.meta.layout
+  if (layout === 'public') {
+    return 'app-shell--public'
+  }
+
+  return 'app-shell--secure'
+})
 </script>
 
 <template>
-  <div class="app-shell">
-    <header class="app-header">
-      <div class="branding">
-        <h1>Facilities Management Vue Client</h1>
-        <p class="tagline">
-          Start migrating Angular screens into Vue single-file components while keeping routing, API calls, and shared state
-          consistent.
-        </p>
-      </div>
+  <div class="app-shell" :class="layoutClass">
+    <GlobalSpinner />
 
-      <nav class="primary-nav">
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+    <header class="app-shell__header">
+      <PrimaryNav />
     </header>
 
-    <main class="app-content">
+    <main class="app-shell__content">
       <RouterView />
     </main>
   </div>
@@ -28,55 +33,28 @@ import { RouterLink, RouterView } from 'vue-router'
 <style scoped>
 .app-shell {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.app-header {
+  display: grid;
+  grid-template-rows: auto 1fr;
   background: var(--color-background-soft);
+}
+
+.app-shell__header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--color-background) 92%, transparent);
   border-bottom: 1px solid var(--color-border);
-  padding: 2rem clamp(1rem, 5vw, 3rem);
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
 }
 
-.branding h1 {
-  font-size: clamp(1.75rem, 2vw + 1.25rem, 2.5rem);
-  margin-bottom: 0.5rem;
+.app-shell__content {
+  padding: clamp(1.5rem, 4vw, 3rem);
 }
 
-.branding .tagline {
-  max-width: 60ch;
-  margin: 0;
-  color: var(--color-text-soft);
-}
-
-.primary-nav {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.primary-nav a {
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  border: 1px solid var(--color-border);
-  color: inherit;
-  text-decoration: none;
-  transition: background 0.2s ease;
-}
-
-.primary-nav a.router-link-active {
-  background: var(--color-background-mute);
-}
-
-.primary-nav a:hover {
-  background: var(--color-background-mute);
-}
-
-.app-content {
-  flex: 1;
-  padding: 2rem clamp(1rem, 5vw, 3rem) 3rem;
+.app-shell--public .app-shell__content {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  padding-block: clamp(3rem, 8vw, 6rem);
 }
 </style>
